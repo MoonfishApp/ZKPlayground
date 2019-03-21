@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A5F22434E55001EC64A /* AppDelegate.swift */; };
+		C7AE8A6222434E55001EC64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A6122434E55001EC64A /* ViewController.swift */; };
+		C7AE8A6422434E55001EC64A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A6322434E55001EC64A /* Document.swift */; };
+		C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6522434E59001EC64A /* Assets.xcassets */; };
+		C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6722434E59001EC64A /* Main.storyboard */; };
+		C7AE8A7522434E59001EC64A /* ZKPlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7AE8A7122434E59001EC64A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7AE8A5422434E55001EC64A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7AE8A5B22434E55001EC64A;
+			remoteInfo = ZKPlayground;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C7AE8A5C22434E55001EC64A /* ZKPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZKPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7AE8A5F22434E55001EC64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C7AE8A6122434E55001EC64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C7AE8A6322434E55001EC64A /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		C7AE8A6522434E59001EC64A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C7AE8A6822434E59001EC64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C7AE8A6A22434E59001EC64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7AE8A6B22434E59001EC64A /* ZKPlayground.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZKPlayground.entitlements; sourceTree = "<group>"; };
+		C7AE8A7022434E59001EC64A /* ZKPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZKPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKPlaygroundTests.swift; sourceTree = "<group>"; };
+		C7AE8A7622434E59001EC64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C7AE8A5922434E55001EC64A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7AE8A6D22434E59001EC64A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C7AE8A5322434E55001EC64A = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A5E22434E55001EC64A /* ZKPlayground */,
+				C7AE8A7322434E59001EC64A /* ZKPlaygroundTests */,
+				C7AE8A5D22434E55001EC64A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C7AE8A5D22434E55001EC64A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A5C22434E55001EC64A /* ZKPlayground.app */,
+				C7AE8A7022434E59001EC64A /* ZKPlaygroundTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C7AE8A5E22434E55001EC64A /* ZKPlayground */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A5F22434E55001EC64A /* AppDelegate.swift */,
+				C7AE8A6122434E55001EC64A /* ViewController.swift */,
+				C7AE8A6322434E55001EC64A /* Document.swift */,
+				C7AE8A6522434E59001EC64A /* Assets.xcassets */,
+				C7AE8A6722434E59001EC64A /* Main.storyboard */,
+				C7AE8A6A22434E59001EC64A /* Info.plist */,
+				C7AE8A6B22434E59001EC64A /* ZKPlayground.entitlements */,
+			);
+			path = ZKPlayground;
+			sourceTree = "<group>";
+		};
+		C7AE8A7322434E59001EC64A /* ZKPlaygroundTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */,
+				C7AE8A7622434E59001EC64A /* Info.plist */,
+			);
+			path = ZKPlaygroundTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C7AE8A5B22434E55001EC64A /* ZKPlayground */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7AE8A7922434E59001EC64A /* Build configuration list for PBXNativeTarget "ZKPlayground" */;
+			buildPhases = (
+				C7AE8A5822434E55001EC64A /* Sources */,
+				C7AE8A5922434E55001EC64A /* Frameworks */,
+				C7AE8A5A22434E55001EC64A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZKPlayground;
+			productName = ZKPlayground;
+			productReference = C7AE8A5C22434E55001EC64A /* ZKPlayground.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C7AE8A6F22434E59001EC64A /* ZKPlaygroundTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7AE8A7C22434E59001EC64A /* Build configuration list for PBXNativeTarget "ZKPlaygroundTests" */;
+			buildPhases = (
+				C7AE8A6C22434E59001EC64A /* Sources */,
+				C7AE8A6D22434E59001EC64A /* Frameworks */,
+				C7AE8A6E22434E59001EC64A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7AE8A7222434E59001EC64A /* PBXTargetDependency */,
+			);
+			name = ZKPlaygroundTests;
+			productName = ZKPlaygroundTests;
+			productReference = C7AE8A7022434E59001EC64A /* ZKPlaygroundTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C7AE8A5422434E55001EC64A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "A Puzzle A Day";
+				TargetAttributes = {
+					C7AE8A5B22434E55001EC64A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					C7AE8A6F22434E59001EC64A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = C7AE8A5B22434E55001EC64A;
+					};
+				};
+			};
+			buildConfigurationList = C7AE8A5722434E55001EC64A /* Build configuration list for PBXProject "ZKPlayground" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C7AE8A5322434E55001EC64A;
+			productRefGroup = C7AE8A5D22434E55001EC64A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7AE8A5B22434E55001EC64A /* ZKPlayground */,
+				C7AE8A6F22434E59001EC64A /* ZKPlaygroundTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7AE8A5A22434E55001EC64A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */,
+				C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7AE8A6E22434E59001EC64A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C7AE8A5822434E55001EC64A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7AE8A6222434E55001EC64A /* ViewController.swift in Sources */,
+				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
+				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7AE8A6C22434E59001EC64A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7AE8A7522434E59001EC64A /* ZKPlaygroundTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7AE8A7222434E59001EC64A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7AE8A5B22434E55001EC64A /* ZKPlayground */;
+			targetProxy = C7AE8A7122434E59001EC64A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C7AE8A6722434E59001EC64A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7AE8A6822434E59001EC64A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C7AE8A7722434E59001EC64A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C7AE8A7822434E59001EC64A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		C7AE8A7A22434E59001EC64A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ZKPlayground/ZKPlayground.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QS2K96ZEMY;
+				INFOPLIST_FILE = ZKPlayground/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.composite.ZKPlayground;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		C7AE8A7B22434E59001EC64A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ZKPlayground/ZKPlayground.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QS2K96ZEMY;
+				INFOPLIST_FILE = ZKPlayground/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.composite.ZKPlayground;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		C7AE8A7D22434E59001EC64A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QS2K96ZEMY;
+				INFOPLIST_FILE = ZKPlaygroundTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.composite.ZKPlaygroundTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZKPlayground.app/Contents/MacOS/ZKPlayground";
+			};
+			name = Debug;
+		};
+		C7AE8A7E22434E59001EC64A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QS2K96ZEMY;
+				INFOPLIST_FILE = ZKPlaygroundTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.composite.ZKPlaygroundTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZKPlayground.app/Contents/MacOS/ZKPlayground";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C7AE8A5722434E55001EC64A /* Build configuration list for PBXProject "ZKPlayground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7AE8A7722434E59001EC64A /* Debug */,
+				C7AE8A7822434E59001EC64A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7AE8A7922434E59001EC64A /* Build configuration list for PBXNativeTarget "ZKPlayground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7AE8A7A22434E59001EC64A /* Debug */,
+				C7AE8A7B22434E59001EC64A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7AE8A7C22434E59001EC64A /* Build configuration list for PBXNativeTarget "ZKPlaygroundTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7AE8A7D22434E59001EC64A /* Debug */,
+				C7AE8A7E22434E59001EC64A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C7AE8A5422434E55001EC64A /* Project object */;
+}
