@@ -1,0 +1,30 @@
+PODS:
+  - SavannaKit (0.9.0)
+  - SourceEditor (1.0.1):
+    - SavannaKit (~> 0.9)
+
+DEPENDENCIES:
+  - SavannaKit (from `https://github.com/ronaldmannak/savannakit.git`)
+  - SourceEditor (from `https://github.com/ronaldmannak/source-editor.git`)
+
+EXTERNAL SOURCES:
+  SavannaKit:
+    :git: https://github.com/ronaldmannak/savannakit.git
+  SourceEditor:
+    :git: https://github.com/ronaldmannak/source-editor.git
+
+CHECKOUT OPTIONS:
+  SavannaKit:
+    :commit: 521199629e8530154442b18512988ecc8367374a
+    :git: https://github.com/ronaldmannak/savannakit.git
+  SourceEditor:
+    :commit: a5375da23fc323e7bba550e5ce93066985dae058
+    :git: https://github.com/ronaldmannak/source-editor.git
+
+SPEC CHECKSUMS:
+  SavannaKit: 920c240bde011900df8156200a960dad3ee5edfd
+  SourceEditor: 4d590385d642c812d08a91941a4bfc90eccf20af
+
+PODFILE CHECKSUM: 6858309b3dc86e0ecd6c8c6cd3d0e79fdabd6218
+
+COCOAPODS: 1.5.3
