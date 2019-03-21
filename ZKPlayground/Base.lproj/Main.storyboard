@@ -854,14 +854,46 @@
             </objects>
             <point key="canvasLocation" x="1271.5" y="279"/>
         </scene>
-        <!--View Controller-->
+        <!--Editor View Controller-->
         <scene sceneID="crs-aI-m6A">
             <objects>
-                <viewController id="kOI-pb-22H" sceneMemberID="viewController">
+                <viewController id="kOI-pb-22H" customClass="EditorViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="6WB-R9-Ddc">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdz-AY-6T5">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="0ip-Jb-gI1">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Evg-o0-Ahu" customClass="SyntaxTextView" customModule="SavannaKit">
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <size key="minSize" width="450" height="300"/>
+                                            <size key="maxSize" width="450" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="VgN-wC-Mte">
+                                    <rect key="frame" x="434" y="0.0" width="16" height="300"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Tdz-AY-6T5" firstAttribute="leading" secondItem="6WB-R9-Ddc" secondAttribute="leading" id="NrG-Ro-PZW"/>
+                            <constraint firstAttribute="bottom" secondItem="Tdz-AY-6T5" secondAttribute="bottom" id="h66-aP-2EK"/>
+                            <constraint firstItem="Tdz-AY-6T5" firstAttribute="top" secondItem="6WB-R9-Ddc" secondAttribute="top" id="o7v-dg-R6B"/>
+                            <constraint firstAttribute="trailing" secondItem="Tdz-AY-6T5" secondAttribute="trailing" id="wnN-fc-TX3"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="syntaxTextView" destination="Evg-o0-Ahu" id="tze-kE-MG1"/>
+                    </connections>
                 </viewController>
                 <customObject id="krL-MG-GYZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
