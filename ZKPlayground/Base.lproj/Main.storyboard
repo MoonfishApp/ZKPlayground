@@ -891,25 +891,7 @@
                     <view key="view" id="VA5-1q-mfb">
                         <rect key="frame" x="0.0" y="0.0" width="145" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R5w-7y-XDs">
-                                <rect key="frame" x="18" y="263" width="109" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="tEs-ZK-hvy">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="R5w-7y-XDs" firstAttribute="leading" secondItem="VA5-1q-mfb" secondAttribute="leading" constant="20" symbolic="YES" id="6CO-vM-aGN"/>
-                            <constraint firstAttribute="trailing" secondItem="R5w-7y-XDs" secondAttribute="trailing" constant="20" symbolic="YES" id="W7f-JY-HrN"/>
-                            <constraint firstItem="R5w-7y-XDs" firstAttribute="top" secondItem="VA5-1q-mfb" secondAttribute="top" constant="20" symbolic="YES" id="vhg-zi-TWL"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="textField" destination="R5w-7y-XDs" id="W1o-Zd-duG"/>
-                    </connections>
                 </viewController>
                 <customObject id="jbY-5a-F77" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

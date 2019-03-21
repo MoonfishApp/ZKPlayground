@@ -12,12 +12,9 @@ class InspectorViewController: NSViewController {
 
     override var representedObject: Any? {
         didSet {
-            guard let document = representedObject as? Document else { return }
-            textField.stringValue = document.string
+//            guard let document = representedObject as? Document else { return }
         }
     }
-    
-    @IBOutlet weak var textField: NSTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
