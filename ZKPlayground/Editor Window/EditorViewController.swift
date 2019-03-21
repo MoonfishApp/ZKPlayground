@@ -11,6 +11,14 @@ import SourceEditor
 import SavannaKit
 
 class EditorViewController: NSViewController {
+    
+    override var representedObject: Any? {
+        didSet {
+            guard let document = representedObject as? Document else { return }
+            
+            syntaxTextView.text = document.string
+        }
+    }
 
     let lexer = SokratesLexer()
     
@@ -29,8 +37,7 @@ class EditorViewController: NSViewController {
 extension EditorViewController: SyntaxTextViewDelegate {
     
     func didChangeText(_ syntaxTextView: SyntaxTextView) {
-        
-        
+        (representedObject as? Document)?.string = syntaxTextView.text
     }
     
     func didChangeSelectedRange(_ syntaxTextView: SyntaxTextView, selectedRange: NSRange) {
