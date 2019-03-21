@@ -684,7 +684,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Document Window Controller" id="jGA-0Y-lOj" customClass="EditorWindowController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ckk-yw-fiv">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -705,7 +705,7 @@
         <!--Split View Controller-->
         <scene sceneID="5w3-Up-CJn">
             <objects>
-                <splitViewController id="YFC-3D-khP" sceneMemberID="viewController">
+                <splitViewController id="YFC-3D-khP" customClass="SplitViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="afx-g0-Yms"/>
                         <splitViewItem holdingPriority="1000" id="Voa-Fu-SFr"/>
@@ -817,7 +817,7 @@
         <!--Split View Controller-->
         <scene sceneID="eMo-72-vPR">
             <objects>
-                <splitViewController id="6sc-hg-Grn" sceneMemberID="viewController">
+                <splitViewController id="6sc-hg-Grn" customClass="SplitViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="iOn-lk-Hf0"/>
                         <splitViewItem id="tLZ-5q-GiO"/>
@@ -884,18 +884,36 @@
             </objects>
             <point key="canvasLocation" x="1424" y="651"/>
         </scene>
-        <!--View Controller-->
+        <!--Inspector View Controller-->
         <scene sceneID="wnG-F7-dFw">
             <objects>
-                <viewController id="kiI-j2-wj3" sceneMemberID="viewController">
+                <viewController id="kiI-j2-wj3" customClass="InspectorViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="VA5-1q-mfb">
                         <rect key="frame" x="0.0" y="0.0" width="145" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="R5w-7y-XDs">
+                                <rect key="frame" x="18" y="263" width="109" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="tEs-ZK-hvy">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="R5w-7y-XDs" firstAttribute="leading" secondItem="VA5-1q-mfb" secondAttribute="leading" constant="20" symbolic="YES" id="6CO-vM-aGN"/>
+                            <constraint firstAttribute="trailing" secondItem="R5w-7y-XDs" secondAttribute="trailing" constant="20" symbolic="YES" id="W7f-JY-HrN"/>
+                            <constraint firstItem="R5w-7y-XDs" firstAttribute="top" secondItem="VA5-1q-mfb" secondAttribute="top" constant="20" symbolic="YES" id="vhg-zi-TWL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="R5w-7y-XDs" id="W1o-Zd-duG"/>
+                    </connections>
                 </viewController>
                 <customObject id="jbY-5a-F77" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1272" y="1030"/>
+            <point key="canvasLocation" x="1271.5" y="1030"/>
         </scene>
     </scenes>
 </document>

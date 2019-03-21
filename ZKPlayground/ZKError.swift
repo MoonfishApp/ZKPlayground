@@ -12,6 +12,7 @@ enum ZKError: Error {
     case fileNotFound(String)
     case directoryNotFound(String)
     case cannotOpenFile(String)
+    case cannotSaveFile(String)
     case platformNotFound(String)
     case frameworkNotFound(String)
     case bashScriptFailed(String)
