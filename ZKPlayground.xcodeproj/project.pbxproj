@@ -15,6 +15,8 @@
 		C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6522434E59001EC64A /* Assets.xcassets */; };
 		C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6722434E59001EC64A /* Main.storyboard */; };
 		C7AE8A7522434E59001EC64A /* ZKPlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */; };
+		C7AE8A8322436486001EC64A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A8222436486001EC64A /* StatusViewController.swift */; };
+		C7AE8A8522436497001EC64A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A8422436497001EC64A /* LogViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		C7AE8A7022434E59001EC64A /* ZKPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZKPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKPlaygroundTests.swift; sourceTree = "<group>"; };
 		C7AE8A7622434E59001EC64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7AE8A8222436486001EC64A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		C7AE8A8422436497001EC64A /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		CD92BEDFC397D6BE20E8D2FE /* Pods-ZKPlaygroundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlaygroundTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlaygroundTests/Pods-ZKPlaygroundTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF75002819B65626EA81721D /* Pods-ZKPlayground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,7 @@
 		C7AE8A5E22434E55001EC64A /* ZKPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				C7AE8A8122436470001EC64A /* ViewControllers */,
 				C7AE8A5F22434E55001EC64A /* AppDelegate.swift */,
 				C7AE8A6122434E55001EC64A /* ViewController.swift */,
 				C7AE8A6322434E55001EC64A /* Document.swift */,
@@ -117,6 +122,15 @@
 				C7AE8A7622434E59001EC64A /* Info.plist */,
 			);
 			path = ZKPlaygroundTests;
+			sourceTree = "<group>";
+		};
+		C7AE8A8122436470001EC64A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A8222436486001EC64A /* StatusViewController.swift */,
+				C7AE8A8422436497001EC64A /* LogViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E88272143AD85EBA37FC3F4E /* Pods */ = {
@@ -304,6 +318,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7AE8A8322436486001EC64A /* StatusViewController.swift in Sources */,
+				C7AE8A8522436497001EC64A /* LogViewController.swift in Sources */,
 				C7AE8A6222434E55001EC64A /* ViewController.swift in Sources */,
 				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
