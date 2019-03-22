@@ -19,7 +19,7 @@ class LogViewController: NSViewController {
     
     func stdin(_ string: String) {
         
-        output("$ " + string, color: NSColor.green)
+        output(string, color: NSColor.systemGreen)
     }
     
     func stdout(_ string: String) {
@@ -35,7 +35,7 @@ class LogViewController: NSViewController {
     private func output(_ string: String, color: NSColor) {
         
         DispatchQueue.main.async {
-            let attributed = NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: NSFont(name: "menlo", size: NSFont.systemFontSize)!])
+            let attributed = NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: NSFont(name: "menlo", size: NSFont.smallSystemFontSize)!])
             self.textView.textStorage?.append(attributed)
             self.textView.isEditable = true
             self.textView.checkTextInDocument(nil)

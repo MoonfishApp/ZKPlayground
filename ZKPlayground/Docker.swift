@@ -77,6 +77,11 @@ class Docker: Operation {
         task.launchPath = "/usr/local/bin/docker" // TODO: use which path
         task.arguments = ["run", "-v /Users/ronalddanger/Development/Temp/zk/:/home/zokrates/zk", "-ti", "zokrates/zokrates", "/bin/bash"]
         
+        // Print to log
+        let command: String = task.launchPath ?? ""
+        let arguments: String = task.arguments?.joined(separator: " ") ?? ""
+        self.delegate?.docker(self, didReceiveStdin: "\n$ " + command + " " + arguments + "\n")
+        
         // Set exitStatus at exit
         self.task.terminationHandler = { task in
             self.exitStatus = Int(task.terminationStatus)
