@@ -21,6 +21,7 @@
 		C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */; };
 		C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A93224430B0001EC64A /* SplitViewController.swift */; };
 		C7AE8A9622443135001EC64A /* InspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A9522443135001EC64A /* InspectorViewController.swift */; };
+		C7AE8A9A22445986001EC64A /* Docker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A97224443BA001EC64A /* Docker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorWindowController.swift; sourceTree = "<group>"; };
 		C7AE8A93224430B0001EC64A /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		C7AE8A9522443135001EC64A /* InspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorViewController.swift; sourceTree = "<group>"; };
+		C7AE8A97224443BA001EC64A /* Docker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docker.swift; sourceTree = "<group>"; };
 		CD92BEDFC397D6BE20E8D2FE /* Pods-ZKPlaygroundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlaygroundTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlaygroundTests/Pods-ZKPlaygroundTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF75002819B65626EA81721D /* Pods-ZKPlayground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 				C7AE8A6122434E55001EC64A /* ViewController.swift */,
 				C7AE8A6322434E55001EC64A /* Document.swift */,
 				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
+				C7AE8A97224443BA001EC64A /* Docker.swift */,
 				C7AE8A6522434E59001EC64A /* Assets.xcassets */,
 				C7AE8A6722434E59001EC64A /* Main.storyboard */,
 				C7AE8A6A22434E59001EC64A /* Info.plist */,
@@ -339,6 +342,7 @@
 				C7AE8A9622443135001EC64A /* InspectorViewController.swift in Sources */,
 				C7AE8A9022436B37001EC64A /* ZKError.swift in Sources */,
 				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
+				C7AE8A9A22445986001EC64A /* Docker.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
 				C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */,
 			);
