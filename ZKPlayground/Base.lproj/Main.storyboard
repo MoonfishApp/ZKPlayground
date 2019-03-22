@@ -766,6 +766,9 @@
                             <constraint firstAttribute="trailing" secondItem="VuM-aw-rmb" secondAttribute="trailing" id="UYW-Qh-c4x"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="7vb-Ac-br4" id="Abn-Jn-Ugb"/>
+                    </connections>
                 </viewController>
                 <customObject id="cSn-d7-JTr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -791,7 +794,7 @@
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FLK-B3-T62">
                                 <rect key="frame" x="39" y="7" width="391" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="ywS-wq-Fj3">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Docker is not running" id="ywS-wq-Fj3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -807,6 +810,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="disclosureButton" destination="2Yy-S7-cqt" id="CaA-7A-iUI"/>
                         <outlet property="statusLabel" destination="FLK-B3-T62" id="FBP-In-Zk8"/>
                     </connections>
                 </viewController>

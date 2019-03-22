@@ -10,6 +10,7 @@ import Cocoa
 
 class StatusViewController: NSViewController {
 
+    @IBOutlet weak var disclosureButton: NSButton!
     @IBOutlet weak var statusLabel: NSTextField!
 
     override func viewDidLoad() {

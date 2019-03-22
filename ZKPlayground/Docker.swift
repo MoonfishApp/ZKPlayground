@@ -11,13 +11,13 @@ import Foundation
 protocol DockerProtocol: class {
     
     // Docker received data from the docker image
-    func docker(_ docker: Docker, didReceiveStdout: String)
+    func docker(_ docker: Docker, didReceiveStdout string: String)
     
     // Docker received an error from the docker image
-    func docker(_ docker: Docker, didReceiveStderr: String)
+    func docker(_ docker: Docker, didReceiveStderr string: String)
     
     // Docker sent stdin to the docker image from the app
-    func docker(_ docker: Docker, didReceiveStdin: String)
+    func docker(_ docker: Docker, didReceiveStdin string: String)
 }
 
 class Docker: Operation {
@@ -81,19 +81,18 @@ class Docker: Operation {
         self.task.terminationHandler = { task in
             self.exitStatus = Int(task.terminationStatus)
         }
-        /*
+        
         // Handle I/O
         self.task.standardOutput = self.stdoutPipe
         self.task.standardError = self.stderrPipe
-        self.task.standardInput = self.stdinPipe
+//        self.task.standardInput = self.stdinPipe
 
         self.capture(self.stdoutPipe) { stdout in
             self.delegate?.docker(self, didReceiveStdout: stdout)
         }
         self.capture(self.stderrPipe) { stderr in
             self.delegate?.docker(self, didReceiveStderr: stderr)
-            
-        } */
+        }
 //        self.capture(self.stdinPipe)
         
         task.launch()

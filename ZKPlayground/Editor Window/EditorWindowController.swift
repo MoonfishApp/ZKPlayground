@@ -29,6 +29,9 @@ class EditorWindowController: NSWindowController {
         }
     }
     
+    private var logViewController: LogViewController!
+    private var statusViewController: StatusViewController!
+    
     private var fileURL: URL?
     private var filename: String? { return self.fileURL?.lastPathComponent }
     private var workDirectory: String? { return self.fileURL?.deletingLastPathComponent().path }
@@ -36,9 +39,11 @@ class EditorWindowController: NSWindowController {
     let dockerQueue = OperationQueue()
 
     override func windowDidLoad() {
+        
         super.windowDidLoad()
-    
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        
+        self.logViewController = ((contentViewController as! NSSplitViewController).splitViewItems[2].viewController as! LogViewController)
+        self.statusViewController = ((contentViewController as! NSSplitViewController).splitViewItems[1].viewController as! StatusViewController)
     }
 
 }
@@ -48,7 +53,6 @@ extension EditorWindowController {
     
     @IBAction func runDocker(_ sender: Any?) {
         
-        print("Run docker called")
         guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
         
         let docker = Docker(workDirectory: workDirectory, filename: filename)
@@ -67,17 +71,27 @@ extension EditorWindowController {
 
 // Docker delegate
 extension EditorWindowController: DockerProtocol {
-    func docker(_ docker: Docker, didReceiveStdout: String) {
-        
+    func docker(_ docker: Docker, didReceiveStdout string: String) {
+        self.logViewController.stdout(string)
     }
     
-    func docker(_ docker: Docker, didReceiveStderr: String) {
+    func docker(_ docker: Docker, didReceiveStderr string: String) {
         
+        // Open log pane
+        DispatchQueue.main.async {
+            let item = (self.contentViewController as! NSSplitViewController).splitViewItems[2]
+            
+            if item.isCollapsed {
+                self.statusViewController.disclosureClicked(self)
+                self.statusViewController.disclosureButton.state = .on
+            }
+        }
+        
+        self.logViewController.stderr(string)
     }
     
-    func docker(_ docker: Docker, didReceiveStdin: String) {
-        
+    func docker(_ docker: Docker, didReceiveStdin string: String) {
+        self.logViewController.stdin(string)
     }
-    
     
 }
