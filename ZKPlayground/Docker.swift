@@ -87,10 +87,15 @@ class Docker: Operation {
         // Handle I/O
         self.task.standardOutput = self.stdoutPipe
         self.task.standardError = self.stderrPipe
-        self.task.standardInput = self.stdinPipe //.fileHandleForWriting
+        self.task.standardInput = self.stdinPipe
 
         self.capture(self.stdoutPipe) { stdout in
             self.delegate?.docker(self, didReceiveStdout: stdout)
+            
+            // print utf8 values
+//            var s = ""
+//            _ = stdout.utf8.map{ s.append("\($0), ") }
+//            self.delegate?.docker(self, didReceiveStdin: s)
         }
         self.capture(self.stderrPipe) { stderr in
             self.delegate?.docker(self, didReceiveStderr: stderr)
@@ -136,9 +141,10 @@ class Docker: Operation {
     /// - Parameter string: <#string description#>
     func send(_ string: String) {
         
-        guard task.isRunning == true, let data = (string + "\n").data(using: .utf8) else { return assertionFailure() }
+        let string = string + "\n"
+        guard task.isRunning == true, let data = (string).data(using: .utf8) else { return assertionFailure() }
         print (string)
-        self.delegate?.docker(self, didReceiveStdin: string + "\n")
+        self.delegate?.docker(self, didReceiveStdin: "\n" + string)
         self.stdinPipe.fileHandleForWriting.write(data)
         self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify()
     }
@@ -148,6 +154,9 @@ class Docker: Operation {
         
         // Send 'exit' command to docker
         if task.isRunning { task.interrupt() }
+        self.stdinPipe.fileHandleForReading.closeFile()
+        self.stderrPipe.fileHandleForReading.closeFile()
+        self.stdoutPipe.fileHandleForWriting.closeFile()
         super.cancel()
     }
 }
