@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func dockerInstall() {
         
-        if FileManager.default.fileExists(atPath: "//usr//local//bin//docker")  { return }
+        if FileManager.default.isExecutableFile(atPath: "//usr//local//bin//docker")  { return }
         
         let alert = NSAlert()
         alert.messageText = "Docker is not installed"

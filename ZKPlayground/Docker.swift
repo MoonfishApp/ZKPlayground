@@ -75,7 +75,8 @@ class Docker: Operation {
         self.task.environment = ProcessInfo().environment
         self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin", forKey: "PATH")
         task.launchPath = "/usr/local/bin/docker" // TODO: use which path
-        task.arguments = ["run", "-v /Users/ronalddanger/Development/Temp/zk/:/home/zokrates/zk", "-ti", "zokrates/zokrates", "/bin/bash"]
+        task.arguments = ["run", "-v", "/Users/ronalddanger/Development/Temp/zk/:/home/zokrates/zk", "-ti", "zokrates/zokrates", "/bin/bash"]
+        task.currentDirectoryPath = Bundle.main.bundlePath
         
         // Print to log
         let command: String = task.launchPath ?? ""

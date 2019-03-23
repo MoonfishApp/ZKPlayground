@@ -8,6 +8,7 @@ target 'ZKPlayground' do
   # Pods for ZKPlayground
   pod 'SourceEditor', :git => 'https://github.com/ronaldmannak/source-editor.git'
   pod 'SavannaKit', :git => 'https://github.com/ronaldmannak/savannakit.git'
+  pod 'STPrivilegedTask'
 
   target 'ZKPlaygroundTests' do
     inherit! :search_paths
