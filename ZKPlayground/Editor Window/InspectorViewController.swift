@@ -9,7 +9,9 @@
 import Cocoa
 
 class InspectorViewController: NSViewController {
-
+    
+    @IBOutlet weak var textField: NSTextField!
+    
     override var representedObject: Any? {
         didSet {
 //            guard let document = representedObject as? Document else { return }
@@ -19,6 +21,16 @@ class InspectorViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+    }
+    @IBAction func buttonPushed(_ sender: Any) {
+        
+        let controller = self.parent!.parent!.view.window!.windowController! as! EditorWindowController
+        
+        guard let operation = controller.dockerQueue.operations.first as? Docker else {
+            return assertionFailure()
+        }
+        
+        operation.send(self.textField.stringValue)
     }
     
 }

@@ -895,7 +895,37 @@
                     <view key="view" id="VA5-1q-mfb">
                         <rect key="frame" x="0.0" y="0.0" width="145" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YgB-a1-oSc">
+                                <rect key="frame" x="0.0" y="278" width="145" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="hCT-x1-hel">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wgk-T1-9qF">
+                                <rect key="frame" x="32" y="242" width="81" height="32"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ueb-gO-Md5">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonPushed:" target="kiI-j2-wj3" id="7S1-cw-gOW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="YgB-a1-oSc" firstAttribute="leading" secondItem="VA5-1q-mfb" secondAttribute="leading" id="29T-3q-GDe"/>
+                            <constraint firstAttribute="trailing" secondItem="YgB-a1-oSc" secondAttribute="trailing" id="7KU-Uh-6VN"/>
+                            <constraint firstItem="Wgk-T1-9qF" firstAttribute="centerX" secondItem="YgB-a1-oSc" secondAttribute="centerX" id="Dhq-pu-2ZF"/>
+                            <constraint firstItem="Wgk-T1-9qF" firstAttribute="top" secondItem="YgB-a1-oSc" secondAttribute="bottom" constant="8" symbolic="YES" id="X3B-Bl-aJN"/>
+                            <constraint firstItem="YgB-a1-oSc" firstAttribute="top" secondItem="VA5-1q-mfb" secondAttribute="top" id="xau-ST-ReE"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="YgB-a1-oSc" id="z3S-gm-b3w"/>
+                    </connections>
                 </viewController>
                 <customObject id="jbY-5a-F77" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

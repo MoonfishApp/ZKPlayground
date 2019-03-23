@@ -30,19 +30,12 @@ class Docker: Operation {
     /// http://www.tldp.org/LDP/abs/html/exitcodes.html
     private (set) var exitStatus: Int?
     
-    /// Complete output
-//    private (set) var output: String = ""
-
-    
     private let task = Process()
     
     private let stdoutPipe = Pipe()
     private let stderrPipe = Pipe()
     private let stdinPipe = Pipe()
     private var notifications = [NSObjectProtocol]()
-//    private var stdoutNotification: NSObjectProtocol!
-//    private var stderrNotification: NSObjectProtocol!
-//    private var stdinNotification: NSObjectProtocol!
     
     /// Path of the directory the .code file is in, e.g. "/MySource/"
     private let workDirectoryPath: String
@@ -53,18 +46,15 @@ class Docker: Operation {
     /// the name of the directory mapped to workDirectoryPath
     private static let dockerDirectoryPath = "playground"
     
-    // TODO: Add arguments?
-    
     init(workDirectory: String, filename: String) {
+        
         self.workDirectoryPath = workDirectory
         self.filename = filename
-        
-        // Set up task
     }
     
     
     /// Runs (and if needed, installs) Zokrates in a Docker image
-    /// Format is: docker run -v /Users/davidhasselhoff/Code/:/home/zokrates/playground -ti zokrates/zokrates /bin/bash
+    /// Format is: docker run -v /Users/davidhasselhoff/Code/:/home/zokrates/playground -i zokrates/zokrates /bin/bash
     override func main() {
         
         defer { _ = notifications.map { NotificationCenter.default.removeObserver($0) } }
@@ -75,7 +65,7 @@ class Docker: Operation {
         self.task.environment = ProcessInfo().environment
         self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin", forKey: "PATH")
         task.launchPath = "/usr/local/bin/docker" // TODO: use which path
-        task.arguments = ["run", "-v", "/Users/ronalddanger/Development/Temp/zk/:/home/zokrates/zk", "-ti", "zokrates/zokrates", "/bin/bash"]
+        task.arguments = ["run", "-v", "/Users/ronalddanger/Development/Temp/zk/:/home/zokrates/zk", "-i", "zokrates/zokrates", "/bin/bash"]
         task.currentDirectoryPath = Bundle.main.bundlePath
         
         // Print to log
@@ -86,12 +76,18 @@ class Docker: Operation {
         // Set exitStatus at exit
         self.task.terminationHandler = { task in
             self.exitStatus = Int(task.terminationStatus)
+            if self.exitStatus == 0 {
+                self.delegate?.docker(self, didReceiveStdin: "Task exited with exit status 0\n")
+            } else {
+                self.delegate?.docker(self, didReceiveStderr: "Task exited with exit status \(self.exitStatus!)\n")
+            }
+            self.delegate?.docker(self, didReceiveStdout: "\(self.stdinPipe.fileHandleForWriting)")
         }
         
         // Handle I/O
         self.task.standardOutput = self.stdoutPipe
         self.task.standardError = self.stderrPipe
-//        self.task.standardInput = self.stdinPipe
+        self.task.standardInput = self.stdinPipe //.fileHandleForWriting
 
         self.capture(self.stdoutPipe) { stdout in
             self.delegate?.docker(self, didReceiveStdout: stdout)
@@ -99,7 +95,6 @@ class Docker: Operation {
         self.capture(self.stderrPipe) { stderr in
             self.delegate?.docker(self, didReceiveStderr: stderr)
         }
-//        self.capture(self.stdinPipe)
         
         task.launch()
         task.waitUntilExit()
@@ -135,11 +130,24 @@ class Docker: Operation {
         
     }
     
+    
+    /// Will add newline character to string
+    ///
+    /// - Parameter string: <#string description#>
+    func send(_ string: String) {
+        
+        guard task.isRunning == true, let data = (string + "\n").data(using: .utf8) else { return assertionFailure() }
+        print (string)
+        self.delegate?.docker(self, didReceiveStdin: string + "\n")
+        self.stdinPipe.fileHandleForWriting.write(data)
+        self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify()
+    }
+    
     /// Exits Docker
     override func cancel() {
         
         // Send 'exit' command to docker
-//        if task.isRunning { task.interrupt() }
+        if task.isRunning { task.interrupt() }
         super.cancel()
     }
 }
