@@ -24,13 +24,13 @@ class InspectorViewController: NSViewController {
     }
     @IBAction func buttonPushed(_ sender: Any) {
         
-        let controller = self.parent!.parent!.view.window!.windowController! as! EditorWindowController
-        
+        let controller = self.view.window!.windowController! as! EditorWindowController
         guard let operation = controller.dockerQueue.operations.first as? Docker else {
             return assertionFailure()
         }
         
-        operation.send(self.textField.stringValue)
+        operation.compile()
+//        operation.write(self.textField.stringValue)
     }
     
 }

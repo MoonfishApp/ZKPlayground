@@ -41,17 +41,20 @@ class Docker: Operation {
     private let workDirectoryPath: String
     
     /// Name of the .code file, e.g. "HelloWorld.code"
-    private var filename: String
+    private let filename: String
     
     /// the name of the directory mapped to workDirectoryPath
-    private static let dockerDirectoryPath = "playground"
+    private static let dockerDirectoryPath = "/home/zokrates/playground"
+    
+    private var dockerFilename: String {
+        return URL(fileURLWithPath: Docker.dockerDirectoryPath).appendingPathComponent(self.filename).path
+    }
     
     init(workDirectory: String, filename: String) {
         
         self.workDirectoryPath = workDirectory
         self.filename = filename
     }
-    
     
     /// Runs (and if needed, installs) Zokrates in a Docker image
     /// Format is: docker run -v /Users/davidhasselhoff/Code/:/home/zokrates/playground -i zokrates/zokrates /bin/bash
@@ -65,7 +68,7 @@ class Docker: Operation {
         self.task.environment = ProcessInfo().environment
         self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin", forKey: "PATH")
         task.launchPath = "/usr/local/bin/docker" // TODO: use which path
-        task.arguments = ["run", "-v", "/Users/ronalddanger/Development/Temp/zk/:/home/zokrates/zk", "-i", "zokrates/zokrates", "/bin/bash"]
+        task.arguments = ["run", "-v", self.workDirectoryPath + ":" + Docker.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
         task.currentDirectoryPath = Bundle.main.bundlePath
         
         // Print to log
@@ -126,8 +129,11 @@ class Docker: Operation {
     
     
     /// Compiles code, returns warnings and errors
+    /// ./zokrates compile -i playground/root.code
     func compile() {
         
+        let command = "./zokrates compile -i " + self.dockerFilename
+        self.write(command)
     }
     
     /// Compiles and builds product and proofs
@@ -139,7 +145,7 @@ class Docker: Operation {
     /// Will add newline character to string
     ///
     /// - Parameter string: <#string description#>
-    func send(_ string: String) {
+    func write(_ string: String) {
         
         let string = string + "\n"
         guard task.isRunning == true, let data = (string).data(using: .utf8) else { return assertionFailure() }
