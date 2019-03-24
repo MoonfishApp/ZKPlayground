@@ -23,7 +23,7 @@ class EditorWindowController: NSWindowController {
             guard self.fileURL != nil else { return }
             
             // (Re)launch Docker
-            self.compile(nil)
+//            self.compile(nil)
             
             // TODO: KVO to check if file location has changed?
         }
@@ -74,7 +74,14 @@ extension EditorWindowController {
     
     @IBAction func compile(_ sender: Any?) {
         
+        guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
         
+        let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: ["337", "113569"])
+        compile.delegate = self
+        compile.completionBlock = {
+//            print (compile.output)
+        }
+        compileQueue.addOperation(compile)
     }
     
     @IBAction func stop(_ sender: Any?) {

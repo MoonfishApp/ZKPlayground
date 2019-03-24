@@ -909,10 +909,10 @@
                                 <buttonCell key="cell" type="squareTextured" title="Compile" bezelStyle="texturedSquare" image="NSTouchBarPlayTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ueb-gO-Md5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="compile:" target="jbY-5a-F77" id="I7v-B8-m4P"/>
+                                    </connections>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="lint:" target="jbY-5a-F77" id="DC1-Q7-GPh"/>
-                                </connections>
                             </button>
                         </subviews>
                         <constraints>

@@ -210,7 +210,7 @@ class Compile: Docker {
         
         var command = "./zokrates compile -i " + self.dockerFilename + "; ./zokrates setup; ./zokrates compute-witness"
         if let arguments = arguments {
-            command += "-a "
+            command += " -a "
             _ = arguments.map{ command.append($0 + " ") }
         }
         command += "; ./zokrates generate-proof; ./zokrates export-verifier; exit"
