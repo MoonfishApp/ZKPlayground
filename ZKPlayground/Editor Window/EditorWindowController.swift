@@ -18,12 +18,12 @@ class EditorWindowController: NSWindowController {
             guard let document = document as? Document, document.fileURL != self.fileURL else { return }
             
             self.fileURL = document.fileURL
-            dockerQueue.cancelAllOperations()
+            lintQueue.cancelAllOperations()
             
             guard self.fileURL != nil else { return }
             
             // (Re)launch Docker
-            self.runDocker(nil)
+            self.compile(nil)
             
             // TODO: KVO to check if file location has changed?
         }
@@ -36,11 +36,19 @@ class EditorWindowController: NSWindowController {
     private var filename: String? { return self.fileURL?.lastPathComponent }
     private var workDirectory: String? { return self.fileURL?.deletingLastPathComponent().path }
     
-    let dockerQueue = OperationQueue()
+    let lintQueue = OperationQueue()
+    let compileQueue = OperationQueue()
 
     override func windowDidLoad() {
         
         super.windowDidLoad()
+        
+        lintQueue.maxConcurrentOperationCount = 1
+        lintQueue.qualityOfService = .userInitiated
+
+        compileQueue.maxConcurrentOperationCount = 1
+        compileQueue.qualityOfService = .userInitiated
+
         
         self.logViewController = ((contentViewController as! NSSplitViewController).splitViewItems[2].viewController as! LogViewController)
         self.statusViewController = ((contentViewController as! NSSplitViewController).splitViewItems[1].viewController as! StatusViewController)
@@ -51,17 +59,20 @@ class EditorWindowController: NSWindowController {
 // Docker extensions
 extension EditorWindowController {
     
-    @IBAction func runDocker(_ sender: Any?) {
+    @IBAction func lint(_ sender: Any?) {
         
         guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
         
         let docker = Docker(workDirectory: workDirectory, filename: filename)
-        docker.delegate = self
+        docker.delegate = self // Remove
         
         // Start docker
-        dockerQueue.maxConcurrentOperationCount = 1
-        dockerQueue.qualityOfService = .userInitiated
-        dockerQueue.addOperation(docker)
+        lintQueue.addOperation(docker)
+    }
+    
+    @IBAction func compile(_ sender: Any?) {
+        
+        
     }
     
     @IBAction func stop(_ sender: Any?) {

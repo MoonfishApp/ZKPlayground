@@ -32,6 +32,9 @@ class Docker: Operation {
     /// http://www.tldp.org/LDP/abs/html/exitcodes.html
     private (set) var exitStatus: Int?
     
+    // If true, output will be stored in output property
+    private let logOutput: Bool
+    
     private (set) var output = ""
     
     private let task = Process()
@@ -63,7 +66,7 @@ class Docker: Operation {
     }
     
     private var computeWitnessCommand: String {
-        return "./zokrates compute-witness -a 337 113569" //<--- arguments!!
+        return "./zokrates compute-witness" // 337 113569" //<--- arguments!!
     }
     
     private var generateProofCommand: String {
@@ -75,10 +78,11 @@ class Docker: Operation {
     }
     
     
-    init(workDirectory: String, filename: String) {
+    init(workDirectory: String, filename: String, logOutput: Bool = false) {
         
         self.workDirectoryPath = workDirectory
         self.filename = filename
+        self.logOutput = logOutput
     }
     
     /// Runs (and if needed, installs) Zokrates in a Docker image
@@ -119,6 +123,7 @@ class Docker: Operation {
 
         self.capture(self.stdoutPipe) { stdout in
             self.delegate?.docker(self, didReceiveStdout: stdout)
+            if self.logOutput == true { self.output += stdout }
             
             // print utf8 values
 //            var s = ""
@@ -127,6 +132,7 @@ class Docker: Operation {
         }
         self.capture(self.stderrPipe) { stderr in
             self.delegate?.docker(self, didReceiveStderr: stderr)
+            if self.logOutput == true { self.output += stderr }
         }
         
         task.launch()
@@ -155,29 +161,38 @@ class Docker: Operation {
     
     /// Compiles code, returns warnings and errors
     /// ./zokrates compile -i playground/root.code
-    func compile() {
+    func lint() {
         
         let command = "./zokrates compile -i " + self.dockerFilename + ";ls"
         self.write(command)
     }
     
     /// Compiles and builds product and proofs
-    func build() {
+    /// Fix output to include
+    func build(arguments: [String]?, output: ([String]) -> ()) {
         
+        var command = compileCommand + "; " + setupCommand + "; " + computeWitnessCommand
+        if let arguments = arguments {
+            command += "-a "
+            _ = arguments.map{ command.append($0 + " ") }
+        }
+        command += "; " + generateProofCommand + "; " + exportVerifierCommand
+        
+        self.write(command, wait: false)
     }
     
     
     /// Will add newline character to string
     ///
     /// - Parameter string: <#string description#>
-    func write(_ string: String) {
+    func write(_ string: String, wait: Bool = true) {
         
         let string = string + "\n"
         guard task.isRunning == true, let data = (string).data(using: .utf8) else { return assertionFailure() }
         print (string)
         self.delegate?.docker(self, didReceiveStdin: "\n" + string)
         self.stdinPipe.fileHandleForWriting.write(data)
-        self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify()
+        if wait == true { self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify() }
     }
     
     /// Exits Docker

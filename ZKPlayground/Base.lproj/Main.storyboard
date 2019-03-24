@@ -924,6 +924,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="compileButton" destination="Wgk-T1-9qF" id="XVf-ww-pra"/>
                         <outlet property="textField" destination="YgB-a1-oSc" id="z3S-gm-b3w"/>
                     </connections>
                 </viewController>
