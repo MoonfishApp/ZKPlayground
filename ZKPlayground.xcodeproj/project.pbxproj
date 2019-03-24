@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A65EACAEBBF7D4F00853C9CA /* Pods_ZKPlayground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */; };
 		BB2ADA80B31BE381C953C669 /* Pods_ZKPlaygroundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */; };
+		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
 		C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A5F22434E55001EC64A /* AppDelegate.swift */; };
 		C7AE8A6422434E55001EC64A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A6322434E55001EC64A /* Document.swift */; };
 		C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6522434E59001EC64A /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPlaygroundTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA9AA319AFCAAB284D17829 /* Pods-ZKPlayground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.release.xcconfig"; sourceTree = "<group>"; };
 		83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPlayground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
 		C7AE8A5C22434E55001EC64A /* ZKPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZKPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A5F22434E55001EC64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7AE8A6122434E55001EC64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				C7AE8A6322434E55001EC64A /* Document.swift */,
 				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
 				C7AE8A97224443BA001EC64A /* Docker.swift */,
+				C78A91C12246F7720033233E /* RemoteDockerAPI.swift */,
 				C7AE8A6522434E59001EC64A /* Assets.xcassets */,
 				C7AE8A6722434E59001EC64A /* Main.storyboard */,
 				C7AE8A6A22434E59001EC64A /* Info.plist */,
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */,
 				C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */,
 				C7AE8A8322436486001EC64A /* StatusViewController.swift in Sources */,
 				C7AE8A8722436604001EC64A /* EditorViewController.swift in Sources */,

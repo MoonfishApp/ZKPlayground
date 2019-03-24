@@ -20,6 +20,8 @@ protocol DockerProtocol: class {
     func docker(_ docker: Docker, didReceiveStdin string: String)
 }
 
+/// TODO: explore Docker Remote API http://blog.arungupta.me/enable-docker-remote-api-mac-osx-machine/
+/// https://github.com/docker/for-mac/issues/770
 class Docker: Operation {
     
     weak var delegate: DockerProtocol?
@@ -29,6 +31,8 @@ class Docker: Operation {
     /// 0 is success, anything else is an error
     /// http://www.tldp.org/LDP/abs/html/exitcodes.html
     private (set) var exitStatus: Int?
+    
+    private (set) var output = ""
     
     private let task = Process()
     
@@ -49,6 +53,27 @@ class Docker: Operation {
     private var dockerFilename: String {
         return URL(fileURLWithPath: Docker.dockerDirectoryPath).appendingPathComponent(self.filename).path
     }
+    
+    private var compileCommand: String {
+        return "./zokrates compile -i " + self.dockerFilename
+    }
+    
+    private var setupCommand: String {
+        return "./zokrates setup"
+    }
+    
+    private var computeWitnessCommand: String {
+        return "./zokrates compute-witness -a 337 113569" //<--- arguments!!
+    }
+    
+    private var generateProofCommand: String {
+        return "./zokrates generate-proof"
+    }
+    
+    private var exportVerifierCommand: String {
+        return "./zokrates export-verifier"
+    }
+    
     
     init(workDirectory: String, filename: String) {
         
@@ -132,7 +157,7 @@ class Docker: Operation {
     /// ./zokrates compile -i playground/root.code
     func compile() {
         
-        let command = "./zokrates compile -i " + self.dockerFilename
+        let command = "./zokrates compile -i " + self.dockerFilename + ";ls"
         self.write(command)
     }
     
