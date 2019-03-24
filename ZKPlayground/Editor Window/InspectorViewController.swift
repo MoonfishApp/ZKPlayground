@@ -30,15 +30,15 @@ class InspectorViewController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
     }
-    @IBAction func buttonPushed(_ sender: Any) {
+//    @IBAction func buttonPushed(_ sender: Any) {
+    
+//        let controller = self.view.window!.windowController! as! EditorWindowController
+//        guard let operation = controller.lintQueue.operations.first as? Docker else {
+//            return assertionFailure()
+//        }
         
-        let controller = self.view.window!.windowController! as! EditorWindowController
-        guard let operation = controller.lintQueue.operations.first as? Docker else {
-            return assertionFailure()
-        }
-        
-        operation.lint()
+//        operation.lint()
 //        operation.write(self.textField.stringValue)
-    }
+//    }
     
 }

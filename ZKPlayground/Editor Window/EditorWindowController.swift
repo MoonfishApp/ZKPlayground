@@ -63,11 +63,13 @@ extension EditorWindowController {
         
         guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
         
-        let docker = Docker(workDirectory: workDirectory, filename: filename)
-        docker.delegate = self // Remove
-        
-        // Start docker
-        lintQueue.addOperation(docker)
+        let lint = Lint(workDirectory: workDirectory, filename: filename)
+        lint.delegate = self
+        lint.completionBlock = {
+            print(lint.output)
+            // Parse output...
+        }
+        lintQueue.addOperation(lint)
     }
     
     @IBAction func compile(_ sender: Any?) {

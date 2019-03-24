@@ -37,67 +37,55 @@ class Docker: Operation {
     
     private (set) var output = ""
     
-    private let task = Process()
+    fileprivate let task = Process()
     
     private let stdoutPipe = Pipe()
     private let stderrPipe = Pipe()
     private let stdinPipe = Pipe()
     private var notifications = [NSObjectProtocol]()
     
-    /// Path of the directory the .code file is in, e.g. "/MySource/"
-    private let workDirectoryPath: String
-    
     /// Name of the .code file, e.g. "HelloWorld.code"
     private let filename: String
     
     /// the name of the directory mapped to workDirectoryPath
-    private static let dockerDirectoryPath = "/home/zokrates/playground"
+    fileprivate static let dockerDirectoryPath = "/home/zokrates/playground"
     
-    private var dockerFilename: String {
+    fileprivate var dockerFilename: String {
         return URL(fileURLWithPath: Docker.dockerDirectoryPath).appendingPathComponent(self.filename).path
     }
     
-    private var compileCommand: String {
-        return "./zokrates compile -i " + self.dockerFilename
-    }
+    /// Arguments used to start Docker (e.g. docker run -v ....)
+    private let dockerArguments: [String]
     
-    private var setupCommand: String {
-        return "./zokrates setup"
-    }
-    
-    private var computeWitnessCommand: String {
-        return "./zokrates compute-witness" // 337 113569" //<--- arguments!!
-    }
-    
-    private var generateProofCommand: String {
-        return "./zokrates generate-proof"
-    }
-    
-    private var exportVerifierCommand: String {
-        return "./zokrates export-verifier"
-    }
-    
-    
-    init(workDirectory: String, filename: String, logOutput: Bool = false) {
+    init(workDirectory: String, filename: String, logOutput: Bool = true) {
         
-        self.workDirectoryPath = workDirectory
         self.filename = filename
+        self.dockerArguments = ["run", "-v", workDirectory + ":" + Docker.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
         self.logOutput = logOutput
+        
+        super.init()
+    }
+    
+    override init() {
+        
+        self.filename = ""
+        self.logOutput = true
+        self.dockerArguments = ["run", "hello-world"]
+        
+        super.init()
     }
     
     /// Runs (and if needed, installs) Zokrates in a Docker image
     /// Format is: docker run -v /Users/davidhasselhoff/Code/:/home/zokrates/playground -i zokrates/zokrates /bin/bash
     override func main() {
-        
-        defer { _ = notifications.map { NotificationCenter.default.removeObserver($0) } }
-        
+            
         guard isCancelled == false else { return }
         
         // Set up task
         self.task.environment = ProcessInfo().environment
         self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin", forKey: "PATH")
         task.launchPath = "/usr/local/bin/docker" // TODO: use which path
-        task.arguments = ["run", "-v", self.workDirectoryPath + ":" + Docker.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
+        task.arguments = self.dockerArguments
         task.currentDirectoryPath = Bundle.main.bundlePath
         
         // Print to log
@@ -109,11 +97,11 @@ class Docker: Operation {
         self.task.terminationHandler = { task in
             self.exitStatus = Int(task.terminationStatus)
             if self.exitStatus == 0 {
-                self.delegate?.docker(self, didReceiveStdin: "Task exited with exit status 0\n")
+                self.delegate?.docker(self, didReceiveStdout: "\nTask exited with exit status 0\n")
             } else {
-                self.delegate?.docker(self, didReceiveStderr: "Task exited with exit status \(self.exitStatus!)\n")
+                self.delegate?.docker(self, didReceiveStderr: "\nTask exited with exit status \(self.exitStatus!)\n")
             }
-            self.delegate?.docker(self, didReceiveStdout: "\(self.stdinPipe.fileHandleForWriting)")
+            _ = self.notifications.map { NotificationCenter.default.removeObserver($0) }
         }
         
         // Handle I/O
@@ -122,21 +110,27 @@ class Docker: Operation {
         self.task.standardInput = self.stdinPipe
 
         self.capture(self.stdoutPipe) { stdout in
+            
             self.delegate?.docker(self, didReceiveStdout: stdout)
             if self.logOutput == true { self.output += stdout }
             
+            print(stdout)
             // print utf8 values
 //            var s = ""
 //            _ = stdout.utf8.map{ s.append("\($0), ") }
 //            self.delegate?.docker(self, didReceiveStdin: s)
         }
+        
         self.capture(self.stderrPipe) { stderr in
+            
             self.delegate?.docker(self, didReceiveStderr: stderr)
             if self.logOutput == true { self.output += stderr }
+            
+            print(stderr)
         }
         
         task.launch()
-        task.waitUntilExit()
+//        self.task.waitUntilExit() // uncomment when testing Hello-world
     }
     
     private func capture(_ pipe: Pipe, dataReceived: @escaping (String) -> Void) {
@@ -157,30 +151,6 @@ class Docker: Operation {
             
         pipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
     }
-    
-    
-    /// Compiles code, returns warnings and errors
-    /// ./zokrates compile -i playground/root.code
-    func lint() {
-        
-        let command = "./zokrates compile -i " + self.dockerFilename + ";ls"
-        self.write(command)
-    }
-    
-    /// Compiles and builds product and proofs
-    /// Fix output to include
-    func build(arguments: [String]?, output: ([String]) -> ()) {
-        
-        var command = compileCommand + "; " + setupCommand + "; " + computeWitnessCommand
-        if let arguments = arguments {
-            command += "-a "
-            _ = arguments.map{ command.append($0 + " ") }
-        }
-        command += "; " + generateProofCommand + "; " + exportVerifierCommand
-        
-        self.write(command, wait: false)
-    }
-    
     
     /// Will add newline character to string
     ///
@@ -204,5 +174,49 @@ class Docker: Operation {
         self.stderrPipe.fileHandleForReading.closeFile()
         self.stdoutPipe.fileHandleForWriting.closeFile()
         super.cancel()
+    }
+}
+
+/// Compiles code, returns warnings and errors
+/// ./zokrates compile -i playground/root.code
+class Lint: Docker {
+    
+    override func main() {
+        
+        super.main()
+        
+        let command = "./zokrates compile -i " + self.dockerFilename + "; exit"
+        self.write(command)
+        
+        self.task.waitUntilExit()
+    }
+}
+
+/// Compiles and builds product and proofs
+class Compile: Docker {
+    
+    let arguments: [String]?
+    
+    init(workDirectory: String, filename: String, arguments: [String]?) {
+        
+        self.arguments = arguments
+        
+        super.init(workDirectory: workDirectory, filename: filename)
+    }
+    
+    override func main() {
+        
+        super.main()
+        
+        var command = "./zokrates compile -i " + self.dockerFilename + "; ./zokrates setup; ./zokrates compute-witness"
+        if let arguments = arguments {
+            command += "-a "
+            _ = arguments.map{ command.append($0 + " ") }
+        }
+        command += "; ./zokrates generate-proof; ./zokrates export-verifier; exit"
+        
+        self.write(command)
+        
+        self.task.waitUntilExit()
     }
 }

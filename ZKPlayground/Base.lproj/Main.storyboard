@@ -911,7 +911,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="buttonPushed:" target="kiI-j2-wj3" id="7S1-cw-gOW"/>
+                                    <action selector="lint:" target="jbY-5a-F77" id="DC1-Q7-GPh"/>
                                 </connections>
                             </button>
                         </subviews>
