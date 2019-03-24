@@ -49,6 +49,7 @@ class Docker: Operation {
     
     /// the name of the directory mapped to workDirectoryPath
     fileprivate static let dockerDirectoryPath = "/home/zokrates/playground"
+    fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent("build").path }()
     
     fileprivate var dockerFilename: String {
         return URL(fileURLWithPath: Docker.dockerDirectoryPath).appendingPathComponent(self.filename).path
@@ -113,8 +114,7 @@ class Docker: Operation {
             
             self.delegate?.docker(self, didReceiveStdout: stdout)
             if self.logOutput == true { self.output += stdout }
-            
-            print(stdout)
+
             // print utf8 values
 //            var s = ""
 //            _ = stdout.utf8.map{ s.append("\($0), ") }
@@ -125,8 +125,6 @@ class Docker: Operation {
             
             self.delegate?.docker(self, didReceiveStderr: stderr)
             if self.logOutput == true { self.output += stderr }
-            
-            print(stderr)
         }
         
         task.launch()
@@ -141,7 +139,6 @@ class Docker: Operation {
             
             guard let outputString = String(data: output, encoding: String.Encoding.utf8), !outputString.isEmpty else { return }
             
-            print(outputString)
             dataReceived(outputString)
             
             pipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
@@ -159,7 +156,6 @@ class Docker: Operation {
         
         let string = string + "\n"
         guard task.isRunning == true, let data = (string).data(using: .utf8) else { return assertionFailure() }
-        print (string)
         self.delegate?.docker(self, didReceiveStdin: "\n" + string)
         self.stdinPipe.fileHandleForWriting.write(data)
         if wait == true { self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify() }
@@ -175,6 +171,11 @@ class Docker: Operation {
         self.stdoutPipe.fileHandleForWriting.closeFile()
         super.cancel()
     }
+    
+    fileprivate func copy(file: String) {
+        
+        self.write("cp " + file + " " + Docker.dockerBuildPath)
+    }
 }
 
 /// Compiles code, returns warnings and errors
@@ -187,7 +188,6 @@ class Lint: Docker {
         
         let command = "./zokrates compile -i " + self.dockerFilename + "; exit"
         self.write(command)
-        
         self.task.waitUntilExit()
     }
 }
@@ -213,10 +213,31 @@ class Compile: Docker {
             command += " -a "
             _ = arguments.map{ command.append($0 + " ") }
         }
-        command += "; ./zokrates generate-proof; ./zokrates export-verifier; exit"
+        command += "; ./zokrates generate-proof; ./zokrates export-verifier"
         
         self.write(command)
         
+        // copy compile output file to build folder
+        copy(file: "out")
+        copy(file: "out.code")
+        
+        // copy setup files
+        copy(file: "proving.key")
+        copy(file: "variables.inf")
+        copy(file: "verification.key")
+        
+        // copy witness
+        copy(file: "witness")
+        
+        // copy proof
+        copy(file: "proof.json")
+        
+        // copy verifier
+        copy(file: "verifier.sol")
+        
+        self.write("exit")
+        
         self.task.waitUntilExit()
     }
+    
 }
