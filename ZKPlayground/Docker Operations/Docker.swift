@@ -46,10 +46,12 @@ class Docker: Operation {
     
     /// Name of the .code file, e.g. "HelloWorld.code"
     private let filename: String
+    private let workDirectory: String
     
     /// the name of the directory mapped to workDirectoryPath
     fileprivate static let dockerDirectoryPath = "/home/zokrates/playground"
-    fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent("build").path }()
+    fileprivate static let buildDirectory = "build"
+    fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent(Docker.buildDirectory).path }()
     
     fileprivate var dockerFilename: String {
         return URL(fileURLWithPath: Docker.dockerDirectoryPath).appendingPathComponent(self.filename).path
@@ -61,6 +63,7 @@ class Docker: Operation {
     init(workDirectory: String, filename: String, logOutput: Bool = true) {
         
         self.filename = filename
+        self.workDirectory = workDirectory
         self.dockerArguments = ["run", "-v", workDirectory + ":" + Docker.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
         self.logOutput = logOutput
         
@@ -70,6 +73,7 @@ class Docker: Operation {
     override init() {
         
         self.filename = ""
+        self.workDirectory = ""
         self.logOutput = true
         self.dockerArguments = ["run", "hello-world"]
         
@@ -172,7 +176,7 @@ class Docker: Operation {
         super.cancel()
     }
     
-    fileprivate func copy(file: String) {
+    fileprivate func copy(file: String) { //} -> Bool {
         
         self.write("cp " + file + " " + Docker.dockerBuildPath)
     }
@@ -208,36 +212,35 @@ class Compile: Docker {
         
         super.main()
         
-        var command = "./zokrates compile -i " + self.dockerFilename + "; ./zokrates setup; ./zokrates compute-witness"
-        if let arguments = arguments {
-            command += " -a "
-            _ = arguments.map{ command.append($0 + " ") }
-        }
-        command += "; ./zokrates generate-proof; ./zokrates export-verifier"
-        
-        self.write(command)
-        
-        // copy compile output file to build folder
+        // 1. Compile
+        self.write("./zokrates compile -i " + self.dockerFilename)
         copy(file: "out")
         copy(file: "out.code")
         
-        // copy setup files
+        // 2. Setup
+        self.write("./zokrates setup")
         copy(file: "proving.key")
         copy(file: "variables.inf")
         copy(file: "verification.key")
         
-        // copy witness
+        // 3. Compute witness
+        var command = "./zokrates compute-witness"
+        if let arguments = self.arguments {
+            command += " -a "
+            _ = arguments.map{ command.append($0 + " ") }
+        }
+        self.write(command)
         copy(file: "witness")
-        
-        // copy proof
+
+        // 4. Generate proof
+        self.write("./zokrates generate-proof")
         copy(file: "proof.json")
         
         // copy verifier
+        self.write("./zokrates export-verifier")
         copy(file: "verifier.sol")
         
         self.write("exit")
-        
         self.task.waitUntilExit()
     }
-    
 }

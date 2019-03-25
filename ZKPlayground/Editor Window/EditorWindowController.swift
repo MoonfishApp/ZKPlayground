@@ -74,7 +74,8 @@ extension EditorWindowController {
     
     @IBAction func compile(_ sender: Any?) {
         
-//        lint(sender)
+        (document as? Document)?.save(self)
+        
         guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
 
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: ["337", "113569"])
