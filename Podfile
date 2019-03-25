@@ -6,8 +6,10 @@ target 'ZKPlayground' do
   use_frameworks!
 
   # Pods for ZKPlayground
+  #pod 'SavannaKit', :path => '../../Tools/savannakit'
   pod 'SourceEditor', :git => 'https://github.com/ronaldmannak/source-editor.git'
-  pod 'SavannaKit', :git => 'https://github.com/ronaldmannak/savannakit.git'
+  #pod 'SavannaKit', :git => 'https://github.com/ronaldmannak/savannakit.git'
+  
   pod 'STPrivilegedTask'
 
   target 'ZKPlaygroundTests' do

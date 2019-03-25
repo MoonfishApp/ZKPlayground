@@ -5,7 +5,7 @@ PODS:
   - STPrivilegedTask (1.0.1)
 
 DEPENDENCIES:
-  - SavannaKit (from `https://github.com/ronaldmannak/savannakit.git`)
+  - SavannaKit (from `../../Tools/savannakit`)
   - SourceEditor (from `https://github.com/ronaldmannak/source-editor.git`)
   - STPrivilegedTask
 
@@ -15,23 +15,20 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   SavannaKit:
-    :git: https://github.com/ronaldmannak/savannakit.git
+    :path: "../../Tools/savannakit"
   SourceEditor:
     :git: https://github.com/ronaldmannak/source-editor.git
 
 CHECKOUT OPTIONS:
-  SavannaKit:
-    :commit: 521199629e8530154442b18512988ecc8367374a
-    :git: https://github.com/ronaldmannak/savannakit.git
   SourceEditor:
     :commit: a5375da23fc323e7bba550e5ce93066985dae058
     :git: https://github.com/ronaldmannak/source-editor.git
 
 SPEC CHECKSUMS:
-  SavannaKit: 920c240bde011900df8156200a960dad3ee5edfd
+  SavannaKit: 307efa0be63cad347853b468880915a3090c336e
   SourceEditor: 4d590385d642c812d08a91941a4bfc90eccf20af
   STPrivilegedTask: 103f97827454e786074640cf89d303be344498c7
 
-PODFILE CHECKSUM: f934b1048b3901594ad4adfa78b2223a9983937c
+PODFILE CHECKSUM: 7849e33e9a46f7593890f522b13d7208c3d22393
 
 COCOAPODS: 1.5.3

@@ -9,20 +9,53 @@
 import Foundation
 import SourceEditor
 import SavannaKit
+import AppKit
 
 struct  SolarizedLight: SourceCodeTheme {
     
-    func color(for syntaxColorType: SourceCodeTokenType) -> Color {
-        <#code#>
+    public init() {
+        
     }
     
-    var lineNumbersStyle: LineNumbersStyle?
+    private static var lineNumbersColor: Color {
+        return NSColor(rgb: 0x657b83)
+    }
     
-    var gutterStyle: GutterStyle
+    public let lineNumbersStyle: LineNumbersStyle? = LineNumbersStyle(font: Font(name: "Menlo", size: 14)!, textColor: lineNumbersColor)
     
-    var font: Font
+    public let gutterStyle: GutterStyle = GutterStyle(backgroundColor: NSColor(rgb: 0xfdf6e3), minimumWidth: 32)
     
-    var backgroundColor: Color
+    public let font = Font(name: "Menlo", size: 14)!
+    
+    public let backgroundColor = NSColor(rgb: 0xfdf6e3)
+    
+    public func color(for syntaxColorType: SourceCodeTokenType) -> Color {
+    
+        switch syntaxColorType {
+        case .plain:
+            return NSColor(rgb: 0x657b83)
+            
+        case .number:
+            return NSColor(rgb: 0xdc322f)
+            
+        case .string:
+            return NSColor(rgb: 0x2aa198)
+            
+        case .identifier:
+            return .blue //NSColor(rgb: 0xb58900)
+            
+        case .keyword:
+            return .red //NSColor(rgb: 0x859900)
+            
+        case .comment:
+            return NSColor(rgb: 0x93a1a1)
+            
+        case .editorPlaceholder:
+            return NSColor(rgb: 0x93a1a1)
+        }
+        
+    }
+    
     
     
 }
@@ -77,11 +110,5 @@ struct  SolarizedLight: SourceCodeTheme {
     "comments" : {
         "color" : "#93a1a1"
     },
-    "metadata" : {
-        "author" : "1024jp",
-        "distributionURL" : "https://coteditor.com",
-        "license" : "Apache License Version 2.0",
-        "description" : "CotEditor bundled theme, which is based on Solarized <http://ethanschoonover.com/solarized> color scheme by Ethan Schoonover."
-    }
 }
 */
