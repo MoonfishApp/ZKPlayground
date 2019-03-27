@@ -794,7 +794,7 @@
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FLK-B3-T62">
                                 <rect key="frame" x="39" y="7" width="391" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Docker is not running" id="ywS-wq-Fj3">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="ywS-wq-Fj3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

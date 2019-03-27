@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import SavannaKit
+import SourceEditor
 
 class EditorWindowController: NSWindowController {
     
@@ -22,15 +24,13 @@ class EditorWindowController: NSWindowController {
             
             guard self.fileURL != nil else { return }
             
-            // (Re)launch Docker
-//            self.compile(nil)
-            
-            // TODO: KVO to check if file location has changed?
+//            lint(self)
         }
     }
     
     private var logViewController: LogViewController!
     private var statusViewController: StatusViewController!
+//    private var syntaxTextView: SyntaxTextView!
     
     private var fileURL: URL?
     private var filename: String? { return self.fileURL?.lastPathComponent }
@@ -52,6 +52,7 @@ class EditorWindowController: NSWindowController {
         
         self.logViewController = ((contentViewController as! NSSplitViewController).splitViewItems[2].viewController as! LogViewController)
         self.statusViewController = ((contentViewController as! NSSplitViewController).splitViewItems[1].viewController as! StatusViewController)
+//        self.syntaxTextView = (((contentViewController as! NSSplitViewController).splitViewItems[0].viewController as! NSSplitViewController).splitViewItems[0].viewController as! EditorViewController).syntaxTextView
     }
 
 }
@@ -59,18 +60,19 @@ class EditorWindowController: NSWindowController {
 // Docker extensions
 extension EditorWindowController {
     
-    @IBAction func lint(_ sender: Any?) {
-        
-        guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
-        
-        let lint = Lint(workDirectory: workDirectory, filename: filename)
-        lint.delegate = self
-        lint.completionBlock = {
-            print(lint.output)
-            // Parse output...
-        }
-        lintQueue.addOperation(lint)
-    }
+//    @IBAction func lint(_ sender: Any?) {
+//
+//        guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
+//
+//        let lint = Lint(workDirectory: workDirectory, filename: filename)
+//        lint.delegate = self
+//        lint.completionBlock = {
+//
+//            self.syntaxTextView.highlight(line: 0, character: 1, color: .red, message: "test error message")
+//            print(lint.output)
+//        }
+//        lintQueue.addOperation(lint)
+//    }
     
     @IBAction func compile(_ sender: Any?) {
         

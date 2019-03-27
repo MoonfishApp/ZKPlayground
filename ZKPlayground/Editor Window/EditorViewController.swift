@@ -52,9 +52,7 @@ class EditorViewController: NSViewController {
             else { return }
             
             let matches = regex.matches(in: lint.output, options: [], range: lint.output.fullRange)
-            
-            var compilerErrors = [CompilerError]()
-            
+        
             for match in matches {
                 
                 guard match.numberOfRanges >= 4 else { continue }
@@ -66,8 +64,8 @@ class EditorViewController: NSViewController {
                 }
                 
                 let compilerError = CompilerError(type: .error, line: linenumber, column: column, message: String(message))
-                compilerErrors.append(compilerError)
                 print(compilerError)
+                self.syntaxTextView.highlight(line: compilerError.line, column: compilerError.column, color: compilerError.type == .error ? .red : .yellow, message: compilerError.message)
             }
             
         }
@@ -84,7 +82,7 @@ extension EditorViewController: SyntaxTextViewDelegate {
 
         // Invoke lint after two second delay
         NSObject.cancelPreviousPerformRequests(withTarget: self)
-        perform(#selector(lint), with: nil, afterDelay: 0.1)
+        perform(#selector(lint), with: nil, afterDelay: 0.5)
     }
     
     func didChangeSelectedRange(_ syntaxTextView: SyntaxTextView, selectedRange: NSRange) {
