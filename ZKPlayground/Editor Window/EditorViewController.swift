@@ -20,7 +20,7 @@ class EditorViewController: NSViewController {
         }
     }
 
-    let lexer = SokratesLexer()
+    let lexer = ZokratesLexer()
     
     let lintQueue = OperationQueue()
     
@@ -32,6 +32,7 @@ class EditorViewController: NSViewController {
         syntaxTextView.theme = DefaultSourceCodeTheme()
         syntaxTextView.delegate = self
         syntaxTextView.contentTextView.insertionPointColor = NSColor.white
+        syntaxTextView.autocompleteWords = self.lexer.keywords
     }
     
     @objc fileprivate func lint(_ sender: Any?) {
@@ -83,7 +84,7 @@ extension EditorViewController: SyntaxTextViewDelegate {
 
         // Invoke lint after two second delay
         NSObject.cancelPreviousPerformRequests(withTarget: self)
-        perform(#selector(lint), with: nil, afterDelay: 2)
+        perform(#selector(lint), with: nil, afterDelay: 0.1)
     }
     
     func didChangeSelectedRange(_ syntaxTextView: SyntaxTextView, selectedRange: NSRange) {

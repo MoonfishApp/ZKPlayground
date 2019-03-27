@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SourceEditor:
-    :commit: a5375da23fc323e7bba550e5ce93066985dae058
+    :commit: af9cb5b75bba44ad72da98cb06798adc70ecccd2
     :git: https://github.com/ronaldmannak/source-editor.git
 
 SPEC CHECKSUMS:
