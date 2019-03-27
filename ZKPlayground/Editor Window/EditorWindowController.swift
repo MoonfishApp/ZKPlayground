@@ -60,20 +60,6 @@ class EditorWindowController: NSWindowController {
 // Docker extensions
 extension EditorWindowController {
     
-//    @IBAction func lint(_ sender: Any?) {
-//
-//        guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
-//
-//        let lint = Lint(workDirectory: workDirectory, filename: filename)
-//        lint.delegate = self
-//        lint.completionBlock = {
-//
-//            self.syntaxTextView.highlight(line: 0, character: 1, color: .red, message: "test error message")
-//            print(lint.output)
-//        }
-//        lintQueue.addOperation(lint)
-//    }
-    
     @IBAction func compile(_ sender: Any?) {
         
         (document as? Document)?.save(self)
