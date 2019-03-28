@@ -47,27 +47,15 @@ class EditorViewController: NSViewController {
         let lint = Lint(workDirectory: workDirectory, filename: filename)
         lint.completionBlock = {
             
-            guard lint.output.contains("Compilation failed:"),
-                let regex = try? NSRegularExpression(pattern: "(\\d+):(\\d+)[\\n\\r\\s]+(.*)", options: [])
-            else { return }
-            
-            let matches = regex.matches(in: lint.output, options: [], range: lint.output.fullRange)
-        
-            for match in matches {
+            guard lint.output.contains("Compilation failed:") else {
                 
-                guard match.numberOfRanges >= 4 else { continue }
-                
-                guard let linenumber = Int(String(lint.output.substring(with: match.range(at: 1)) ?? "")),
-                    let column = Int(String(lint.output.substring(with: match.range(at: 2)) ?? "")),
-                    let message = lint.output.substring(with: match.range(at: 3)) else {
-                    continue
-                }
-                
-                let compilerError = CompilerError(type: .error, line: linenumber, column: column, message: String(message))
-                print(compilerError)
-                self.syntaxTextView.highlight(line: compilerError.line, column: compilerError.column, color: compilerError.type == .error ? .red : .yellow, message: compilerError.message)
+                // Set def main arguments in compiler part
+                return
             }
             
+            _ = CompilerError.createErrors(string: lint.output).map {
+                self.syntaxTextView.highlight(line: $0.line, column: $0.column, color: $0.type == .error ? .red : .yellow, message: $0.message)
+            }
         }
         lintQueue.addOperation(lint)
     }
