@@ -17,12 +17,15 @@ class InspectorViewController: NSViewController {
     
     override var representedObject: Any? {
         didSet {
+            
             guard let document = representedObject as? Document, document.fileURL != nil else {
                 self.compileButton.isEnabled = false
                 return
             }
             
             self.compileButton.isEnabled = true
+            
+            // KVO arguments
         }
     }
     

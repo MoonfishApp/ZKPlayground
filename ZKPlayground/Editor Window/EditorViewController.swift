@@ -49,20 +49,17 @@ class EditorViewController: NSViewController {
             
             guard lint.output.contains("Compilation failed:") else {
                 
+                // Set def main arguments in compiler part
+                
                 DispatchQueue.main.sync {
-                    
-                    // Set def main arguments in compiler part
-                    
                     let arguments = Argument.createArguments(string: self.syntaxTextView.text)
-                    
-                    _ = arguments.map{
-                        print($0)
-                    }
+                    (self.representedObject as? Document)?.arguments = arguments
                 }
                 
                 return
             }
             
+            // Create errors and highlight the lines in the editor
             _ = CompilerError.createErrors(string: lint.output).map {
                 self.syntaxTextView.highlight(line: $0.line, column: $0.column, color: $0.type == .error ? .red : .yellow, message: $0.message)
             }

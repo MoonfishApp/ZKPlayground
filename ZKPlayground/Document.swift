@@ -12,6 +12,8 @@ class Document: NSDocument {
 
     var string: String = ""
     
+    var arguments: [Argument]? = nil
+    
     override init() {
         super.init()
         // Add your subclass-specific initialization here.

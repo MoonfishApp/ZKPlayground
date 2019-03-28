@@ -21,10 +21,6 @@ class EditorWindowController: NSWindowController {
             
             self.fileURL = document.fileURL
             lintQueue.cancelAllOperations()
-            
-            guard self.fileURL != nil else { return }
-            
-//            lint(self)
         }
     }
     
