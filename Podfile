@@ -6,11 +6,10 @@ target 'ZKPlayground' do
   use_frameworks!
 
   # Pods for ZKPlayground
-  pod 'SavannaKit', :path => '../../Tools/savannakit'
+  #pod 'SavannaKit', :path => '../../Tools/savannakit'
+  pod 'SavannaKit', :git => 'https://github.com/ronaldmannak/savannakit.git'
   pod 'SourceEditor', :git => 'https://github.com/ronaldmannak/source-editor.git'
-  #pod 'SavannaKit', :git => 'https://github.com/ronaldmannak/savannakit.git'
-  
-  pod 'STPrivilegedTask'
+  #pod 'STPrivilegedTask'
 
   target 'ZKPlaygroundTests' do
     inherit! :search_paths

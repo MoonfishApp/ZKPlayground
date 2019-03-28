@@ -305,7 +305,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/STPrivilegedTask/STPrivilegedTask.framework",
 				"${BUILT_PRODUCTS_DIR}/SavannaKit/SavannaKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SourceEditor/SourceEditor.framework",
 			);
@@ -313,7 +312,6 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STPrivilegedTask.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SavannaKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SourceEditor.framework",
 			);
