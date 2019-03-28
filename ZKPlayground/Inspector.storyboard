@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="hv4-4T-D4q">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Inspector View Controller-->
+        <scene sceneID="roP-hK-psg">
+            <objects>
+                <viewController id="hv4-4T-D4q" customClass="InspectorViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="GM1-Ly-IAn">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-bh-hHd">
+                                <rect key="frame" x="0.0" y="234" width="150" height="66"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vrv-sb-7BI" customClass="ArgumentStackView" customModule="ZKPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="150" height="44"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="10" translatesAutoresizingMaskIntoConstraints="NO" id="ni1-i7-heW">
+                                                <rect key="frame" x="-2" y="27" width="104" height="17"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="argument 🕶👓" id="V36-96-wkC">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" tag="20" translatesAutoresizingMaskIntoConstraints="NO" id="woU-FT-YxZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="22"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="W82-t4-sYj">
+                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="90" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zc-vk-YVn">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="22"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J03-vE-oiS">
+                                                <rect key="frame" x="0.0" y="-2" width="78" height="25"/>
+                                                <buttonCell key="cell" type="squareTextured" title="Compile" bezelStyle="texturedSquare" image="NSTouchBarPlayTemplate" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fP8-sZ-TeL">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <connections>
+                                                        <action selector="compile:" target="xsr-Wg-6UL" id="qyI-y4-Zb5"/>
+                                                    </connections>
+                                                </buttonCell>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="J03-vE-oiS" firstAttribute="leading" secondItem="3zc-vk-YVn" secondAttribute="leading" id="wg9-ic-gho"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Vrv-sb-7BI" secondAttribute="trailing" id="AiP-0t-tqy"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-es-0d5">
+                                <rect key="frame" x="0.0" y="209" width="55" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IET-Cq-SHt">
+                                        <rect key="frame" x="-2" y="0.0" width="59" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Compiler" id="X8a-kd-owz">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="7d8-bh-hHd" firstAttribute="leading" secondItem="GM1-Ly-IAn" secondAttribute="leading" id="9Sf-gS-bjN"/>
+                            <constraint firstAttribute="trailing" secondItem="7d8-bh-hHd" secondAttribute="trailing" id="Ah9-qD-kCK"/>
+                            <constraint firstItem="7d8-bh-hHd" firstAttribute="top" secondItem="GM1-Ly-IAn" secondAttribute="top" id="zhP-7D-0R1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="argumentsStackView" destination="7d8-bh-hHd" id="b0H-f5-vZN"/>
+                        <outlet property="compileButton" destination="J03-vE-oiS" id="G9e-Wr-dw6"/>
+                        <outlet property="textField" destination="woU-FT-YxZ" id="htD-us-TNR"/>
+                    </connections>
+                </viewController>
+                <customObject id="xsr-Wg-6UL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1409" y="1095"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
+    </resources>
+</document>

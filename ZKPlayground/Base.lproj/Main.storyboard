@@ -824,7 +824,7 @@
                 <splitViewController id="6sc-hg-Grn" customClass="SplitViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="iOn-lk-Hf0"/>
-                        <splitViewItem id="tLZ-5q-GiO"/>
+                        <splitViewItem id="ANK-F7-b7J"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="9k2-3I-UOC">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -836,7 +836,7 @@
                     <connections>
                         <outlet property="splitView" destination="9k2-3I-UOC" id="pff-J2-A2D"/>
                         <segue destination="kOI-pb-22H" kind="relationship" relationship="splitItems" id="94A-4D-5Ep"/>
-                        <segue destination="kiI-j2-wj3" kind="relationship" relationship="splitItems" id="mXK-Vv-4YW"/>
+                        <segue destination="7Mq-B2-vHe" kind="relationship" relationship="splitItems" id="70l-RS-8hw"/>
                     </connections>
                 </splitViewController>
                 <customObject id="nwQ-lR-OvQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -888,6 +888,14 @@
             </objects>
             <point key="canvasLocation" x="1424" y="651"/>
         </scene>
+        <!--Inspector-->
+        <scene sceneID="U1y-1a-ly2">
+            <objects>
+                <controllerPlaceholder storyboardIdentifier="Inspector" storyboardName="Inspector" id="7Mq-B2-vHe" sceneMemberID="viewController"/>
+                <customObject id="Dgg-8S-jP0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1282" y="856"/>
+        </scene>
         <!--Inspector View Controller-->
         <scene sceneID="wnG-F7-dFw">
             <objects>
@@ -914,6 +922,15 @@
                                     </connections>
                                 </buttonCell>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-Bn-j4f">
+                                <rect key="frame" x="12" y="242" width="35" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="🕶👓" id="ufU-7t-3Gk">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="YgB-a1-oSc" firstAttribute="leading" secondItem="VA5-1q-mfb" secondAttribute="leading" id="29T-3q-GDe"/>
@@ -930,7 +947,7 @@
                 </viewController>
                 <customObject id="jbY-5a-F77" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271.5" y="1030"/>
+            <point key="canvasLocation" x="1500" y="1032"/>
         </scene>
     </scenes>
     <resources>

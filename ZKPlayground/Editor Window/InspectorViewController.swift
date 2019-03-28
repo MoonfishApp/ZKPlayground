@@ -10,20 +10,19 @@ import Cocoa
 
 class InspectorViewController: NSViewController {
     
-    @IBOutlet weak var compileButton: NSButton!
-    @IBOutlet weak var textField: NSTextField!
+    @IBOutlet weak var argumentsStackView: NSStackView!
     
-    let compileQueue = OperationQueue()
+//    let compileQueue = OperationQueue()
     
     override var representedObject: Any? {
         didSet {
             
             guard let document = representedObject as? Document, document.fileURL != nil else {
-                self.compileButton.isEnabled = false
+//                self.compileButton.isEnabled = false
                 return
             }
             
-            self.compileButton.isEnabled = true
+//            self.compileButton.isEnabled = true
             
             // KVO arguments
         }
@@ -33,15 +32,5 @@ class InspectorViewController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
     }
-//    @IBAction func buttonPushed(_ sender: Any) {
-    
-//        let controller = self.view.window!.windowController! as! EditorWindowController
-//        guard let operation = controller.lintQueue.operations.first as? Docker else {
-//            return assertionFailure()
-//        }
-        
-//        operation.lint()
-//        operation.write(self.textField.stringValue)
-//    }
     
 }
