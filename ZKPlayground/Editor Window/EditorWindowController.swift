@@ -62,9 +62,26 @@ extension EditorWindowController {
     
     @IBAction func compile(_ sender: Any?) {
         
-        (document as? Document)?.save(self)
+        guard let document = document as? Document,
+            let workDirectory = self.workDirectory,
+            let filename = self.filename
+        else { return }
         
-        guard let filename = self.filename, let workDirectory = self.workDirectory else { return }
+        // Save document and delete all files in the build directory
+        document.save(self)
+        
+        let fileManager = FileManager.default
+        let url = URL(string: workDirectory)!.appendingPathComponent("build")
+        let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil)
+        while let file = enumerator?.nextObject() as? URL {
+            do {
+                try fileManager.removeItem(at: file)
+            } catch {
+                let alert = NSAlert(error: error)
+                alert.runModal()
+                return
+            }
+        }
 
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: ["337", "113569"])
         compile.delegate = self
