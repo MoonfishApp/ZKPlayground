@@ -19,4 +19,8 @@ extension String {
         return NSRange(location: 0, length: self.count)
     }
     
+    func trim() -> String? {
+        return String(self.trimmingCharacters(in: .whitespacesAndNewlines))
+    }
+    
 }

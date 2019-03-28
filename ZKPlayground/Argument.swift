@@ -24,7 +24,7 @@ struct Argument {
 }
 
 extension Argument {
-    /*
+    
     static func createArguments(string: String) -> [Argument] {
         
         var arguments = [Argument]()
@@ -38,11 +38,18 @@ extension Argument {
         
         // remove traling and leading spaces
         _ = argumentsStrings.map {
-            let argument = Argument(isPrivate: <#T##Bool#>, type: <#T##String#>, name: <#T##String#>, originalString: $0)
             
+            let argumentString = $0.trim()!
+            let words = argumentString.components(separatedBy: .whitespaces)
+            let isPrivate = (words.first ?? "" == "private")
+            let type = isPrivate ? words[1].trim()! : words[0].trim()!
+            let name = isPrivate ? words[2].trim()! : words[1].trim()!
+            let argument = Argument(isPrivate: isPrivate, type: type, name: name, originalString: argumentString)
             
-//            print($0.trimmingCharacters(in: .whitespacesAndNewlines))
+            arguments.append(argument)
         }
-    }*/
+        
+        return arguments
+    }
 }
 

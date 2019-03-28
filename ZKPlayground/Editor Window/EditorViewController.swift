@@ -50,17 +50,13 @@ class EditorViewController: NSViewController {
             guard lint.output.contains("Compilation failed:") else {
                 
                 DispatchQueue.main.sync {
+                    
                     // Set def main arguments in compiler part
-                    let regex = try! NSRegularExpression(pattern: "def\\s+main[^(]*\\(([^)]*)\\)", options: [])
-                    let matches = regex.matches(in: self.syntaxTextView.text, options: [], range: self.syntaxTextView.text.fullRange)
                     
-                    guard let subString = self.syntaxTextView.text.substring(with: matches[0].range(at: 1)) else { return assertionFailure() }
+                    let arguments = Argument.createArguments(string: self.syntaxTextView.text)
                     
-                    let arguments = String(subString).components(separatedBy: ",")
-                    
-                    // remove traling and leading spaces
                     _ = arguments.map{
-                        print($0.trimmingCharacters(in: .whitespacesAndNewlines))
+                        print($0)
                     }
                 }
                 
