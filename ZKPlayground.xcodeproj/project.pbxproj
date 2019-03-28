@@ -10,6 +10,7 @@
 		A65EACAEBBF7D4F00853C9CA /* Pods_ZKPlayground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */; };
 		BB2ADA80B31BE381C953C669 /* Pods_ZKPlaygroundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */; };
 		C7350A37224AF87800569FD4 /* ZokratesLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A36224AF87800569FD4 /* ZokratesLexer.swift */; };
+		C7350A39224CA28500569FD4 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A38224CA28500569FD4 /* Argument.swift */; };
 		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
 		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
 		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
@@ -45,6 +46,7 @@
 		5BA9AA319AFCAAB284D17829 /* Pods-ZKPlayground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.release.xcconfig"; sourceTree = "<group>"; };
 		83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPlayground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7350A36224AF87800569FD4 /* ZokratesLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZokratesLexer.swift; sourceTree = "<group>"; };
+		C7350A38224CA28500569FD4 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
 		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
 		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				C7AE8A6322434E55001EC64A /* Document.swift */,
 				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
 				C78A92432248ADD60033233E /* CompilerError.swift */,
+				C7350A38224CA28500569FD4 /* Argument.swift */,
 				C78A91C822488B970033233E /* Extensions */,
 				C7AE8A6522434E59001EC64A /* Assets.xcassets */,
 				C7AE8A6722434E59001EC64A /* Main.storyboard */,
@@ -383,6 +386,7 @@
 				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
 				C7AE8A9A22445986001EC64A /* Docker.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
+				C7350A39224CA28500569FD4 /* Argument.swift in Sources */,
 				C78A92462248AF3A0033233E /* String.swift in Sources */,
 				C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */,
 				C78A92442248ADD60033233E /* CompilerError.swift in Sources */,
