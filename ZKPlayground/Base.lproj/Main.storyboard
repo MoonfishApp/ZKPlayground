@@ -824,7 +824,7 @@
                 <splitViewController id="6sc-hg-Grn" customClass="SplitViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="iOn-lk-Hf0"/>
-                        <splitViewItem id="ANK-F7-b7J"/>
+                        <splitViewItem holdingPriority="270" id="ANK-F7-b7J"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="9k2-3I-UOC">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -891,66 +891,10 @@
         <!--Inspector-->
         <scene sceneID="U1y-1a-ly2">
             <objects>
-                <controllerPlaceholder storyboardIdentifier="Inspector" storyboardName="Inspector" id="7Mq-B2-vHe" sceneMemberID="viewController"/>
                 <customObject id="Dgg-8S-jP0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardIdentifier="Inspector" storyboardName="Inspector" id="7Mq-B2-vHe" sceneMemberID="viewController"/>
             </objects>
             <point key="canvasLocation" x="1282" y="856"/>
         </scene>
-        <!--Inspector View Controller-->
-        <scene sceneID="wnG-F7-dFw">
-            <objects>
-                <viewController id="kiI-j2-wj3" customClass="InspectorViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="VA5-1q-mfb">
-                        <rect key="frame" x="0.0" y="0.0" width="145" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YgB-a1-oSc">
-                                <rect key="frame" x="0.0" y="212" width="145" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="hCT-x1-hel">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wgk-T1-9qF">
-                                <rect key="frame" x="12" y="269" width="113" height="25"/>
-                                <buttonCell key="cell" type="squareTextured" title="Compile" bezelStyle="texturedSquare" image="NSTouchBarPlayTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ueb-gO-Md5">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <connections>
-                                        <action selector="compile:" target="jbY-5a-F77" id="I7v-B8-m4P"/>
-                                    </connections>
-                                </buttonCell>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KPN-Bn-j4f">
-                                <rect key="frame" x="12" y="242" width="35" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="🕶👓" id="ufU-7t-3Gk">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="YgB-a1-oSc" firstAttribute="leading" secondItem="VA5-1q-mfb" secondAttribute="leading" id="29T-3q-GDe"/>
-                            <constraint firstAttribute="trailing" secondItem="YgB-a1-oSc" secondAttribute="trailing" id="7KU-Uh-6VN"/>
-                            <constraint firstItem="Wgk-T1-9qF" firstAttribute="leading" secondItem="VA5-1q-mfb" secondAttribute="leading" constant="12" id="C0V-AU-2jL"/>
-                            <constraint firstItem="Wgk-T1-9qF" firstAttribute="top" secondItem="VA5-1q-mfb" secondAttribute="top" constant="7" id="eGD-Po-mcJ"/>
-                            <constraint firstItem="YgB-a1-oSc" firstAttribute="top" secondItem="VA5-1q-mfb" secondAttribute="top" constant="66" id="xau-ST-ReE"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="compileButton" destination="Wgk-T1-9qF" id="XVf-ww-pra"/>
-                        <outlet property="textField" destination="YgB-a1-oSc" id="z3S-gm-b3w"/>
-                    </connections>
-                </viewController>
-                <customObject id="jbY-5a-F77" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1500" y="1032"/>
-        </scene>
     </scenes>
-    <resources>
-        <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
-    </resources>
 </document>
