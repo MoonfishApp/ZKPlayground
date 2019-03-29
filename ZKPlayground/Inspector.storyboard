@@ -49,26 +49,6 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-es-0d5">
-                                <rect key="frame" x="0.0" y="209" width="55" height="17"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IET-Cq-SHt">
-                                        <rect key="frame" x="-2" y="0.0" width="59" height="17"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Compiler" id="X8a-kd-owz">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7d8-bh-hHd" firstAttribute="leading" secondItem="GM1-Ly-IAn" secondAttribute="leading" id="9Sf-gS-bjN"/>

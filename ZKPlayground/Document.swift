@@ -10,7 +10,11 @@ import Cocoa
 
 class Document: NSDocument {
 
-    var string: String = ""
+    var string: String = "" {
+        didSet {
+            self.arguments = Argument.createArguments(string: string)
+        }
+    }
     
     var arguments: [Argument]? = nil
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Argument {
+class Argument: NSObject {
     
     /// True if private is set
     let isPrivate: Bool
@@ -21,6 +21,15 @@ struct Argument {
     
     // Full original string, for debugging purposes
     let originalString: String
+    
+    init(isPrivate: Bool, type: String, name: String, originalString: String) {
+        
+        self.isPrivate = isPrivate
+        self.type = type
+        self.name = name
+        self.originalString = originalString
+        super.init()
+    }
 }
 
 extension Argument {
@@ -28,6 +37,8 @@ extension Argument {
     static func createArguments(string: String) -> [Argument] {
         
         var arguments = [Argument]()
+        
+        guard !string.isEmpty else { return arguments }
         
         let regex = try! NSRegularExpression(pattern: "def\\s+main[^(]*\\(([^)]*)\\)", options: [])
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
@@ -41,9 +52,22 @@ extension Argument {
             
             let argumentString = $0.trim()!
             let words = argumentString.components(separatedBy: .whitespaces)
+            
+            
+            
             let isPrivate = (words.first ?? "" == "private")
-            let type = isPrivate ? words[1].trim()! : words[0].trim()!
-            let name = isPrivate ? words[2].trim()! : words[1].trim()!
+            let name, type: String
+            if isPrivate {
+                // Minimum is "field name". If less than two, user is typing or source has syntax error
+                guard words.count > 2 else { return }
+                type = words[1].trim()!
+                name = words[2].trim()!
+            } else {
+                guard words.count > 1 else { return }
+                type = words[0].trim()!
+                name = words[1].trim()!
+            }
+            
             let argument = Argument(isPrivate: isPrivate, type: type, name: name, originalString: argumentString)
             
             arguments.append(argument)
