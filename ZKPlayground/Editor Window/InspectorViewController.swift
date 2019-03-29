@@ -31,6 +31,32 @@ class InspectorViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+        addArgumentViews()
+    }
+    
+    func addArgumentViews() {
+        
+        
+        guard let document = representedObject as? Document else {
+//            argumentsStackView.removeArrangedSubview(<#T##view: NSView##NSView#>)
+            return
+        }
+        
+        var topLevelObjects: NSArray?
+        Bundle.main.loadNibNamed("ArgumentView", owner: self, topLevelObjects: &topLevelObjects)
+            
+        let argumentView = topLevelObjects?.first(where: { $0 is NSView } ) as! ArgumentStackView
+            
+
+        print(argumentView)
+        argumentsStackView.addArrangedSubview(argumentView)
+//        argumentsStackView.addView(<#T##view: NSView##NSView#>, in: <#T##NSStackView.Gravity#>)
+        
+//        let subviews = (0..<3).map { (_) -> CustomView in
+//            return UINib(nibName: "CustomView", bundle: nil).instantiateWithOwner(nil,
+//                                                                                  options: nil)[0] as! CustomView
+//        }
     }
     
 }

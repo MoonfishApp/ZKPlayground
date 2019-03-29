@@ -10,8 +10,8 @@ import Cocoa
 
 class ArgumentStackView: NSStackView {
     
-    // Argument label is tag 10
+    @IBOutlet weak var label: NSTextField!
     
-    // Argument textField is tag 50
+    @IBOutlet weak var textField: NSTextField!
 
 }
