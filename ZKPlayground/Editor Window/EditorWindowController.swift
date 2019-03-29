@@ -26,6 +26,7 @@ class EditorWindowController: NSWindowController {
     
     private var logViewController: LogViewController!
     private var statusViewController: StatusViewController!
+    private var inspectorViewController: InspectorViewController!
 //    private var syntaxTextView: SyntaxTextView!
     
     private var fileURL: URL?
@@ -48,6 +49,7 @@ class EditorWindowController: NSWindowController {
         
         self.logViewController = ((contentViewController as! NSSplitViewController).splitViewItems[2].viewController as! LogViewController)
         self.statusViewController = ((contentViewController as! NSSplitViewController).splitViewItems[1].viewController as! StatusViewController)
+        self.inspectorViewController = (((contentViewController as! NSSplitViewController).splitViewItems[0].viewController as! NSSplitViewController).splitViewItems[1].viewController as! InspectorViewController)
 //        self.syntaxTextView = (((contentViewController as! NSSplitViewController).splitViewItems[0].viewController as! NSSplitViewController).splitViewItems[0].viewController as! EditorViewController).syntaxTextView
     }
 
@@ -79,7 +81,7 @@ extension EditorWindowController {
             }
         }
 
-        let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: ["337", "113569"])
+        let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
         compile.delegate = self
         compile.completionBlock = {
 //            print (compile.output)

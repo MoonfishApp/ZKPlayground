@@ -12,8 +12,6 @@ class InspectorViewController: NSViewController {
     
     @IBOutlet weak var argumentsStackView: NSStackView!
     
-//    let compileQueue = OperationQueue()
-    
     override var representedObject: Any? {
         didSet {
             
@@ -31,6 +29,11 @@ class InspectorViewController: NSViewController {
         }
     }
     
+    var arguments: [String] {
+                
+        return self.argumentsStackView.subviews.filter({ $0 is ArgumentStackView }).map({ ($0 as! ArgumentStackView).textField.stringValue })
+    }
+    
     private var argumentObserver: NSKeyValueObservation?
     
     override func viewDidLoad() {
@@ -42,9 +45,8 @@ class InspectorViewController: NSViewController {
     func addArgumentViews() {
         
         // Remove argument views
-        print("removing argumentviews")
         _ = self.argumentsStackView.subviews.filter({ $0 is ArgumentStackView }).map({
-            self.argumentsStackView.removeArrangedSubview($0)
+            self.argumentsStackView.removeView($0)
             $0.isHidden = true
         })
         
