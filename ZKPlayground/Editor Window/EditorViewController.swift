@@ -67,8 +67,6 @@ class EditorViewController: NSViewController {
         lintQueue.addOperation(lint)
     }
     
-//    bigger
-    
 }
 
 
