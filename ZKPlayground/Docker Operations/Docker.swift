@@ -213,18 +213,18 @@ class Compile: Docker {
         super.main()
         
         // 1. Compile
-        self.write("./zokrates compile -i " + self.dockerFilename)
+        self.write("time ./zokrates compile -i " + self.dockerFilename)
         copy(file: "out")
         copy(file: "out.code")
         
         // 2. Setup
-        self.write("./zokrates setup")
+        self.write("time ./zokrates setup")
         copy(file: "proving.key")
         copy(file: "variables.inf")
         copy(file: "verification.key")
         
         // 3. Compute witness
-        var command = "./zokrates compute-witness"
+        var command = "time ./zokrates compute-witness"
         if let arguments = self.arguments {
             command += " -a "
             _ = arguments.map{ command.append($0 + " ") }
@@ -233,11 +233,11 @@ class Compile: Docker {
         copy(file: "witness")
 
         // 4. Generate proof
-        self.write("./zokrates generate-proof")
+        self.write("time ./zokrates generate-proof")
         copy(file: "proof.json")
         
         // copy verifier
-        self.write("./zokrates export-verifier")
+        self.write("time ./zokrates export-verifier")
         copy(file: "verifier.sol")
         
         self.write("exit")
