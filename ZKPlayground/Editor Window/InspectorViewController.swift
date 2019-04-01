@@ -15,9 +15,7 @@ class InspectorViewController: NSViewController {
     override var representedObject: Any? {
         didSet {
             
-            guard let representedObject = representedObject as? Document else {
-                return
-            }
+            guard let representedObject = representedObject as? Document else { return }
 
             self.argumentObserver = representedObject.observe(\Document.arguments, options: [.new, .initial]) { queue, change in
                 self.addArgumentViews()
@@ -55,12 +53,13 @@ class InspectorViewController: NSViewController {
             var topLevelObjects: NSArray?
             Bundle.main.loadNibNamed("ArgumentView", owner: self, topLevelObjects: &topLevelObjects)
             let argumentView = topLevelObjects?.first(where: { $0 is NSView } ) as! ArgumentStackView
-            argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name + (argument.isPrivate ? "🕶" : "")
+            argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name
             print(argumentView.label.stringValue)
             self.argumentsStackView.insertView(argumentView, at: index, in: .top)
             argumentView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
             argumentView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
             
+            // TODO: Remove example arguments, save arguments, or read them from comments in source.
             if index == 0 {
                 argumentView.textField.stringValue = "337"
             } else if index == 1 {
