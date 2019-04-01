@@ -60,14 +60,17 @@ extension EditorWindowController {
     
     @IBAction func compile(_ sender: Any?) {
         
+        // 1. Sanity check
         guard let document = document as? Document,
             let workDirectory = self.workDirectory,
             let filename = self.filename
         else { return }
         
-        // Save document and delete all files in the build directory
+        // 2. Save document and reset buildphases
         document.save(self)
+        document.buildPhases = nil
         
+        // 3.  Delete all files in the build directory
         let fileManager = FileManager.default
         let url = URL(string: workDirectory)!.appendingPathComponent("build")
         let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil)
@@ -81,19 +84,27 @@ extension EditorWindowController {
             }
         }
 
+        // 4. Create and queue compile operation
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
         compile.delegate = self
         compile.completionBlock = {
             
-            // Fetch time measurements
+            // 4.a Fetch time measurements
             let times = TimeInterval.parse(compile.output)
+            
+            // 4.b Set BuildPhases
             if times.count == 5 {
-//                let phases = times.map{
-//                    
-//                    
-//                }
+                var phases = [BuildPhase]()
+                for (index, time) in times.enumerated() {
+                    if index == 0 { phases.append(.compile(time))
+                    } else if index == 1 { phases.append(.setup(time))
+                    } else if index == 2 { phases.append(.witness(time))
+                    } else if index == 3 { phases.append(.proof(time))
+                    } else if index == 4 { phases.append(.verifier(time))
+                    }
+                }
+                document.buildPhases = phases
             }
-            print(times)
         }
         compileQueue.addOperation(compile)
     }

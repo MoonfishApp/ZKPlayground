@@ -18,6 +18,8 @@ class Document: NSDocument {
     
     var arguments: [Argument]? = nil
     
+    var buildPhases: [BuildPhase]? = nil
+    
     override init() {
         super.init()
         // Add your subclass-specific initialization here.
