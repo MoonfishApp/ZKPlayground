@@ -16,7 +16,7 @@ class Document: NSDocument {
         }
     }
     
-    var arguments: [Argument]? = nil
+    @objc var arguments: [Argument]? = nil
     
     var buildPhases: [BuildPhase]? = nil
     

@@ -18,14 +18,11 @@ class InspectorViewController: NSViewController {
             guard let representedObject = representedObject as? Document else {
                 return
             }
-            
-            addArgumentViews()
 
-//            self.argumentObserver = representedObject.observe(\Document.arguments, options: .new) { queue, change in
-//                
-//                self.addArgumentViews()
-//            }
-
+            self.argumentObserver = representedObject.observe(\Document.arguments, options: [.new, .initial]) { queue, change in
+                
+                self.addArgumentViews()
+            }
         }
     }
     
@@ -39,7 +36,6 @@ class InspectorViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-//        addArgumentViews()
     }
     
     func addArgumentViews() {
@@ -60,7 +56,7 @@ class InspectorViewController: NSViewController {
             var topLevelObjects: NSArray?
             Bundle.main.loadNibNamed("ArgumentView", owner: self, topLevelObjects: &topLevelObjects)
             let argumentView = topLevelObjects?.first(where: { $0 is NSView } ) as! ArgumentStackView
-            argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name + (argument.isPrivate ? "🕶" : "👓")
+            argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name + (argument.isPrivate ? "🕶" : "")
             print(argumentView.label.stringValue)
             self.argumentsStackView.insertView(argumentView, at: index, in: .top)
             
