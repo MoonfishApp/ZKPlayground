@@ -58,6 +58,8 @@ class InspectorViewController: NSViewController {
             argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name + (argument.isPrivate ? "🕶" : "")
             print(argumentView.label.stringValue)
             self.argumentsStackView.insertView(argumentView, at: index, in: .top)
+            argumentView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
+            argumentView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
             
             if index == 0 {
                 argumentView.textField.stringValue = "337"

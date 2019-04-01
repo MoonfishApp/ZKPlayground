@@ -46,27 +46,24 @@ class EditorViewController: NSViewController {
         
         let lint = Lint(workDirectory: workDirectory, filename: filename)
         lint.completionBlock = {
-            
-            guard lint.output.contains("Compilation failed:") else {
+
+            if lint.output.contains("Compilation failed:") {
                 
-                // Set def main arguments in compiler part
-                
-                DispatchQueue.main.sync {
-                    document.arguments = Argument.createArguments(string: self.syntaxTextView.text)
-                    print("set document arguments to \(document.arguments)")
+                // Create errors and highlight the lines in the editor
+                _ = CompilerError.createErrors(string: lint.output).map {
+                    self.syntaxTextView.highlight(line: $0.line, column: $0.column, color: $0.type == .error ? .red : .yellow, message: $0.message)
                 }
                 
-                return
-            }
-            
-            // Create errors and highlight the lines in the editor
-            _ = CompilerError.createErrors(string: lint.output).map {
-                self.syntaxTextView.highlight(line: $0.line, column: $0.column, color: $0.type == .error ? .red : .yellow, message: $0.message)
+            } else {
+                
+                // Linting successful, show arguments in inspector
+                DispatchQueue.main.sync {
+                    document.arguments = Argument.createArguments(string: self.syntaxTextView.text)
+                }
             }
         }
         lintQueue.addOperation(lint)
     }
-    
 }
 
 
