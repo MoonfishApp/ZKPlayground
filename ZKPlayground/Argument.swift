@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+/// Parse Zokrates source code to extract main arguments
 class Argument: NSObject {
     
     /// True if private is set

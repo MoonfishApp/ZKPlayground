@@ -15,6 +15,7 @@
 		C7350A3D224D7DAA00569FD4 /* ArgumentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */; };
 		C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3E224DE2E200569FD4 /* ArgumentView.xib */; };
 		C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8B22518043002B275B /* TimeInterval.swift */; };
+		C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8D2251943F002B275B /* BuildPhase.swift */; };
 		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
 		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
 		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
@@ -55,6 +56,7 @@
 		C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentStackView.swift; sourceTree = "<group>"; };
 		C7350A3E224DE2E200569FD4 /* ArgumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArgumentView.xib; sourceTree = "<group>"; };
 		C76F0A8B22518043002B275B /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		C76F0A8D2251943F002B275B /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
 		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
 		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
 				C78A92432248ADD60033233E /* CompilerError.swift */,
 				C7350A38224CA28500569FD4 /* Argument.swift */,
+				C76F0A8D2251943F002B275B /* BuildPhase.swift */,
 				C78A91C822488B970033233E /* Extensions */,
 				C7AE8A6522434E59001EC64A /* Assets.xcassets */,
 				C7AE8A6722434E59001EC64A /* Main.storyboard */,
@@ -404,6 +407,7 @@
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
 				C7350A39224CA28500569FD4 /* Argument.swift in Sources */,
 				C78A92462248AF3A0033233E /* String.swift in Sources */,
+				C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */,
 				C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */,
 				C78A92442248ADD60033233E /* CompilerError.swift in Sources */,
 			);

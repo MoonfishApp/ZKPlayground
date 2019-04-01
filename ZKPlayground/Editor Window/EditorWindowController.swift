@@ -87,6 +87,12 @@ extension EditorWindowController {
             
             // Fetch time measurements
             let times = TimeInterval.parse(compile.output)
+            if times.count == 5 {
+//                let phases = times.map{
+//                    
+//                    
+//                }
+            }
             print(times)
         }
         compileQueue.addOperation(compile)
