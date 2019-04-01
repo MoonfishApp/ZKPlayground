@@ -212,18 +212,21 @@ class Compile: Docker {
         
         super.main()
         
-        // 1. Compile
+        // 1. Set time format
+        self.write("TIMEFORMAT='Elapsed time: %3R'")
+        
+        // 2. Compile
         self.write("time ./zokrates compile -i " + self.dockerFilename)
         copy(file: "out")
         copy(file: "out.code")
         
-        // 2. Setup
+        // 3. Setup
         self.write("time ./zokrates setup")
         copy(file: "proving.key")
         copy(file: "variables.inf")
         copy(file: "verification.key")
         
-        // 3. Compute witness
+        // 4. Compute witness
         var command = "time ./zokrates compute-witness"
         if let arguments = self.arguments {
             command += " -a "
@@ -232,7 +235,7 @@ class Compile: Docker {
         self.write(command)
         copy(file: "witness")
 
-        // 4. Generate proof
+        // 5. Generate proof
         self.write("time ./zokrates generate-proof")
         copy(file: "proof.json")
         

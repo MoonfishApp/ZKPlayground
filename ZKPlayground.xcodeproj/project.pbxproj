@@ -14,6 +14,7 @@
 		C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3A224D381700569FD4 /* Inspector.storyboard */; };
 		C7350A3D224D7DAA00569FD4 /* ArgumentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */; };
 		C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3E224DE2E200569FD4 /* ArgumentView.xib */; };
+		C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8B22518043002B275B /* TimeInterval.swift */; };
 		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
 		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
 		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
@@ -53,6 +54,7 @@
 		C7350A3A224D381700569FD4 /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
 		C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentStackView.swift; sourceTree = "<group>"; };
 		C7350A3E224DE2E200569FD4 /* ArgumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArgumentView.xib; sourceTree = "<group>"; };
+		C76F0A8B22518043002B275B /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
 		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				C78A91C922488BA00033233E /* NSColor.swift */,
 				C78A92452248AF3A0033233E /* String.swift */,
+				C76F0A8B22518043002B275B /* TimeInterval.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */,
+				C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */,
 				C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */,
 				C7AE8A8322436486001EC64A /* StatusViewController.swift in Sources */,
 				C7AE8A8722436604001EC64A /* EditorViewController.swift in Sources */,

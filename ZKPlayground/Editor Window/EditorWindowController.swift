@@ -84,7 +84,10 @@ extension EditorWindowController {
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
         compile.delegate = self
         compile.completionBlock = {
-//            print (compile.output)
+            
+            // Fetch time measurements
+            let times = TimeInterval.parse(compile.output)
+            print(times)
         }
         compileQueue.addOperation(compile)
     }
