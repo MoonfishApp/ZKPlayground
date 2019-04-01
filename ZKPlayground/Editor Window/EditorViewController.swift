@@ -52,8 +52,8 @@ class EditorViewController: NSViewController {
                 // Set def main arguments in compiler part
                 
                 DispatchQueue.main.sync {
-                    let arguments = Argument.createArguments(string: self.syntaxTextView.text)
-                    (self.representedObject as? Document)?.arguments = arguments
+                    document.arguments = Argument.createArguments(string: self.syntaxTextView.text)
+                    print("set document arguments to \(document.arguments)")
                 }
                 
                 return

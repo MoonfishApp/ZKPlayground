@@ -20,7 +20,6 @@ class InspectorViewController: NSViewController {
             }
 
             self.argumentObserver = representedObject.observe(\Document.arguments, options: [.new, .initial]) { queue, change in
-                
                 self.addArgumentViews()
             }
         }
