@@ -70,8 +70,9 @@ class EditorViewController: NSViewController {
 extension EditorViewController: SyntaxTextViewDelegate {
     
     func didChangeText(_ syntaxTextView: SyntaxTextView) {
+        
         (representedObject as? Document)?.string = syntaxTextView.text
-
+        
         // Invoke lint after two second delay
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         perform(#selector(lint), with: nil, afterDelay: 0.5)

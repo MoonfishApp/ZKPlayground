@@ -45,7 +45,7 @@ extension Argument {
         let regex = try! NSRegularExpression(pattern: "def\\s+main[^(]*\\(([^)]*)\\)", options: [])
         let matches = regex.matches(in: string, options: [], range: string.fullRange)
         
-        guard let subString = string.substring(with: matches[0].range(at: 1)) else { return arguments }
+        guard matches.count > 0, let subString = string.substring(with: matches[0].range(at: 1)) else { return arguments }
         
         let argumentsStrings = String(subString).components(separatedBy: ",")
         
