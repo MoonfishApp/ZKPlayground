@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="hv4-4T-D4q">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Inspector View Controller-->
+        <scene sceneID="roP-hK-psg">
+            <objects>
+                <viewController id="hv4-4T-D4q" customClass="InspectorViewController" customModule="ZKPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="GM1-Ly-IAn">
+                        <rect key="frame" x="0.0" y="0.0" width="192" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-bh-hHd">
+                                <rect key="frame" x="0.0" y="273" width="192" height="27"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="90" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zc-vk-YVn">
+                                        <rect key="frame" x="0.0" y="1" width="192" height="22"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J03-vE-oiS">
+                                                <rect key="frame" x="4" y="-2" width="78" height="25"/>
+                                                <buttonCell key="cell" type="squareTextured" title="Compile" bezelStyle="texturedSquare" image="NSTouchBarPlayTemplate" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fP8-sZ-TeL">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <connections>
+                                                        <action selector="compile:" target="xsr-Wg-6UL" id="qyI-y4-Zb5"/>
+                                                    </connections>
+                                                </buttonCell>
+                                            </button>
+                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="bpM-g1-Qap">
+                                                <rect key="frame" x="172" y="3" width="16" height="16"/>
+                                            </progressIndicator>
+                                        </subviews>
+                                        <edgeInsets key="edgeInsets" left="4" right="4" top="4" bottom="0.0"/>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="dH1-3p-6Xc">
+                                        <rect key="frame" x="4" y="-2" width="96" height="5"/>
+                                    </box>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="4" right="4" top="4" bottom="0.0"/>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="7d8-bh-hHd" firstAttribute="leading" secondItem="GM1-Ly-IAn" secondAttribute="leading" id="9Sf-gS-bjN"/>
+                            <constraint firstAttribute="trailing" secondItem="7d8-bh-hHd" secondAttribute="trailing" id="Ah9-qD-kCK"/>
+                            <constraint firstItem="7d8-bh-hHd" firstAttribute="top" secondItem="GM1-Ly-IAn" secondAttribute="top" id="zhP-7D-0R1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="argumentsStackView" destination="7d8-bh-hHd" id="b0H-f5-vZN"/>
+                        <outlet property="progressIndicator" destination="bpM-g1-Qap" id="208-o3-6GJ"/>
+                    </connections>
+                </viewController>
+                <customObject id="xsr-Wg-6UL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1409" y="1095"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
+    </resources>
+</document>

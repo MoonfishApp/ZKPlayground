@@ -7,12 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A65EACAEBBF7D4F00853C9CA /* Pods_ZKPlayground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */; };
+		BB2ADA80B31BE381C953C669 /* Pods_ZKPlaygroundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */; };
+		C7350A37224AF87800569FD4 /* ZokratesLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A36224AF87800569FD4 /* ZokratesLexer.swift */; };
+		C7350A39224CA28500569FD4 /* Argument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A38224CA28500569FD4 /* Argument.swift */; };
+		C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3A224D381700569FD4 /* Inspector.storyboard */; };
+		C7350A3D224D7DAA00569FD4 /* ArgumentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */; };
+		C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3E224DE2E200569FD4 /* ArgumentView.xib */; };
+		C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8B22518043002B275B /* TimeInterval.swift */; };
+		C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8D2251943F002B275B /* BuildPhase.swift */; };
+		C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76F0A8F2252D167002B275B /* BuildPhaseView.xib */; };
+		C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */; };
+		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
+		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
+		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
+		C78A92462248AF3A0033233E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92452248AF3A0033233E /* String.swift */; };
 		C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A5F22434E55001EC64A /* AppDelegate.swift */; };
-		C7AE8A6222434E55001EC64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A6122434E55001EC64A /* ViewController.swift */; };
 		C7AE8A6422434E55001EC64A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A6322434E55001EC64A /* Document.swift */; };
 		C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6522434E59001EC64A /* Assets.xcassets */; };
 		C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6722434E59001EC64A /* Main.storyboard */; };
 		C7AE8A7522434E59001EC64A /* ZKPlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */; };
+		C7AE8A8322436486001EC64A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A8222436486001EC64A /* StatusViewController.swift */; };
+		C7AE8A8522436497001EC64A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A8422436497001EC64A /* LogViewController.swift */; };
+		C7AE8A8722436604001EC64A /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A8622436604001EC64A /* EditorViewController.swift */; };
+		C7AE8A9022436B37001EC64A /* ZKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A8F22436B37001EC64A /* ZKError.swift */; };
+		C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */; };
+		C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A93224430B0001EC64A /* SplitViewController.swift */; };
+		C7AE8A9622443135001EC64A /* InspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A9522443135001EC64A /* InspectorViewController.swift */; };
+		C7AE8A9A22445986001EC64A /* Docker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A97224443BA001EC64A /* Docker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +48,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		526210C7FBCB42D5498BCA55 /* Pods-ZKPlaygroundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlaygroundTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlaygroundTests/Pods-ZKPlaygroundTests.debug.xcconfig"; sourceTree = "<group>"; };
+		56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPlaygroundTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BA9AA319AFCAAB284D17829 /* Pods-ZKPlayground.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.release.xcconfig"; sourceTree = "<group>"; };
+		83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZKPlayground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7350A36224AF87800569FD4 /* ZokratesLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZokratesLexer.swift; sourceTree = "<group>"; };
+		C7350A38224CA28500569FD4 /* Argument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Argument.swift; sourceTree = "<group>"; };
+		C7350A3A224D381700569FD4 /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
+		C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentStackView.swift; sourceTree = "<group>"; };
+		C7350A3E224DE2E200569FD4 /* ArgumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArgumentView.xib; sourceTree = "<group>"; };
+		C76F0A8B22518043002B275B /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		C76F0A8D2251943F002B275B /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
+		C76F0A8F2252D167002B275B /* BuildPhaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BuildPhaseView.xib; sourceTree = "<group>"; };
+		C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhaseStackView.swift; sourceTree = "<group>"; };
+		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
+		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
+		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
+		C78A92452248AF3A0033233E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C7AE8A5C22434E55001EC64A /* ZKPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZKPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A5F22434E55001EC64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7AE8A6122434E55001EC64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +76,16 @@
 		C7AE8A7022434E59001EC64A /* ZKPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZKPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A7422434E59001EC64A /* ZKPlaygroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKPlaygroundTests.swift; sourceTree = "<group>"; };
 		C7AE8A7622434E59001EC64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7AE8A8222436486001EC64A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		C7AE8A8422436497001EC64A /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		C7AE8A8622436604001EC64A /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		C7AE8A8F22436B37001EC64A /* ZKError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZKError.swift; sourceTree = "<group>"; };
+		C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorWindowController.swift; sourceTree = "<group>"; };
+		C7AE8A93224430B0001EC64A /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		C7AE8A9522443135001EC64A /* InspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorViewController.swift; sourceTree = "<group>"; };
+		C7AE8A97224443BA001EC64A /* Docker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docker.swift; sourceTree = "<group>"; };
+		CD92BEDFC397D6BE20E8D2FE /* Pods-ZKPlaygroundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlaygroundTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlaygroundTests/Pods-ZKPlaygroundTests.release.xcconfig"; sourceTree = "<group>"; };
+		DF75002819B65626EA81721D /* Pods-ZKPlayground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A65EACAEBBF7D4F00853C9CA /* Pods_ZKPlayground.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,18 +101,59 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB2ADA80B31BE381C953C669 /* Pods_ZKPlaygroundTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E38E3451B62FEA7EAFF18CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83170E42F68463E28F6F0899 /* Pods_ZKPlayground.framework */,
+				56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C76F0A932252EAB2002B275B /* Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A9522443135001EC64A /* InspectorViewController.swift */,
+				C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */,
+				C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */,
+			);
+			path = Inspector;
+			sourceTree = "<group>";
+		};
+		C78A91C3224718390033233E /* Docker Operations */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A97224443BA001EC64A /* Docker.swift */,
+				C78A91C12246F7720033233E /* RemoteDockerAPI.swift */,
+			);
+			path = "Docker Operations";
+			sourceTree = "<group>";
+		};
+		C78A91C822488B970033233E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C78A91C922488BA00033233E /* NSColor.swift */,
+				C78A92452248AF3A0033233E /* String.swift */,
+				C76F0A8B22518043002B275B /* TimeInterval.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C7AE8A5322434E55001EC64A = {
 			isa = PBXGroup;
 			children = (
 				C7AE8A5E22434E55001EC64A /* ZKPlayground */,
 				C7AE8A7322434E59001EC64A /* ZKPlaygroundTests */,
 				C7AE8A5D22434E55001EC64A /* Products */,
+				E88272143AD85EBA37FC3F4E /* Pods */,
+				5E38E3451B62FEA7EAFF18CA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,11 +169,21 @@
 		C7AE8A5E22434E55001EC64A /* ZKPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				C7AE8A8122436470001EC64A /* Editor Window */,
 				C7AE8A5F22434E55001EC64A /* AppDelegate.swift */,
+				C78A91C3224718390033233E /* Docker Operations */,
 				C7AE8A6122434E55001EC64A /* ViewController.swift */,
 				C7AE8A6322434E55001EC64A /* Document.swift */,
+				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
+				C78A92432248ADD60033233E /* CompilerError.swift */,
+				C7350A38224CA28500569FD4 /* Argument.swift */,
+				C76F0A8D2251943F002B275B /* BuildPhase.swift */,
+				C78A91C822488B970033233E /* Extensions */,
 				C7AE8A6522434E59001EC64A /* Assets.xcassets */,
 				C7AE8A6722434E59001EC64A /* Main.storyboard */,
+				C7350A3A224D381700569FD4 /* Inspector.storyboard */,
+				C7350A3E224DE2E200569FD4 /* ArgumentView.xib */,
+				C76F0A8F2252D167002B275B /* BuildPhaseView.xib */,
 				C7AE8A6A22434E59001EC64A /* Info.plist */,
 				C7AE8A6B22434E59001EC64A /* ZKPlayground.entitlements */,
 			);
@@ -98,6 +199,31 @@
 			path = ZKPlaygroundTests;
 			sourceTree = "<group>";
 		};
+		C7AE8A8122436470001EC64A /* Editor Window */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A8222436486001EC64A /* StatusViewController.swift */,
+				C7AE8A8422436497001EC64A /* LogViewController.swift */,
+				C7AE8A8622436604001EC64A /* EditorViewController.swift */,
+				C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */,
+				C7AE8A93224430B0001EC64A /* SplitViewController.swift */,
+				C7350A36224AF87800569FD4 /* ZokratesLexer.swift */,
+				C76F0A932252EAB2002B275B /* Inspector */,
+			);
+			path = "Editor Window";
+			sourceTree = "<group>";
+		};
+		E88272143AD85EBA37FC3F4E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF75002819B65626EA81721D /* Pods-ZKPlayground.debug.xcconfig */,
+				5BA9AA319AFCAAB284D17829 /* Pods-ZKPlayground.release.xcconfig */,
+				526210C7FBCB42D5498BCA55 /* Pods-ZKPlaygroundTests.debug.xcconfig */,
+				CD92BEDFC397D6BE20E8D2FE /* Pods-ZKPlaygroundTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,9 +231,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7AE8A7922434E59001EC64A /* Build configuration list for PBXNativeTarget "ZKPlayground" */;
 			buildPhases = (
+				5911F12BEA1E381C10EDCF7A /* [CP] Check Pods Manifest.lock */,
 				C7AE8A5822434E55001EC64A /* Sources */,
 				C7AE8A5922434E55001EC64A /* Frameworks */,
 				C7AE8A5A22434E55001EC64A /* Resources */,
+				101DC0314AAF0B9225C0472A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,6 +250,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7AE8A7C22434E59001EC64A /* Build configuration list for PBXNativeTarget "ZKPlaygroundTests" */;
 			buildPhases = (
+				A615A66EAB0F2F026CAD86C0 /* [CP] Check Pods Manifest.lock */,
 				C7AE8A6C22434E59001EC64A /* Sources */,
 				C7AE8A6D22434E59001EC64A /* Frameworks */,
 				C7AE8A6E22434E59001EC64A /* Resources */,
@@ -148,6 +277,11 @@
 				TargetAttributes = {
 					C7AE8A5B22434E55001EC64A = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					C7AE8A6F22434E59001EC64A = {
 						CreatedOnToolsVersion = 10.1;
@@ -179,8 +313,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */,
 				C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */,
+				C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */,
 				C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */,
+				C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,14 +330,102 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		101DC0314AAF0B9225C0472A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SavannaKit/SavannaKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SourceEditor/SourceEditor.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SavannaKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SourceEditor.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5911F12BEA1E381C10EDCF7A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZKPlayground-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A615A66EAB0F2F026CAD86C0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZKPlaygroundTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C7AE8A5822434E55001EC64A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7AE8A6222434E55001EC64A /* ViewController.swift in Sources */,
+				C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */,
+				C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */,
+				C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */,
+				C7AE8A8322436486001EC64A /* StatusViewController.swift in Sources */,
+				C7AE8A8722436604001EC64A /* EditorViewController.swift in Sources */,
+				C7350A37224AF87800569FD4 /* ZokratesLexer.swift in Sources */,
+				C78A91CA22488BA00033233E /* NSColor.swift in Sources */,
+				C7AE8A8522436497001EC64A /* LogViewController.swift in Sources */,
+				C7AE8A9622443135001EC64A /* InspectorViewController.swift in Sources */,
+				C7350A3D224D7DAA00569FD4 /* ArgumentStackView.swift in Sources */,
+				C7AE8A9022436B37001EC64A /* ZKError.swift in Sources */,
 				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
+				C7AE8A9A22445986001EC64A /* Docker.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
+				C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */,
+				C7350A39224CA28500569FD4 /* Argument.swift in Sources */,
+				C78A92462248AF3A0033233E /* String.swift in Sources */,
+				C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */,
+				C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */,
+				C78A92442248ADD60033233E /* CompilerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,9 +576,10 @@
 		};
 		C7AE8A7A22434E59001EC64A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF75002819B65626EA81721D /* Pods-ZKPlayground.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ZKPlayground/ZKPlayground.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QS2K96ZEMY;
@@ -364,15 +590,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.composite.ZKPlayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		C7AE8A7B22434E59001EC64A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BA9AA319AFCAAB284D17829 /* Pods-ZKPlayground.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ZKPlayground/ZKPlayground.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QS2K96ZEMY;
@@ -383,12 +611,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.composite.ZKPlayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
 		C7AE8A7D22434E59001EC64A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 526210C7FBCB42D5498BCA55 /* Pods-ZKPlaygroundTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -410,6 +640,7 @@
 		};
 		C7AE8A7E22434E59001EC64A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD92BEDFC397D6BE20E8D2FE /* Pods-ZKPlaygroundTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
