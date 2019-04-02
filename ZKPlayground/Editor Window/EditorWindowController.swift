@@ -31,6 +31,11 @@ class EditorWindowController: NSWindowController {
     
     let lintQueue = OperationQueue()
     let compileQueue = OperationQueue()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        shouldCascadeWindows = true
+    }
 
     override func windowDidLoad() {
         
