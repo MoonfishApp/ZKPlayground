@@ -50,7 +50,7 @@ class Docker: Operation {
     
     /// the name of the directory mapped to workDirectoryPath
     fileprivate static let dockerDirectoryPath = "/home/zokrates/playground"
-    fileprivate static let buildDirectory = "build"
+    static let buildDirectory = "build"
     fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent(Docker.buildDirectory).path }()
     
     fileprivate var dockerFilename: String {

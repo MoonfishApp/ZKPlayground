@@ -66,13 +66,17 @@ extension EditorWindowController {
             let filename = self.filename
         else { return }
         
-        // 2. Save document and reset buildphases
+        // 2. Show progress indicator
+        inspectorViewController.progressIndicator.isHidden = false
+        inspectorViewController.progressIndicator.startAnimation(self)
+        
+        // 3. Save document and reset buildphases
         document.save(self)
         document.buildPhases = nil
         
-        // 3.  Delete all files in the build directory
+        // 4.  Delete all files in the build directory
         let fileManager = FileManager.default
-        let url = URL(string: workDirectory)!.appendingPathComponent("build")
+        let url = URL(string: workDirectory)!.appendingPathComponent(Docker.buildDirectory)
         let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil)
         while let file = enumerator?.nextObject() as? URL {
             do {
@@ -84,15 +88,15 @@ extension EditorWindowController {
             }
         }
 
-        // 4. Create and queue compile operation
+        // 5. Create and queue compile operation
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
         compile.delegate = self
         compile.completionBlock = {
             
-            // 4.a Fetch time measurements
+            // 5.a Fetch time measurements
             let times = TimeInterval.parse(compile.output)
             
-            // 4.b Set BuildPhases
+            // 5.b Set BuildPhases
             var phases = [BuildPhase]()
             for index in 0 ..< 5 {
                 
@@ -117,10 +121,10 @@ extension EditorWindowController {
                 let buildPhase: BuildPhase
                 if times.count > index {
                     // Phase completed successfully
-                    buildPhase = BuildPhase(phase: phase, elapsedTime: times[index])
+                    buildPhase = BuildPhase(phase: phase, workDirectory: workDirectory, elapsedTime: times[index])
                 } else {
                     // Error
-                    buildPhase = BuildPhase(phase: phase, elapsedTime: nil, errorMessage: "Error")
+                    buildPhase = BuildPhase(phase: phase, workDirectory: workDirectory, elapsedTime: nil, errorMessage: "Error")
                 }
                 phases.append(buildPhase)
             }

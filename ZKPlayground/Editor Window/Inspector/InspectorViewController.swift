@@ -11,6 +11,7 @@ import Cocoa
 class InspectorViewController: NSViewController {
     
     @IBOutlet weak var argumentsStackView: NSStackView!
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     override var representedObject: Any? {
         didSet {
@@ -24,7 +25,6 @@ class InspectorViewController: NSViewController {
             
             self.buildPhaseObserver = representedObject.observe(\Document.buildPhases, options: [.new, .initial]) { queue, change in
                 
-                print("Build phase change")
                 self.addBuildPhaseViews()
             }
         }
@@ -106,14 +106,35 @@ class InspectorViewController: NSViewController {
                 let buildPhaseView = topLevelObjects?.first(where: { $0 is NSView } ) as! BuildPhaseStackView
                 
                 // 3b. Set labels
-                buildPhaseView.titleLabel.stringValue = phase.name
-                buildPhaseView.timeLabel.stringValue = phase.elapsedTime != nil ? "\(phase.elapsedTime!) ✅" : "🛑"
+                if phase.successful {
+                    
+                    // Phase was successful
+                    buildPhaseView.titleLabel.stringValue = "✅ " + phase.name
+                    buildPhaseView.timeLabel.stringValue = phase.elapsedTime == nil ? " " : "\(phase.elapsedTime!)s"
+                    buildPhaseView.errorMessageTextField.isHidden = true
+                    
+                } else {
+                    
+                    // Phase was unsuccessful
+                    
+                    buildPhaseView.titleLabel.stringValue = "🛑 " + phase.name
+                    buildPhaseView.viewInFinderButton.isHidden = true
+                    buildPhaseView.timeLabel.isHidden = true
+                    
+                    if let errorMessage = phase.errorMessage {
+                        buildPhaseView.errorMessageTextField.stringValue = errorMessage
+                        buildPhaseView.errorMessageTextField.textColor = .red
+                    } else {
+                        buildPhaseView.errorMessageTextField.isHidden = true
+                    }
+                }
                 
                 // 3c. Add view to stackview
                 self.argumentsStackView.addView(buildPhaseView, in: .top)
-                buildPhaseView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
+//                buildPhaseView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
                 buildPhaseView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
             }
+            self.progressIndicator.stopAnimation(self)
         }
     }
     

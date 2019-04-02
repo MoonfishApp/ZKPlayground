@@ -13,24 +13,30 @@ class BuildPhase: NSObject {
     let phase: BuildPhaseType
     
     var name: String {
-        return phase.rawValue
+        return phase.rawValue.prefix(1).capitalized + phase.rawValue.dropFirst()
     }
+    
+    let urls: [String]?
+    
+    let successful: Bool
     
     let errorMessage: String?
     
     let elapsedTime: TimeInterval?
     
-    init(phase: BuildPhaseType, elapsedTime: TimeInterval? = nil, errorMessage: String? = nil) {
+    init(phase: BuildPhaseType, workDirectory: String, elapsedTime: TimeInterval? = nil, errorMessage: String? = nil) {
         
         self.phase = phase
         self.elapsedTime = elapsedTime
         self.errorMessage = errorMessage
         
+        self.urls = phase.filenames.map{
+            return URL(fileURLWithPath: workDirectory).appendingPathComponent(Docker.buildDirectory).appendingPathComponent($0).path
+        }
+        if let urls = self.urls { self.successful = urls.filter{ FileManager.default.fileExists(atPath: $0) }.count == urls.count
+        } else { self.successful = false }
+        
         super.init()
-    }
-    
-    func urls(baseDirectory: String) -> [URL] {
-        return [URL]()
     }
     
     var action: String? {
