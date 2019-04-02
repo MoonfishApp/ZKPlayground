@@ -16,10 +16,7 @@ class EditorWindowController: NSWindowController {
         didSet {
             
             contentViewController?.representedObject = document
-            
             guard let document = document as? Document, document.fileURL != self.fileURL else { return }
-            
-            self.fileURL = document.fileURL
             lintQueue.cancelAllOperations()
         }
     }
@@ -27,9 +24,8 @@ class EditorWindowController: NSWindowController {
     private var logViewController: LogViewController!
     private var statusViewController: StatusViewController!
     private var inspectorViewController: InspectorViewController!
-//    private var syntaxTextView: SyntaxTextView!
     
-    private var fileURL: URL?
+    private var fileURL: URL? { return self.document?.fileURL }
     private var filename: String? { return self.fileURL?.lastPathComponent }
     private var workDirectory: String? { return self.fileURL?.deletingLastPathComponent().path }
     
@@ -61,10 +57,15 @@ extension EditorWindowController {
     @IBAction func compile(_ sender: Any?) {
         
         // 1. Sanity check
-        guard let document = document as? Document,
-            let workDirectory = self.workDirectory,
-            let filename = self.filename
-        else { return }
+        guard let document = document as? Document
+        else { return assertionFailure() }
+        
+        // 2. If document is draft (fileURL = nil), save document first
+        guard let workDirectory = self.workDirectory,
+            let filename = self.filename else {
+            document.saveAs(nil)
+            return
+        }
         
         // 2. Show progress indicator
         inspectorViewController.progressIndicator.isHidden = false
@@ -74,21 +75,36 @@ extension EditorWindowController {
         document.save(self)
         document.buildPhases = nil
         
-        // 4.  Delete all files in the build directory
+        // 4. Build directory
         let fileManager = FileManager.default
-        let url = URL(string: workDirectory)!.appendingPathComponent(Docker.buildDirectory)
-        let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: nil)
-        while let file = enumerator?.nextObject() as? URL {
+        let buildDirectory = URL(string: workDirectory)!.appendingPathComponent(Docker.buildDirectory)
+        var isDirectory: ObjCBool = false
+        if fileManager.fileExists(atPath: buildDirectory.path, isDirectory: &isDirectory) == false || isDirectory.boolValue == false {
+            
+            // 5.a Build directory does not exist. Create it
             do {
-                try fileManager.removeItem(at: file)
+                try fileManager.createDirectory(atPath: buildDirectory.path, withIntermediateDirectories: false, attributes: nil)
             } catch {
-                let alert = NSAlert(error: error)
-                alert.runModal()
+                NSAlert(error: error).beginSheetModal(for: self.window!)
+                inspectorViewController.progressIndicator.stopAnimation(self)
                 return
+            }
+        } else {
+        
+            // 5.b  Delete all files in the build directory
+            let enumerator = fileManager.enumerator(at: buildDirectory, includingPropertiesForKeys: nil)
+            while let file = enumerator?.nextObject() as? URL {
+                do {
+                    try fileManager.removeItem(at: file)
+                } catch {
+                    NSAlert(error: error).beginSheetModal(for: self.window!)
+                    inspectorViewController.progressIndicator.stopAnimation(self)
+                    return
+                }
             }
         }
 
-        // 5. Create and queue compile operation
+        // 6. Create and queue compile operation
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
         compile.delegate = self
         compile.completionBlock = {
