@@ -15,10 +15,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-bh-hHd">
-                                <rect key="frame" x="0.0" y="274" width="192" height="26"/>
+                                <rect key="frame" x="0.0" y="273" width="192" height="27"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="90" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zc-vk-YVn">
-                                        <rect key="frame" x="0.0" y="0.0" width="192" height="22"/>
+                                        <rect key="frame" x="0.0" y="1" width="192" height="22"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J03-vE-oiS">
                                                 <rect key="frame" x="4" y="-2" width="78" height="25"/>
@@ -44,12 +44,17 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="dH1-3p-6Xc">
+                                        <rect key="frame" x="4" y="-2" width="96" height="5"/>
+                                    </box>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="4" right="4" top="4" bottom="0.0"/>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>

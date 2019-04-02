@@ -98,7 +98,7 @@ class InspectorViewController: NSViewController {
             }
             
             // 3. Add arguement views
-            for phase in phases {
+            for (index, phase) in phases.enumerated() {
                 
                 // 3a. Load view from NIB
                 var topLevelObjects: NSArray?
@@ -106,6 +106,7 @@ class InspectorViewController: NSViewController {
                 let buildPhaseView = topLevelObjects?.first(where: { $0 is NSView } ) as! BuildPhaseStackView
                 
                 // 3b. Set labels
+                buildPhaseView.viewInFinderButton.tag = index
                 if phase.successful {
                     
                     // Phase was successful
@@ -138,4 +139,16 @@ class InspectorViewController: NSViewController {
         }
     }
     
+    @IBAction func showFilesInFinder(_ sender: Any?) {
+    
+        guard let document = self.representedObject as? Document,
+            let phases = document.buildPhases,
+            let sender = sender as? NSButton,
+            phases.count > sender.tag,
+            let urls = phases[sender.tag].urls else {
+            return assertionFailure()
+        }
+        
+        NSWorkspace.shared.activateFileViewerSelecting(urls.map{ return URL(fileURLWithPath: $0) })
+    }
 }
