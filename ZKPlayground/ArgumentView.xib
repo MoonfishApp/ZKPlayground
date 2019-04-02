@@ -48,7 +48,7 @@
                 <outlet property="label" destination="Lum-bz-yer" id="krj-qC-YJI"/>
                 <outlet property="textField" destination="ap0-bW-w3q" id="cCz-iX-hmG"/>
             </connections>
-            <point key="canvasLocation" x="144" y="-52.5"/>
+            <point key="canvasLocation" x="144" y="-53"/>
         </stackView>
     </objects>
 </document>

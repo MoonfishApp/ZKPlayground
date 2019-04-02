@@ -93,18 +93,39 @@ extension EditorWindowController {
             let times = TimeInterval.parse(compile.output)
             
             // 4.b Set BuildPhases
-            if times.count == 5 {
-                var phases = [BuildPhase]()
-                for (index, time) in times.enumerated() {
-                    if index == 0 { phases.append(.compile(time))
-                    } else if index == 1 { phases.append(.setup(time))
-                    } else if index == 2 { phases.append(.witness(time))
-                    } else if index == 3 { phases.append(.proof(time))
-                    } else if index == 4 { phases.append(.verifier(time))
+            var phases = [BuildPhase]()
+            for index in 0 ..< 5 {
+                
+                var phase: BuildPhaseType {
+                    switch index {
+                    case 0:
+                        return .compile
+                    case 1:
+                        return .setup
+                    case 2:
+                        return .witness
+                    case 3:
+                        return .proof
+                    case 4:
+                        return .verifier
+                    default:
+                        assertionFailure()
+                        return .verifier
                     }
                 }
-                document.buildPhases = phases
+                
+                let buildPhase: BuildPhase
+                if times.count > index {
+                    // Phase completed successfully
+                    buildPhase = BuildPhase(phase: phase, elapsedTime: times[index])
+                } else {
+                    // Error
+                    buildPhase = BuildPhase(phase: phase, elapsedTime: nil, errorMessage: "Error")
+                }
+                phases.append(buildPhase)
             }
+                    
+            document.buildPhases = phases
         }
         compileQueue.addOperation(compile)
     }

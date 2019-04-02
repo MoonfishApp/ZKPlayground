@@ -18,7 +18,7 @@ class Document: NSDocument {
     
     @objc dynamic var arguments: [Argument]? = nil
     
-    var buildPhases: [BuildPhase]? = nil
+    @objc dynamic var buildPhases: [BuildPhase]? = nil
     
     override init() {
         super.init()

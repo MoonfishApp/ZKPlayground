@@ -16,6 +16,8 @@
 		C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3E224DE2E200569FD4 /* ArgumentView.xib */; };
 		C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8B22518043002B275B /* TimeInterval.swift */; };
 		C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8D2251943F002B275B /* BuildPhase.swift */; };
+		C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76F0A8F2252D167002B275B /* BuildPhaseView.xib */; };
+		C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */; };
 		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
 		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
 		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
@@ -57,6 +59,8 @@
 		C7350A3E224DE2E200569FD4 /* ArgumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArgumentView.xib; sourceTree = "<group>"; };
 		C76F0A8B22518043002B275B /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		C76F0A8D2251943F002B275B /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
+		C76F0A8F2252D167002B275B /* BuildPhaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BuildPhaseView.xib; sourceTree = "<group>"; };
+		C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhaseStackView.swift; sourceTree = "<group>"; };
 		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
 		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
@@ -111,6 +115,16 @@
 				56BB4DA73188D01F0CD93F59 /* Pods_ZKPlaygroundTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C76F0A932252EAB2002B275B /* Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE8A9522443135001EC64A /* InspectorViewController.swift */,
+				C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */,
+				C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */,
+			);
+			path = Inspector;
 			sourceTree = "<group>";
 		};
 		C78A91C3224718390033233E /* Docker Operations */ = {
@@ -169,6 +183,7 @@
 				C7AE8A6722434E59001EC64A /* Main.storyboard */,
 				C7350A3A224D381700569FD4 /* Inspector.storyboard */,
 				C7350A3E224DE2E200569FD4 /* ArgumentView.xib */,
+				C76F0A8F2252D167002B275B /* BuildPhaseView.xib */,
 				C7AE8A6A22434E59001EC64A /* Info.plist */,
 				C7AE8A6B22434E59001EC64A /* ZKPlayground.entitlements */,
 			);
@@ -192,9 +207,8 @@
 				C7AE8A8622436604001EC64A /* EditorViewController.swift */,
 				C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */,
 				C7AE8A93224430B0001EC64A /* SplitViewController.swift */,
-				C7AE8A9522443135001EC64A /* InspectorViewController.swift */,
 				C7350A36224AF87800569FD4 /* ZokratesLexer.swift */,
-				C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */,
+				C76F0A932252EAB2002B275B /* Inspector */,
 			);
 			path = "Editor Window";
 			sourceTree = "<group>";
@@ -299,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */,
 				C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */,
 				C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */,
 				C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */,
@@ -405,6 +420,7 @@
 				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
 				C7AE8A9A22445986001EC64A /* Docker.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
+				C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */,
 				C7350A39224CA28500569FD4 /* Argument.swift in Sources */,
 				C78A92462248AF3A0033233E /* String.swift in Sources */,
 				C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */,
