@@ -72,13 +72,6 @@ class InspectorViewController: NSViewController {
             self.argumentsStackView.insertView(argumentView, at: index, in: .top)
             argumentView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
             argumentView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
-            
-            // TODO: Remove example arguments, save arguments, or read them from comments in source.
-            if index == 0 {
-                argumentView.textField.stringValue = "337"
-            } else if index == 1 {
-                argumentView.textField.stringValue = "113569"
-            }
         }
     }
     
