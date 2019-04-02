@@ -71,9 +71,7 @@ extension EditorViewController: SyntaxTextViewDelegate {
     
     func didChangeText(_ syntaxTextView: SyntaxTextView) {
         
-        print("$EV1")
         (representedObject as? Document)?.string = syntaxTextView.text
-        print("$EV2")
         
         // Invoke lint after two second delay
         NSObject.cancelPreviousPerformRequests(withTarget: self)
