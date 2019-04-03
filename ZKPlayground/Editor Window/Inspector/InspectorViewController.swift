@@ -46,18 +46,26 @@ class InspectorViewController: NSViewController {
     
     func addArgumentViews() {
         
-        // 1. Remove argument views
-        _ = self.argumentsStackView.subviews.filter({ $0 is ArgumentStackView }).map({
-            self.argumentsStackView.removeView($0)
-            $0.isHidden = true
+        // 1. Store old arguments
+        var oldValues = [String]()
+        
+        // 2. Remove argument views
+        _ = self.argumentsStackView.subviews.filter({ $0 is ArgumentStackView }).enumerated().map({ (index, view) in
+            
+            // 2a. Store old value
+            oldValues.append((view as! ArgumentStackView).textField.stringValue)
+            
+            // 2b. Remove views
+            self.argumentsStackView.removeView(view)
+            view.isHidden = true
         })
         
-        // 2. Sanity check
+        // 3. Sanity check
         guard let document = representedObject as? Document, let arguments = document.arguments else {
             return
         }
         
-        // 3. Add arguement views
+        // 4. Add argument views
         for (index, argument) in arguments.enumerated() {
 
             // 3a. Load view from NIB
@@ -68,7 +76,12 @@ class InspectorViewController: NSViewController {
             // 3b. Set label
             argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name
             
-            // 3c. Add view to stackview
+            // 3c. Set old values, if present
+            if oldValues.count > index {
+                argumentView.textField.stringValue = oldValues[index]
+            }
+            
+            // 3d. Add view to stackview
             self.argumentsStackView.insertView(argumentView, at: index, in: .top)
             argumentView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
             argumentView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true

@@ -31,7 +31,7 @@ When a Zokrates smart contract is executed, Zokrates produces the new result (th
 
 Zokrates also supports privacy. Inputs (arguments) can be set to private. Private inputs will not be known to the verifiers, yet the verifiers can easily verify that correctness of the output, even without knowing the inputs.
 
-Zokrates is experimental and not suitable for production. Alternatives to Zokrates include [ZEXE](https://github.com/scipr-lab/zexe) and Coda Protocol's Snarky (no public repo available yet).
+Zokrates is experimental and not suitable for production. Alternatives to Zokrates include [ZEXE](https://github.com/scipr-lab/zexe) and [Snarky](https://github.com/o1-labs/snarky).
 
 ## Why ZK Playground?
 
