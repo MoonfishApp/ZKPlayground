@@ -22,6 +22,7 @@
 		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
 		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
 		C78A92462248AF3A0033233E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92452248AF3A0033233E /* String.swift */; };
+		C79BE65D2255765C00325471 /* slice1_512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79BE65C2255765C00325471 /* slice1_512@2x.png */; };
 		C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A5F22434E55001EC64A /* AppDelegate.swift */; };
 		C7AE8A6422434E55001EC64A /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A6322434E55001EC64A /* Document.swift */; };
 		C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7AE8A6522434E59001EC64A /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
 		C78A92452248AF3A0033233E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		C79BE65C2255765C00325471 /* slice1_512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slice1_512@2x.png"; sourceTree = "<group>"; };
 		C7AE8A5C22434E55001EC64A /* ZKPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZKPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A5F22434E55001EC64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7AE8A6122434E55001EC64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		C7AE8A5322434E55001EC64A = {
 			isa = PBXGroup;
 			children = (
+				C79BE65C2255765C00325471 /* slice1_512@2x.png */,
 				C7AE8A5E22434E55001EC64A /* ZKPlayground */,
 				C7AE8A7322434E59001EC64A /* ZKPlaygroundTests */,
 				C7AE8A5D22434E55001EC64A /* Products */,
@@ -320,6 +323,7 @@
 				C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */,
 				C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */,
 				C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */,
+				C79BE65D2255765C00325471 /* slice1_512@2x.png in Resources */,
 				C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
