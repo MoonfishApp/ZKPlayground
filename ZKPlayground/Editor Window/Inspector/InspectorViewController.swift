@@ -118,7 +118,12 @@ class InspectorViewController: NSViewController {
                     // Phase was successful
                     buildPhaseView.titleLabel.stringValue = "✅ " + phase.name
                     buildPhaseView.timeLabel.stringValue = phase.elapsedTime == nil ? " " : "\(phase.elapsedTime!)s"
-                    buildPhaseView.errorMessageTextField.isHidden = true
+                    if let result = phase.fetchCompilerResult() {
+                        buildPhaseView.textField.stringValue = result
+                        buildPhaseView.textField.isHidden = false
+                    } else {
+                        buildPhaseView.textField.isHidden = true
+                    }
                     
                 } else {
                     
@@ -129,16 +134,16 @@ class InspectorViewController: NSViewController {
                     buildPhaseView.timeLabel.isHidden = true
                     
                     if let errorMessage = phase.errorMessage {
-                        buildPhaseView.errorMessageTextField.stringValue = errorMessage
-                        buildPhaseView.errorMessageTextField.textColor = .red
+                        buildPhaseView.textField.stringValue = errorMessage
+                        buildPhaseView.textField.textColor = .red
                     } else {
-                        buildPhaseView.errorMessageTextField.isHidden = true
+                        buildPhaseView.textField.isHidden = true
                     }
                 }
                 
                 // 3c. Add view to stackview
                 self.argumentsStackView.addView(buildPhaseView, in: .top)
-//                buildPhaseView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
+                buildPhaseView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
                 buildPhaseView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
             }
             self.progressIndicator.stopAnimation(self)

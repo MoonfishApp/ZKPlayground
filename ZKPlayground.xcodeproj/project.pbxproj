@@ -151,7 +151,6 @@
 		C7AE8A5322434E55001EC64A = {
 			isa = PBXGroup;
 			children = (
-				C79BE65C2255765C00325471 /* slice1_512@2x.png */,
 				C7AE8A5E22434E55001EC64A /* ZKPlayground */,
 				C7AE8A7322434E59001EC64A /* ZKPlaygroundTests */,
 				C7AE8A5D22434E55001EC64A /* Products */,
@@ -189,6 +188,7 @@
 				C76F0A8F2252D167002B275B /* BuildPhaseView.xib */,
 				C7AE8A6A22434E59001EC64A /* Info.plist */,
 				C7AE8A6B22434E59001EC64A /* ZKPlayground.entitlements */,
+				C79BE65C2255765C00325471 /* slice1_512@2x.png */,
 			);
 			path = ZKPlayground;
 			sourceTree = "<group>";

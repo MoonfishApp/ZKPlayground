@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +16,7 @@
                     <rect key="frame" x="4" y="46" width="196" height="20"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7OJ-yV-exW">
-                            <rect key="frame" x="-6" y="3" width="37" height="17"/>
+                            <rect key="frame" x="2" y="3" width="37" height="17"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="eIC-7e-Z9o">
                                 <font key="font" usesAppearanceFont="YES"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -25,7 +24,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="371-xX-e5D">
-                            <rect key="frame" x="157" y="3" width="37" height="17"/>
+                            <rect key="frame" x="165" y="3" width="37" height="17"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="7Qb-kd-0QI">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -87,7 +86,7 @@
                 <real value="3.4028234663852886e+38"/>
             </customSpacing>
             <connections>
-                <outlet property="errorMessageTextField" destination="2Qv-IH-S8c" id="AeA-jU-3XL"/>
+                <outlet property="textField" destination="2Qv-IH-S8c" id="AeA-jU-3XL"/>
                 <outlet property="timeLabel" destination="371-xX-e5D" id="xQC-aA-lM6"/>
                 <outlet property="titleLabel" destination="7OJ-yV-exW" id="Mkb-Fp-z2I"/>
                 <outlet property="viewInFinderButton" destination="Z6l-4j-qRe" id="ytQ-Ul-nSD"/>
