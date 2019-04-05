@@ -64,7 +64,14 @@ class BuildPhase: NSObject {
     }
     
     private func matchResult(_ result: String) -> String {
-        return "test result"
+        
+        guard let regex = phase.fileRegex(),
+            let match = regex.matches(in: result, options: [], range: result.fullRange).first,
+            match.numberOfRanges >= 1,
+            let subString = result.substring(with: match.range(at: 0))
+            else { return "" }
+        
+        return String(subString)
     }
     
 }
@@ -85,6 +92,23 @@ enum BuildPhaseType: String {
             return ["proof.json"]
         case .verifier:
             return ["verifier.sol"]
+        }
+    }
+    
+    func fileRegex() -> NSRegularExpression? {
+        switch self {
+        case .compile:
+            return nil
+        case .setup:
+            return nil
+        case .witness:
+            return try! NSRegularExpression(pattern: "(?<=~out_0\\s)[0-9]{1,4}", options: [])
+        case .proof:
+            return nil
+        case .verifier:
+            return nil
+        
+        
         }
     }
 }
