@@ -14,6 +14,9 @@
 		C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3A224D381700569FD4 /* Inspector.storyboard */; };
 		C7350A3D224D7DAA00569FD4 /* ArgumentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */; };
 		C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7350A3E224DE2E200569FD4 /* ArgumentView.xib */; };
+		C764DC5C2257B2AA0042B122 /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = C764DC5B2257B2AA0042B122 /* Templates */; };
+		C764DC5F2257B3E40042B122 /* Templates.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C764DC5E2257B3E40042B122 /* Templates.storyboard */; };
+		C764DC612257B3F60042B122 /* TemplatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764DC602257B3F60042B122 /* TemplatesViewController.swift */; };
 		C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8B22518043002B275B /* TimeInterval.swift */; };
 		C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8D2251943F002B275B /* BuildPhase.swift */; };
 		C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76F0A8F2252D167002B275B /* BuildPhaseView.xib */; };
@@ -58,6 +61,9 @@
 		C7350A3A224D381700569FD4 /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
 		C7350A3C224D7DAA00569FD4 /* ArgumentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentStackView.swift; sourceTree = "<group>"; };
 		C7350A3E224DE2E200569FD4 /* ArgumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArgumentView.xib; sourceTree = "<group>"; };
+		C764DC5B2257B2AA0042B122 /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
+		C764DC5E2257B3E40042B122 /* Templates.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Templates.storyboard; sourceTree = "<group>"; };
+		C764DC602257B3F60042B122 /* TemplatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesViewController.swift; sourceTree = "<group>"; };
 		C76F0A8B22518043002B275B /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		C76F0A8D2251943F002B275B /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
 		C76F0A8F2252D167002B275B /* BuildPhaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BuildPhaseView.xib; sourceTree = "<group>"; };
@@ -119,6 +125,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C764DC5D2257B3B80042B122 /* Template Window */ = {
+			isa = PBXGroup;
+			children = (
+				C764DC5E2257B3E40042B122 /* Templates.storyboard */,
+				C764DC602257B3F60042B122 /* TemplatesViewController.swift */,
+			);
+			name = "Template Window";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		C76F0A932252EAB2002B275B /* Inspector */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +187,8 @@
 		C7AE8A5E22434E55001EC64A /* ZKPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				C764DC5B2257B2AA0042B122 /* Templates */,
+				C764DC5D2257B3B80042B122 /* Template Window */,
 				C7AE8A8122436470001EC64A /* Editor Window */,
 				C7AE8A5F22434E55001EC64A /* AppDelegate.swift */,
 				C78A91C3224718390033233E /* Docker Operations */,
@@ -321,8 +339,10 @@
 			files = (
 				C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */,
 				C7AE8A6622434E59001EC64A /* Assets.xcassets in Resources */,
+				C764DC5F2257B3E40042B122 /* Templates.storyboard in Resources */,
 				C7350A3B224D381700569FD4 /* Inspector.storyboard in Resources */,
 				C7AE8A6922434E59001EC64A /* Main.storyboard in Resources */,
+				C764DC5C2257B2AA0042B122 /* Templates in Resources */,
 				C79BE65D2255765C00325471 /* slice1_512@2x.png in Resources */,
 				C7350A3F224DE2E200569FD4 /* ArgumentView.xib in Resources */,
 			);
@@ -428,6 +448,7 @@
 				C7AE8A9A22445986001EC64A /* Docker.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
 				C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */,
+				C764DC612257B3F60042B122 /* TemplatesViewController.swift in Sources */,
 				C7350A39224CA28500569FD4 /* Argument.swift in Sources */,
 				C78A92462248AF3A0033233E /* String.swift in Sources */,
 				C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */,
