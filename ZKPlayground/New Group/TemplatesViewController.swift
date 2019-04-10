@@ -11,16 +11,32 @@ import Cocoa
 class TemplatesViewController: NSViewController {
     
     private var templatePaths: [String]? {
-        didSet {
+        
+        return Bundle.main.paths(forResourcesOfType: "code", inDirectory: "Templates")
+    }
+    
+    private var platformPaths: [String] {
+        
+        let paths = Bundle.main.paths(forResourcesOfType: nil, inDirectory: "Templates").filter {
             
+            var isDirectory: ObjCBool = false
+            let _ = FileManager.default.fileExists(atPath: $0, isDirectory: &isDirectory)
+            return isDirectory.boolValue == true
         }
+        return paths
+    }
+    
+    private var platforms: [String] {
+        
+        return self.platformPaths.map { return URL(fileURLWithPath: $0).lastPathComponent }
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
-        self.templatePaths = Bundle.main.paths(forResourcesOfType: "code", inDirectory: "Templates")
-        
+        let p = self.platforms
+        print(p)
     }
     
     @IBAction func cancel(_ sender: Any?) {
