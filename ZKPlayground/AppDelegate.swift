@@ -14,14 +14,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        
         dockerInstall()
+        
+        // If no document is restored, show template chooser
+//        if NSDocumentController.shared.documents.isEmpty {
+//            showTemplates(nil)
+//        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
+    
+    // Prevent showing empty untitled project window at startup
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
+        return false
+    }
 
     private func dockerInstall() {
         
@@ -37,6 +46,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let url = URL(string: "https://docs.docker.com/docker-for-mac/install") {
             NSWorkspace.shared.open(url)
         }
+    }
+    
+    @IBAction func showTemplates(_ sender: AnyObject?) {
+        
+        let templateWindowController = NSStoryboard(name: NSStoryboard.Name("Templates"), bundle: nil).instantiateInitialController() as! NSWindowController
+        templateWindowController.showWindow(sender)
     }
     
 }

@@ -12,6 +12,6 @@ class BuildPhaseStackView: NSStackView {
     
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var timeLabel: NSTextField!
-    @IBOutlet weak var errorMessageTextField: NSTextField!
+    @IBOutlet weak var textField: NSTextField!
     @IBOutlet weak var viewInFinderButton: NSButton!
 }

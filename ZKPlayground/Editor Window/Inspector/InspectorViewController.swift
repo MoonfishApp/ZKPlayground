@@ -46,18 +46,26 @@ class InspectorViewController: NSViewController {
     
     func addArgumentViews() {
         
-        // 1. Remove argument views
-        _ = self.argumentsStackView.subviews.filter({ $0 is ArgumentStackView }).map({
-            self.argumentsStackView.removeView($0)
-            $0.isHidden = true
+        // 1. Store old arguments
+        var oldValues = [String]()
+        
+        // 2. Remove argument views
+        _ = self.argumentsStackView.subviews.filter({ $0 is ArgumentStackView }).enumerated().map({ (index, view) in
+            
+            // 2a. Store old value
+            oldValues.append((view as! ArgumentStackView).textField.stringValue)
+            
+            // 2b. Remove views
+            self.argumentsStackView.removeView(view)
+            view.isHidden = true
         })
         
-        // 2. Sanity check
+        // 3. Sanity check
         guard let document = representedObject as? Document, let arguments = document.arguments else {
             return
         }
         
-        // 3. Add arguement views
+        // 4. Add argument views
         for (index, argument) in arguments.enumerated() {
 
             // 3a. Load view from NIB
@@ -68,7 +76,12 @@ class InspectorViewController: NSViewController {
             // 3b. Set label
             argumentView.label.stringValue = (argument.isPrivate ? "private " : "") + argument.name
             
-            // 3c. Add view to stackview
+            // 3c. Set old values, if present
+            if oldValues.count > index {
+                argumentView.textField.stringValue = oldValues[index]
+            }
+            
+            // 3d. Add view to stackview
             self.argumentsStackView.insertView(argumentView, at: index, in: .top)
             argumentView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
             argumentView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
@@ -105,7 +118,12 @@ class InspectorViewController: NSViewController {
                     // Phase was successful
                     buildPhaseView.titleLabel.stringValue = "✅ " + phase.name
                     buildPhaseView.timeLabel.stringValue = phase.elapsedTime == nil ? " " : "\(phase.elapsedTime!)s"
-                    buildPhaseView.errorMessageTextField.isHidden = true
+                    if let result = phase.fetchCompilerResult() {
+                        buildPhaseView.textField.stringValue = result
+                        buildPhaseView.textField.isHidden = false
+                    } else {
+                        buildPhaseView.textField.isHidden = true
+                    }
                     
                 } else {
                     
@@ -116,16 +134,16 @@ class InspectorViewController: NSViewController {
                     buildPhaseView.timeLabel.isHidden = true
                     
                     if let errorMessage = phase.errorMessage {
-                        buildPhaseView.errorMessageTextField.stringValue = errorMessage
-                        buildPhaseView.errorMessageTextField.textColor = .red
+                        buildPhaseView.textField.stringValue = errorMessage
+                        buildPhaseView.textField.textColor = .red
                     } else {
-                        buildPhaseView.errorMessageTextField.isHidden = true
+                        buildPhaseView.textField.isHidden = true
                     }
                 }
                 
                 // 3c. Add view to stackview
                 self.argumentsStackView.addView(buildPhaseView, in: .top)
-//                buildPhaseView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
+                buildPhaseView.leadingAnchor.constraint(equalTo: self.argumentsStackView.leadingAnchor).isActive = true
                 buildPhaseView.trailingAnchor.constraint(equalTo: self.argumentsStackView.trailingAnchor).isActive = true
             }
             self.progressIndicator.stopAnimation(self)

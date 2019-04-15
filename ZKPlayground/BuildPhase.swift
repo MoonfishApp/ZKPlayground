@@ -31,7 +31,7 @@ class BuildPhase: NSObject {
         self.errorMessage = errorMessage
         
         self.urls = phase.filenames.map{
-            return URL(fileURLWithPath: workDirectory).appendingPathComponent(Docker.buildDirectory).appendingPathComponent($0).path
+            URL(fileURLWithPath: workDirectory).appendingPathComponent(Docker.buildDirectory).appendingPathComponent($0).path
         }
         if let urls = self.urls { self.successful = urls.filter{ FileManager.default.fileExists(atPath: $0) }.count == urls.count
         } else { self.successful = false }
@@ -41,6 +41,37 @@ class BuildPhase: NSObject {
     
     var action: String? {
         return nil
+    }
+    
+    func fetchCompilerResult() -> String? {
+        
+        // Check if files exist?
+        print(self.phase.rawValue)
+        
+        guard let urls = self.urls else { assertionFailure(); return nil }
+        
+        // Lazy but working: Apply regex to all files in list
+        return urls.compactMap({
+            if FileManager.default.fileExists(atPath: $0) == false {
+                print("\($0) does not exist")
+                print("")
+            }
+            guard let content = try? String(contentsOf: URL(fileURLWithPath: $0)) else {
+                return nil
+            }
+            return matchResult(content)
+        }).reduce("", +)
+    }
+    
+    private func matchResult(_ result: String) -> String {
+        
+        guard let regex = phase.fileRegex(),
+            let match = regex.matches(in: result, options: [], range: result.fullRange).first,
+            match.numberOfRanges >= 1,
+            let subString = result.substring(with: match.range(at: 0))
+            else { return "" }
+        
+        return String(subString)
     }
     
 }
@@ -61,6 +92,23 @@ enum BuildPhaseType: String {
             return ["proof.json"]
         case .verifier:
             return ["verifier.sol"]
+        }
+    }
+    
+    func fileRegex() -> NSRegularExpression? {
+        switch self {
+        case .compile:
+            return nil
+        case .setup:
+            return nil
+        case .witness:
+            return try! NSRegularExpression(pattern: "(?<=~out_0\\s)[0-9]{1,4}", options: [])
+        case .proof:
+            return nil
+        case .verifier:
+            return nil
+        
+        
         }
     }
 }
