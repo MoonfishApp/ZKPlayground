@@ -78,6 +78,10 @@ extension EditorViewController: SyntaxTextViewDelegate {
         perform(#selector(lint), with: nil, afterDelay: 0.5)
     }
     
+    func didChangeFont(_ font: Font) {
+        syntaxTextView.theme = DefaultSourceCodeTheme(font: font)
+    }
+    
     func didChangeSelectedRange(_ syntaxTextView: SyntaxTextView, selectedRange: NSRange) {
         
         
