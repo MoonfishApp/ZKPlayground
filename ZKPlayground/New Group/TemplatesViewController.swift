@@ -10,7 +10,10 @@ import Cocoa
 
 class TemplatesViewController: NSViewController {
     
-    private var templatePaths: [String]? {
+    @IBOutlet weak var platformCollectionView: NSCollectionView!
+    @IBOutlet weak var templateCollectionView: NSCollectionView!
+    
+    private var templatePaths: [String] {
         
         return Bundle.main.paths(forResourcesOfType: "code", inDirectory: "Templates")
     }
@@ -56,10 +59,16 @@ extension TemplatesViewController: NSCollectionViewDelegate {
 }
 /*
 extension TemplatesViewController: NSCollectionViewDataSource {
+    
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 0
-        return templatePaths?.count ?? 0
+    
+        if collectionView === self.platformCollectionView {
+            return platformPaths.count
+        } else if collectionView === self.templateCollectionView {
+            return templatePaths.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {

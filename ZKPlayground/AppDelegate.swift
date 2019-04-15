@@ -18,9 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         dockerInstall()
         
         // If no document is restored, show template chooser
-        if NSDocumentController.shared.documents.isEmpty {
-            showTemplates(nil)
-        }
+//        if NSDocumentController.shared.documents.isEmpty {
+//            showTemplates(nil)
+//        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

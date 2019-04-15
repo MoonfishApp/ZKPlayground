@@ -27,6 +27,30 @@
             </objects>
             <point key="canvasLocation" x="41" y="-9"/>
         </scene>
+        <!--Collection View Item-->
+        <scene sceneID="Ltg-xU-jkK">
+            <objects>
+                <collectionViewItem id="6Jh-lw-Adt" sceneMemberID="viewController">
+                    <view key="view" id="yiE-dm-thr">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="75"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c98-NK-dfT">
+                                <rect key="frame" x="73" y="29" width="37" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="VKh-QC-v0I">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </collectionViewItem>
+                <customObject id="L2w-UQ-UW5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="478" y="-554"/>
+        </scene>
         <!--Templates View Controller-->
         <scene sceneID="8tc-Fl-guv">
             <objects>
@@ -153,6 +177,10 @@ DQ
                             <real value="3.4028234663852886e+38"/>
                         </customSpacing>
                     </stackView>
+                    <connections>
+                        <outlet property="platformCollectionView" destination="Qix-Wn-DeW" id="S8K-H3-CID"/>
+                        <outlet property="templateCollectionView" destination="3tX-45-ofZ" id="SBD-Fd-7da"/>
+                    </connections>
                 </viewController>
                 <customObject id="Nlu-y9-fsD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
