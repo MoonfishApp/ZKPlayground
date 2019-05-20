@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        dockerInstall()
+        verifyZokratesInstall()
         
         // If no document is restored, show template chooser
 //        if NSDocumentController.shared.documents.isEmpty {
@@ -31,21 +31,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
         return false
     }
-
-    private func dockerInstall() {
+    
+    private func verifyZokratesInstall() {
         
-        if FileManager.default.isExecutableFile(atPath: "//usr//local//bin//docker")  { return }
+        let zokratesPath = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".zokrates/bin/zokrates").path
         
-        let alert = NSAlert()
-        alert.messageText = "Docker is not installed"
-        alert.informativeText = "ZK Playground requires Docker"
-        alert.addButton(withTitle: "Download Docker")
-        alert.addButton(withTitle: "Continue anyway")
-        let response = alert.runModal()
-        if response == .alertFirstButtonReturn,
-            let url = URL(string: "https://docs.docker.com/docker-for-mac/install") {
-            NSWorkspace.shared.open(url)
-        }
+        print(zokratesPath)
+        
+        if FileManager.default.isExecutableFile(atPath: zokratesPath)  { return }
+        
+        // Zokrates is not installed
+        
+        // Run:
+        // curl -LSfs get.zokrat.es | sh
+        // export PATH=$PATH:$HOME/.zokrates/bin
+        // export ZOKRATES_HOME=$HOME/.zokrates/stdlib
+        
     }
     
     @IBAction func showTemplates(_ sender: AnyObject?) {

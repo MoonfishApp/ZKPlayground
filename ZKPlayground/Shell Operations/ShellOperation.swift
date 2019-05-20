@@ -8,23 +8,21 @@
 
 import Foundation
 
-protocol DockerProtocol: class {
+protocol ShellProtocol: class {
     
-    // Docker received data from the docker image
-    func docker(_ docker: Docker, didReceiveStdout string: String)
+    // Received data from shell
+    func shell(_ shell: ShellOperation, didReceiveStdout string: String)
     
-    // Docker received an error from the docker image
-    func docker(_ docker: Docker, didReceiveStderr string: String)
+    // Received error from shell
+    func shell(_ shell: ShellOperation, didReceiveStderr string: String)
     
-    // Docker sent stdin to the docker image from the app
-    func docker(_ docker: Docker, didReceiveStdin string: String)
+    // App sent stdin to shell
+    func shell(_ shell: ShellOperation, didReceiveStdin string: String)
 }
 
-/// TODO: explore Docker Remote API http://blog.arungupta.me/enable-docker-remote-api-mac-osx-machine/
-/// https://github.com/docker/for-mac/issues/770
-class Docker: Operation {
+class ShellOperation: Operation {
     
-    weak var delegate: DockerProtocol?
+    weak var delegate: ShellProtocol?
     
     /// If any of the commands in the script returns non-zero,
     /// the script will cancel and forward the exit code
@@ -51,10 +49,10 @@ class Docker: Operation {
     /// the name of the directory mapped to workDirectoryPath
     fileprivate static let dockerDirectoryPath = "/home/zokrates/playground"
     static let buildDirectory = "build"
-    fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent(Docker.buildDirectory).path }()
+    fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent(ShellOperation.buildDirectory).path }()
     
     fileprivate var dockerFilename: String {
-        return URL(fileURLWithPath: Docker.dockerDirectoryPath).appendingPathComponent(self.filename).path
+        return URL(fileURLWithPath: ShellOperation.dockerDirectoryPath).appendingPathComponent(self.filename).path
     }
     
     /// Arguments used to start Docker (e.g. docker run -v ....)
@@ -64,7 +62,7 @@ class Docker: Operation {
         
         self.filename = filename
         self.workDirectory = workDirectory
-        self.dockerArguments = ["run", "-v", workDirectory + ":" + Docker.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
+        self.dockerArguments = ["run", "-v", workDirectory + ":" + ShellOperation.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
         self.logOutput = logOutput
         
         super.init()
@@ -96,15 +94,15 @@ class Docker: Operation {
         // Print to log
         let command: String = task.launchPath ?? ""
         let arguments: String = task.arguments?.joined(separator: " ") ?? ""
-        self.delegate?.docker(self, didReceiveStdin: "\n$ " + command + " " + arguments + "\n")
+        self.delegate?.shell(self, didReceiveStdin: "\n$ " + command + " " + arguments + "\n")
         
         // Set exitStatus at exit
         self.task.terminationHandler = { task in
             self.exitStatus = Int(task.terminationStatus)
             if self.exitStatus == 0 {
-                self.delegate?.docker(self, didReceiveStdout: "\nTask exited with exit status 0\n")
+                self.delegate?.shell(self, didReceiveStdout: "\nTask exited with exit status 0\n")
             } else {
-                self.delegate?.docker(self, didReceiveStderr: "\nTask exited with exit status \(self.exitStatus!)\n")
+                self.delegate?.shell(self, didReceiveStderr: "\nTask exited with exit status \(self.exitStatus!)\n")
             }
             _ = self.notifications.map { NotificationCenter.default.removeObserver($0) }
         }
@@ -116,7 +114,7 @@ class Docker: Operation {
 
         self.capture(self.stdoutPipe) { stdout in
             
-            self.delegate?.docker(self, didReceiveStdout: stdout)
+            self.delegate?.shell(self, didReceiveStdout: stdout)
             if self.logOutput == true { self.output += stdout }
 
             // print utf8 values
@@ -127,7 +125,7 @@ class Docker: Operation {
         
         self.capture(self.stderrPipe) { stderr in
             
-            self.delegate?.docker(self, didReceiveStderr: stderr)
+            self.delegate?.shell(self, didReceiveStderr: stderr)
             if self.logOutput == true { self.output += stderr }
         }
         
@@ -160,7 +158,7 @@ class Docker: Operation {
         
         let string = string + "\n"
         guard task.isRunning == true, let data = (string).data(using: .utf8) else { return assertionFailure() }
-        self.delegate?.docker(self, didReceiveStdin: "\n" + string)
+        self.delegate?.shell(self, didReceiveStdin: "\n" + string)
         self.stdinPipe.fileHandleForWriting.write(data)
         if wait == true { self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify() }
     }
@@ -178,13 +176,13 @@ class Docker: Operation {
     
     fileprivate func copy(file: String) { //} -> Bool {
         
-        self.write("cp " + file + " " + Docker.dockerBuildPath)
+        self.write("cp " + file + " " + ShellOperation.dockerBuildPath)
     }
 }
 
 /// Compiles code, returns warnings and errors
 /// ./zokrates compile -i playground/root.code
-class Lint: Docker {
+class Lint: ShellOperation {
     
     override func main() {
         
@@ -197,7 +195,7 @@ class Lint: Docker {
 }
 
 /// Compiles and builds product and proofs
-class Compile: Docker {
+class Compile: ShellOperation {
     
     let arguments: [String]?
     

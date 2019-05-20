@@ -82,7 +82,7 @@ extension EditorWindowController {
         
         // 4. Build directory
         let fileManager = FileManager.default
-        let buildDirectory = URL(string: workDirectory)!.appendingPathComponent(Docker.buildDirectory)
+        let buildDirectory = URL(string: workDirectory)!.appendingPathComponent(ShellOperation.buildDirectory)
         var isDirectory: ObjCBool = false
         if fileManager.fileExists(atPath: buildDirectory.path, isDirectory: &isDirectory) == false || isDirectory.boolValue == false {
             
@@ -161,12 +161,12 @@ extension EditorWindowController {
 }
 
 // Docker delegate
-extension EditorWindowController: DockerProtocol {
-    func docker(_ docker: Docker, didReceiveStdout string: String) {
+extension EditorWindowController: ShellProtocol {
+    func shell(_ docker: ShellOperation, didReceiveStdout string: String) {
         self.logViewController.stdout(string)
     }
     
-    func docker(_ docker: Docker, didReceiveStderr string: String) {
+    func shell(_ docker: ShellOperation, didReceiveStderr string: String) {
         
         // Open log pane
         DispatchQueue.main.async {
@@ -181,7 +181,7 @@ extension EditorWindowController: DockerProtocol {
         self.logViewController.stderr(string)
     }
     
-    func docker(_ docker: Docker, didReceiveStdin string: String) {
+    func shell(_ docker: ShellOperation, didReceiveStdin string: String) {
         self.logViewController.stdin(string)
     }
     

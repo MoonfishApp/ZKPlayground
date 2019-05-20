@@ -31,7 +31,7 @@ class BuildPhase: NSObject {
         self.errorMessage = errorMessage
         
         self.urls = phase.filenames.map{
-            URL(fileURLWithPath: workDirectory).appendingPathComponent(Docker.buildDirectory).appendingPathComponent($0).path
+            URL(fileURLWithPath: workDirectory).appendingPathComponent(ShellOperation.buildDirectory).appendingPathComponent($0).path
         }
         if let urls = self.urls { self.successful = urls.filter{ FileManager.default.fileExists(atPath: $0) }.count == urls.count
         } else { self.successful = false }
