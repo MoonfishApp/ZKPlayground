@@ -85,8 +85,16 @@ class ShellOperation: Operation {
         guard isCancelled == false else { return }
         
         // Set up task
+
+        // Exporting Zokrates paths
+        // export PATH=$PATH:$HOME/.zokrates/bin
+        // export ZOKRATES_HOME=$HOME/.zokrates/stdlib
+        let zokratesDirectory = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".zokrates")
+        let zokratesBinPath = zokratesDirectory.appendingPathComponent("bin").path
+        let zokratesHomePath = zokratesDirectory.appendingPathComponent("stdlib").path
+        
         self.task.environment = ProcessInfo().environment
-        self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin", forKey: "PATH")
+        self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:\(zokratesBinPath):\(zokratesHomePath)", forKey: "PATH")
         task.launchPath = "/usr/local/bin/docker" // TODO: use which path
         task.arguments = self.dockerArguments
         task.currentDirectoryPath = Bundle.main.bundlePath
