@@ -60,7 +60,7 @@ class EditorWindowController: NSWindowController {
 extension EditorWindowController {
     
     @IBAction func compile(_ sender: Any?) {
-        
+        /*
         // 1. Sanity check
         guard let document = document as? Document
         else { return assertionFailure() }
@@ -79,35 +79,6 @@ extension EditorWindowController {
         // 3. Save document and reset buildphases
         document.save(self)
         document.buildPhases = nil
-        
-        // 4. Build directory
-        let fileManager = FileManager.default
-        let buildDirectory = URL(string: workDirectory)!.appendingPathComponent(ShellOperation.buildDirectory)
-        var isDirectory: ObjCBool = false
-        if fileManager.fileExists(atPath: buildDirectory.path, isDirectory: &isDirectory) == false || isDirectory.boolValue == false {
-            
-            // 5.a Build directory does not exist. Create it
-            do {
-                try fileManager.createDirectory(atPath: buildDirectory.path, withIntermediateDirectories: false, attributes: nil)
-            } catch {
-                NSAlert(error: error).beginSheetModal(for: self.window!)
-                inspectorViewController.progressIndicator.stopAnimation(self)
-                return
-            }
-        } else {
-        
-            // 5.b  Delete all files in the build directory
-            let enumerator = fileManager.enumerator(at: buildDirectory, includingPropertiesForKeys: nil)
-            while let file = enumerator?.nextObject() as? URL {
-                do {
-                    try fileManager.removeItem(at: file)
-                } catch {
-                    NSAlert(error: error).beginSheetModal(for: self.window!)
-                    inspectorViewController.progressIndicator.stopAnimation(self)
-                    return
-                }
-            }
-        }
 
         // 6. Create and queue compile operation
         let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
@@ -152,7 +123,7 @@ extension EditorWindowController {
                     
             document.buildPhases = phases
         }
-        compileQueue.addOperation(compile)
+        compileQueue.addOperation(compile) */
     }
     
     @IBAction func stop(_ sender: Any?) {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 protocol ShellProtocol: class {
     
@@ -43,66 +44,66 @@ class ShellOperation: Operation {
     private var notifications = [NSObjectProtocol]()
     
     /// Name of the .code file, e.g. "HelloWorld.code"
-    private let filename: String
-    private let workDirectory: String
+    fileprivate let sourceFilename: String
+    fileprivate let workDirectory: String
+    var buildDirectory: String { return URL(fileURLWithPath: self.workDirectory).appendingPathComponent("build").path }
     
-    /// the name of the directory mapped to workDirectoryPath
-    fileprivate static let dockerDirectoryPath = "/home/zokrates/playground"
-    static let buildDirectory = "build"
-    fileprivate static var dockerBuildPath = { return URL(fileURLWithPath: dockerDirectoryPath).appendingPathComponent(ShellOperation.buildDirectory).path }()
-    
-    fileprivate var dockerFilename: String {
-        return URL(fileURLWithPath: ShellOperation.dockerDirectoryPath).appendingPathComponent(self.filename).path
-    }
-    
-    /// Arguments used to start Docker (e.g. docker run -v ....)
-    private let dockerArguments: [String]
-    
-    init(workDirectory: String, filename: String, logOutput: Bool = true) {
+    init(workDirectory: String, sourceFilename: String, logOutput: Bool = true) {
         
-        self.filename = filename
+        self.sourceFilename = sourceFilename
         self.workDirectory = workDirectory
-        self.dockerArguments = ["run", "-v", workDirectory + ":" + ShellOperation.dockerDirectoryPath, "-i", "zokrates/zokrates", "/bin/bash"]
         self.logOutput = logOutput
         
         super.init()
     }
     
-    override init() {
-        
-        self.filename = ""
-        self.workDirectory = ""
-        self.logOutput = true
-        self.dockerArguments = ["run", "hello-world"]
-        
-        super.init()
-    }
+//    override init() {
+//
+//        self.sourceFilename = ""
+//        self.workDirectory = ""
+//        self.arguments = ""
+//        self.logOutput = true
+//
+//        super.init()
+//    }
     
-    /// Runs (and if needed, installs) Zokrates in a Docker image
-    /// Format is: docker run -v /Users/davidhasselhoff/Code/:/home/zokrates/playground -i zokrates/zokrates /bin/bash
+    /// Runs Zokrates
     override func main() {
             
         guard isCancelled == false else { return }
         
+        // Create build directory
+        if self.createBuildDirectory() == false {
+            assertionFailure()
+            return
+        }
+        
         // Set up task
 
-        // Exporting Zokrates paths
-        // export PATH=$PATH:$HOME/.zokrates/bin
-        // export ZOKRATES_HOME=$HOME/.zokrates/stdlib
+        // Exporting Zokrates paths in environment. May not be necessary
         let zokratesDirectory = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".zokrates")
         let zokratesBinPath = zokratesDirectory.appendingPathComponent("bin").path
-        let zokratesHomePath = zokratesDirectory.appendingPathComponent("stdlib").path
+//        let zokratesHomePath = zokratesDirectory.appendingPathComponent("stdlib").path
+//        self.task.environment = ProcessInfo().environment
+//        self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:\(zokratesBinPath)", forKey: "PATH")
+//        self.task.environment?.updateValue(zokratesHomePath, forKey: "ZOKRATES_HOME")
         
-        self.task.environment = ProcessInfo().environment
-        self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:\(zokratesBinPath):\(zokratesHomePath)", forKey: "PATH")
-        task.launchPath = "/usr/local/bin/docker" // TODO: use which path
-        task.arguments = self.dockerArguments
-        task.currentDirectoryPath = Bundle.main.bundlePath
+        // Set executable to Zokrates
+        self.task.executableURL = URL(fileURLWithPath: zokratesBinPath, isDirectory: true).appendingPathComponent("zokrates")
         
-        // Print to log
-        let command: String = task.launchPath ?? ""
-        let arguments: String = task.arguments?.joined(separator: " ") ?? ""
-        self.delegate?.shell(self, didReceiveStdin: "\n$ " + command + " " + arguments + "\n")
+        // currentDirectoryPath is the starting point for any relative path speficied.
+        // Set to the buildDirectory.
+        self.task.currentDirectoryPath = self.buildDirectory
+        
+        if self.logOutput {
+            
+            // Print to log
+            let path = task.currentDirectoryPath
+            let command: String = task.executableURL?.path ?? ""
+            let arguments: String = task.arguments?.joined(separator: " ") ?? ""
+            self.delegate?.shell(self, didReceiveStdin: "\n\(path)$ " + command + " " + arguments + "\n")
+            print("\n\(path)$ " + command + " " + arguments + "\n")
+        }
         
         // Set exitStatus at exit
         self.task.terminationHandler = { task in
@@ -123,22 +124,28 @@ class ShellOperation: Operation {
         self.capture(self.stdoutPipe) { stdout in
             
             self.delegate?.shell(self, didReceiveStdout: stdout)
-            if self.logOutput == true { self.output += stdout }
-
-            // print utf8 values
+            if self.logOutput == true {
+                self.output += stdout
+                print(stdout)
+            }
+            
+            // uncomment to print utf8 values
 //            var s = ""
 //            _ = stdout.utf8.map{ s.append("\($0), ") }
-//            self.delegate?.docker(self, didReceiveStdin: s)
+//            self.delegate?.shell(self, didReceiveStdin: s)
         }
         
         self.capture(self.stderrPipe) { stderr in
             
             self.delegate?.shell(self, didReceiveStderr: stderr)
-            if self.logOutput == true { self.output += stderr }
+            if self.logOutput == true {
+                self.output += stderr
+                print(stderr)
+            }
         }
         
         task.launch()
-//        self.task.waitUntilExit() // uncomment when testing Hello-world
+        self.task.waitUntilExit() // uncomment when testing Hello-world
     }
     
     private func capture(_ pipe: Pipe, dataReceived: @escaping (String) -> Void) {
@@ -171,10 +178,8 @@ class ShellOperation: Operation {
         if wait == true { self.stdinPipe.fileHandleForWriting.waitForDataInBackgroundAndNotify() }
     }
     
-    /// Exits Docker
     override func cancel() {
         
-        // Send 'exit' command to docker
         if task.isRunning { task.interrupt() }
         self.stdinPipe.fileHandleForReading.closeFile()
         self.stderrPipe.fileHandleForReading.closeFile()
@@ -182,9 +187,35 @@ class ShellOperation: Operation {
         super.cancel()
     }
     
-    fileprivate func copy(file: String) { //} -> Bool {
+    fileprivate func createBuildDirectory() -> Bool {
         
-        self.write("cp " + file + " " + ShellOperation.dockerBuildPath)
+        // 1. Check if build directory exists
+        let manager = FileManager.default
+        var isDirectory: ObjCBool = false
+        if manager.fileExists(atPath: self.buildDirectory, isDirectory: &isDirectory) == false || isDirectory.boolValue == false {
+            
+            // Build directory does not exist. Create it
+            do {
+                try
+                    manager.createDirectory(atPath: self.buildDirectory, withIntermediateDirectories: false, attributes: nil)
+            } catch {
+                NSAlert(error: error).runModal()
+                return false
+            }
+        }
+        
+        // 2. Delete all files in the build directory
+        let enumerator = manager.enumerator(at: URL(fileURLWithPath: self.buildDirectory, isDirectory: true), includingPropertiesForKeys: nil)
+        while let file = enumerator?.nextObject() as? URL {
+            do {
+                try manager.removeItem(at: file)
+            } catch {
+                NSAlert(error: error).runModal()
+                return false
+            }
+        }
+        
+        return true
     }
 }
 
@@ -194,16 +225,17 @@ class Lint: ShellOperation {
     
     override func main() {
         
+        self.task.arguments = ["compile", "-i", "../" + self.sourceFilename]
         super.main()
         
-        let command = "./zokrates compile -i " + self.dockerFilename + "; exit"
-        self.write(command)
-        self.task.waitUntilExit()
+//        let command = "cd " + self.buildDirectory + "; " + self.zokratesBinPath + "/zokrates compile -i ../" + self.filename
+//        self.write(command)
+//        self.task.waitUntilExit()
     }
 }
 
 /// Compiles and builds product and proofs
-class Compile: ShellOperation {
+/*class Compile: ShellOperation {
     
     let arguments: [String]?
     
@@ -211,12 +243,18 @@ class Compile: ShellOperation {
         
         self.arguments = arguments
         
-        super.init(workDirectory: workDirectory, filename: filename)
+        super.init(workDirectory: workDirectory, sourceFilename: filename)
     }
     
     override func main() {
         
         super.main()
+        
+        // 1. Create build directory
+        if self.createBuildDirectory() == false {
+            assertionFailure()
+            return
+        }
         
         // 1. Set time format
         self.write("TIMEFORMAT='Elapsed time: %3R'")
@@ -253,3 +291,4 @@ class Compile: ShellOperation {
         self.task.waitUntilExit()
     }
 }
+*/

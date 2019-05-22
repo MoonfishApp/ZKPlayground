@@ -79,7 +79,6 @@
 		C79BE65C2255765C00325471 /* slice1_512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slice1_512@2x.png"; sourceTree = "<group>"; };
 		C7AE8A5C22434E55001EC64A /* ZKPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZKPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A5F22434E55001EC64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C7AE8A6122434E55001EC64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C7AE8A6322434E55001EC64A /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		C7AE8A6522434E59001EC64A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7AE8A6822434E59001EC64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -205,7 +204,6 @@
 				C7AE8A8122436470001EC64A /* Editor Window */,
 				C7AE8A5F22434E55001EC64A /* AppDelegate.swift */,
 				C78A91C3224718390033233E /* Shell Operations */,
-				C7AE8A6122434E55001EC64A /* ViewController.swift */,
 				C7AE8A6322434E55001EC64A /* Document.swift */,
 				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
 				C78A92432248ADD60033233E /* CompilerError.swift */,
