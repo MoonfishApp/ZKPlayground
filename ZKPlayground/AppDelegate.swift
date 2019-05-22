@@ -41,12 +41,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if FileManager.default.isExecutableFile(atPath: zokratesPath)  { return }
         
         // Zokrates is not installed
-        
-        // Run:
-        // curl -LSfs get.zokrat.es | sh
-        // export PATH=$PATH:$HOME/.zokrates/bin
-        // export ZOKRATES_HOME=$HOME/.zokrates/stdlib
-        
+        let alert = NSAlert()
+        alert.messageText = "Zokrates is not installed"
+        alert.informativeText = "run 'curl -LSfs get.zokrat.es | sh' in the terminal to install Zokrates"
+        alert.runModal()
     }
     
     @IBAction func showTemplates(_ sender: AnyObject?) {

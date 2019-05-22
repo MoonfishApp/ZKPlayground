@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ZKError: Error {
+enum ZKError:LocalizedError {
     case fileNotFound(String)
     case directoryNotFound(String)
     case cannotOpenFile(String)
@@ -18,4 +18,5 @@ enum ZKError: Error {
     case bashScriptFailed(String)
     case initError(String)
     case internalError(String)
+
 }
