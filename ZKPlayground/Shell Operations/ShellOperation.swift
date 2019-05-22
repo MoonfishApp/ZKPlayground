@@ -57,16 +57,6 @@ class ShellOperation: Operation {
         super.init()
     }
     
-//    override init() {
-//
-//        self.sourceFilename = ""
-//        self.workDirectory = ""
-//        self.arguments = ""
-//        self.logOutput = true
-//
-//        super.init()
-//    }
-    
     /// Runs Zokrates
     override func main() {
             
@@ -219,19 +209,17 @@ class ShellOperation: Operation {
     }
 }
 
-/// Compiles code, returns warnings and errors
-/// ./zokrates compile -i playground/root.code
-class Lint: ShellOperation {
+// Convenience inits
+extension ShellOperation {
     
-    override func main() {
+    /// Compiles code, returns warnings and errors
+    static func lint(workDirectory: String, sourceFilename: String, logOutput: Bool = true) -> ShellOperation {
         
-        self.task.arguments = ["compile", "-i", "../" + self.sourceFilename]
-        super.main()
-        
-//        let command = "cd " + self.buildDirectory + "; " + self.zokratesBinPath + "/zokrates compile -i ../" + self.filename
-//        self.write(command)
-//        self.task.waitUntilExit()
+        let operation = ShellOperation(workDirectory: workDirectory, sourceFilename: sourceFilename, logOutput: logOutput)
+        operation.task.arguments = ["compile", "-i", "../" + operation.sourceFilename]
+        return operation
     }
+    
 }
 
 /// Compiles and builds product and proofs
