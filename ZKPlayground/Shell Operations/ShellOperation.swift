@@ -43,14 +43,11 @@ class ShellOperation: Operation {
     private let stdinPipe = Pipe()
     private var notifications = [NSObjectProtocol]()
     
-    /// Name of the .code file, e.g. "HelloWorld.code"
-    fileprivate let sourceFilename: String
     fileprivate let workDirectory: String
     var buildDirectory: String { return URL(fileURLWithPath: self.workDirectory).appendingPathComponent("build").path }
     
-    init(workDirectory: String, sourceFilename: String, logOutput: Bool = true) {
+    init(workDirectory: String, logOutput: Bool = true) {
         
-        self.sourceFilename = sourceFilename
         self.workDirectory = workDirectory
         self.logOutput = logOutput
         
@@ -212,71 +209,75 @@ class ShellOperation: Operation {
 // Convenience inits
 extension ShellOperation {
     
-    /// Compiles code, returns warnings and errors
-    static func lint(workDirectory: String, sourceFilename: String, logOutput: Bool = true) -> ShellOperation {
+    private static func assemble(arguments: [String], workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        let operation = ShellOperation(workDirectory: workDirectory, sourceFilename: sourceFilename, logOutput: logOutput)
-        operation.task.arguments = ["compile", "-i", "../" + operation.sourceFilename]
+        let operation = ShellOperation(workDirectory: workDirectory, logOutput: logOutput)
+        operation.task.arguments = arguments
         return operation
     }
     
-}
-
-/// Compiles and builds product and proofs
-/*class Compile: ShellOperation {
-    
-    let arguments: [String]?
-    
-    init(workDirectory: String, filename: String, arguments: [String]?) {
+    /// Compiles code, returns warnings and errors
+    static func lint(workDirectory: String, sourceFilename: String, logOutput: Bool = false) -> ShellOperation {
         
-        self.arguments = arguments
+        // TODO: don't delete the other files in the build directory
         
-        super.init(workDirectory: workDirectory, sourceFilename: filename)
+        return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, logOutput: logOutput)
     }
     
-    override func main() {
+    static func build(workDirectory: String, arguments: [String]?, sourceFilename: String, logOutput: Bool = true) -> [ShellOperation] {
         
-        super.main()
+        let compileOperation = compile(workDirectory: workDirectory, sourceFilename: sourceFilename, logOutput: logOutput)
+        let witnessOperation = witness(arguments: arguments, workDirectory: workDirectory, logOutput: logOutput)
+        let setupOperation = setup(workDirectory: workDirectory, logOutput: logOutput)
+        let verifierOperation = verifier(workDirectory: workDirectory, logOutput: logOutput)
+        let proofOperation = proof(workDirectory: workDirectory, logOutput: logOutput)
         
-        // 1. Create build directory
-        if self.createBuildDirectory() == false {
-            assertionFailure()
-            return
+        // Add dependencies, so operations are executed in the right order
+        proofOperation.addDependency(verifierOperation)
+        verifierOperation.addDependency(setupOperation)
+        setupOperation.addDependency(witnessOperation)
+        witnessOperation.addDependency(compileOperation)
+        
+        return [compileOperation, witnessOperation, setupOperation, verifierOperation, proofOperation]
+    }
+    
+    /// Compiles code
+    static func compile(workDirectory: String, sourceFilename: String, logOutput: Bool = true) -> ShellOperation {
+        
+        // TODO: don't delete the other files in the build directory
+        
+        return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, logOutput: logOutput)
+    }
+    
+    /// Computes a witness for the compiled program found at ./out.code and arguments to the program.
+    static func witness(arguments: [String]? = nil, workDirectory: String, logOutput: Bool = true) -> ShellOperation {
+        
+        var args = ["compute-witness"]
+        if let arguments = arguments {
+            args.append("-a")
+            args.append(contentsOf: arguments)
         }
         
-        // 1. Set time format
-        self.write("TIMEFORMAT='Elapsed time: %3R'")
+        return assemble(arguments: args, workDirectory: workDirectory, logOutput: logOutput)
+    }
+    
+    /// Generates a trusted setup for the compiled program found at ./out.code
+    /// Creates a proving key and a verifying key at ./proving.key and ./verifying.key. These keys are derived from a source of randomness, commonly referred to as “toxic waste”. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.
+    static func setup(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        // 2. Compile
-        self.write("time ./zokrates compile -i " + self.dockerFilename)
-        copy(file: "out")
-        copy(file: "out.code")
+        return assemble(arguments: ["setup"], workDirectory: workDirectory, logOutput: logOutput)
+    }
+    
+    /// Using the verifying key at ./verifying.key, generates a Solidity contract which contains the generated verification key and a public function to verify a solution to the compiled program at ./out.code.
+    /// Creates a verifier contract at ./verifier.sol.
+    static func verifier(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        // 3. Setup
-        self.write("time ./zokrates setup")
-        copy(file: "proving.key")
-        copy(file: "variables.inf")
-        copy(file: "verification.key")
-        
-        // 4. Compute witness
-        var command = "time ./zokrates compute-witness"
-        if let arguments = self.arguments {
-            command += " -a "
-            _ = arguments.map{ command.append($0 + " ") }
-        }
-        self.write(command)
-        copy(file: "witness")
+        return assemble(arguments: ["export-verifier"], workDirectory: workDirectory, logOutput: logOutput)
+    }
 
-        // 5. Generate proof
-        self.write("time ./zokrates generate-proof")
-        copy(file: "proof.json")
+    /// Using the proving key at ./proving.key, generates a proof for a computation of the compiled program ./out.code resulting in ./witness.
+    static func proof(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        // copy verifier
-        self.write("time ./zokrates export-verifier")
-        copy(file: "verifier.sol")
-        
-        self.write("exit")
-        self.task.waitUntilExit()
+        return assemble(arguments: ["generate-proof"], workDirectory: workDirectory, logOutput: logOutput)
     }
 }
-*/
