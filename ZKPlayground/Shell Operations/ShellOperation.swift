@@ -64,13 +64,7 @@ class ShellOperation: Operation {
             
         guard isCancelled == false else { return }
         
-        let startTime = DispatchTime.now()
-        
-        // Create build directory
-        if self.createBuildDirectory() == false {
-            assertionFailure()
-            return
-        }
+        let startTime = Date()
         
         // Set up task
 
@@ -135,9 +129,8 @@ class ShellOperation: Operation {
         }
         
         task.launch()
-        self.task.waitUntilExit() // uncomment when testing Hello-world
-        let endTime = DispatchTime.now()
-        self.executionTime = TimeInterval(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds)
+        self.task.waitUntilExit() // uncomment when testing Hello-world        
+        self.executionTime = Date().timeIntervalSince(startTime)
     }
     
     private func capture(_ pipe: Pipe, dataReceived: @escaping (String) -> Void) {
@@ -218,6 +211,12 @@ extension ShellOperation {
         
         let operation = ShellOperation(workDirectory: workDirectory, buildPhase: buildPhase, logOutput: logOutput)
         operation.task.arguments = arguments
+        
+        // Create build directory
+        if operation.createBuildDirectory() == false {
+            assertionFailure()
+        }
+        
         return operation
     }
     
