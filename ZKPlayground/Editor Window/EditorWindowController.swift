@@ -60,7 +60,7 @@ class EditorWindowController: NSWindowController {
 extension EditorWindowController {
     
     @IBAction func compile(_ sender: Any?) {
-        /*
+        
         // 1. Sanity check
         guard let document = document as? Document
         else { return assertionFailure() }
@@ -78,56 +78,24 @@ extension EditorWindowController {
         
         // 3. Save document and reset buildphases
         document.save(self)
-        document.buildPhases = nil
+        document.buildPhases = [BuildPhase]()
 
-        // 6. Create and queue compile operation
-        let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
-        compile.delegate = self
-        compile.completionBlock = {
-            
-            // 5.a Fetch time measurements
-            let times = TimeInterval.parse(compile.output)
-            
-            // 5.b Set BuildPhases
-            var phases = [BuildPhase]()
-            for index in 0 ..< 5 {
-                
-                var phase: BuildPhaseType {
-                    switch index {
-                    case 0:
-                        return .compile
-                    case 1:
-                        return .setup
-                    case 2:
-                        return .witness
-                    case 3:
-                        return .proof
-                    case 4:
-                        return .verifier
-                    default:
-                        assertionFailure()
-                        return .verifier
-                    }
-                }
-                
-                let buildPhase: BuildPhase
-                if times.count > index {
-                    // Phase completed successfully
-                    buildPhase = BuildPhase(phase: phase, workDirectory: workDirectory, elapsedTime: times[index])
-                } else {
-                    // Error
-                    buildPhase = BuildPhase(phase: phase, workDirectory: workDirectory, elapsedTime: nil, errorMessage: "Error")
-                }
-                phases.append(buildPhase)
+        // 6. Create and queue compile operations
+        let compileOperations = ShellOperation.build(workDirectory: workDirectory, arguments: self.inspectorViewController.arguments, sourceFilename: filename)
+        
+        for operation in compileOperations {
+            operation.delegate = self
+            operation.completionBlock = {
+                let buildPhase = BuildPhase(phase: operation.buildPhaseType, workDirectory: workDirectory, elapsedTime: operation.executionTime , errorMessage: operation.exitStatus == 0 ? nil : "Error")
+                document.buildPhases!.append(buildPhase)
             }
-                    
-            document.buildPhases = phases
         }
-        compileQueue.addOperation(compile) */
+        compileQueue.addOperations(compileOperations, waitUntilFinished: false)
+        
     }
     
     @IBAction func stop(_ sender: Any?) {
-        
+        print("Not implemented")
     }
 }
 

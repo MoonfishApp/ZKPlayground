@@ -31,10 +31,14 @@ class ShellOperation: Operation {
     /// http://www.tldp.org/LDP/abs/html/exitcodes.html
     private (set) var exitStatus: Int?
     
+    private (set) var executionTime: TimeInterval?
+    
     // If true, output will be stored in output property
     private let logOutput: Bool
     
     private (set) var output = ""
+    let buildPhaseType: BuildPhaseType
+    
     
     fileprivate let task = Process()
     
@@ -46,9 +50,10 @@ class ShellOperation: Operation {
     fileprivate let workDirectory: String
     var buildDirectory: String { return URL(fileURLWithPath: self.workDirectory).appendingPathComponent("build").path }
     
-    init(workDirectory: String, logOutput: Bool = true) {
+    init(workDirectory: String, buildPhase: BuildPhaseType, logOutput: Bool = true) {
         
         self.workDirectory = workDirectory
+        self.buildPhaseType = buildPhase
         self.logOutput = logOutput
         
         super.init()
@@ -58,6 +63,8 @@ class ShellOperation: Operation {
     override func main() {
             
         guard isCancelled == false else { return }
+        
+        let startTime = DispatchTime.now()
         
         // Create build directory
         if self.createBuildDirectory() == false {
@@ -70,10 +77,6 @@ class ShellOperation: Operation {
         // Exporting Zokrates paths in environment. May not be necessary
         let zokratesDirectory = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".zokrates")
         let zokratesBinPath = zokratesDirectory.appendingPathComponent("bin").path
-//        let zokratesHomePath = zokratesDirectory.appendingPathComponent("stdlib").path
-//        self.task.environment = ProcessInfo().environment
-//        self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:\(zokratesBinPath)", forKey: "PATH")
-//        self.task.environment?.updateValue(zokratesHomePath, forKey: "ZOKRATES_HOME")
         
         // Set executable to Zokrates
         self.task.executableURL = URL(fileURLWithPath: zokratesBinPath, isDirectory: true).appendingPathComponent("zokrates")
@@ -133,6 +136,8 @@ class ShellOperation: Operation {
         
         task.launch()
         self.task.waitUntilExit() // uncomment when testing Hello-world
+        let endTime = DispatchTime.now()
+        self.executionTime = TimeInterval(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds)
     }
     
     private func capture(_ pipe: Pipe, dataReceived: @escaping (String) -> Void) {
@@ -209,9 +214,9 @@ class ShellOperation: Operation {
 // Convenience inits
 extension ShellOperation {
     
-    private static func assemble(arguments: [String], workDirectory: String, logOutput: Bool = true) -> ShellOperation {
+    private static func assemble(arguments: [String], workDirectory: String, buildPhase: BuildPhaseType, logOutput: Bool = true) -> ShellOperation {
         
-        let operation = ShellOperation(workDirectory: workDirectory, logOutput: logOutput)
+        let operation = ShellOperation(workDirectory: workDirectory, buildPhase: buildPhase, logOutput: logOutput)
         operation.task.arguments = arguments
         return operation
     }
@@ -221,7 +226,7 @@ extension ShellOperation {
         
         // TODO: don't delete the other files in the build directory
         
-        return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, logOutput: logOutput)
+        return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, buildPhase: .compile, logOutput: logOutput)
     }
     
     static func build(workDirectory: String, arguments: [String]?, sourceFilename: String, logOutput: Bool = true) -> [ShellOperation] {
@@ -246,7 +251,7 @@ extension ShellOperation {
         
         // TODO: don't delete the other files in the build directory
         
-        return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, logOutput: logOutput)
+        return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, buildPhase: .compile, logOutput: logOutput)
     }
     
     /// Computes a witness for the compiled program found at ./out.code and arguments to the program.
@@ -258,26 +263,26 @@ extension ShellOperation {
             args.append(contentsOf: arguments)
         }
         
-        return assemble(arguments: args, workDirectory: workDirectory, logOutput: logOutput)
+        return assemble(arguments: args, workDirectory: workDirectory, buildPhase: .witness, logOutput: logOutput)
     }
     
     /// Generates a trusted setup for the compiled program found at ./out.code
     /// Creates a proving key and a verifying key at ./proving.key and ./verifying.key. These keys are derived from a source of randomness, commonly referred to as “toxic waste”. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.
     static func setup(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        return assemble(arguments: ["setup"], workDirectory: workDirectory, logOutput: logOutput)
+        return assemble(arguments: ["setup"], workDirectory: workDirectory, buildPhase: .setup, logOutput: logOutput)
     }
     
     /// Using the verifying key at ./verifying.key, generates a Solidity contract which contains the generated verification key and a public function to verify a solution to the compiled program at ./out.code.
     /// Creates a verifier contract at ./verifier.sol.
     static func verifier(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        return assemble(arguments: ["export-verifier"], workDirectory: workDirectory, logOutput: logOutput)
+        return assemble(arguments: ["export-verifier"], workDirectory: workDirectory, buildPhase: .verifier, logOutput: logOutput)
     }
 
     /// Using the proving key at ./proving.key, generates a proof for a computation of the compiled program ./out.code resulting in ./witness.
     static func proof(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
         
-        return assemble(arguments: ["generate-proof"], workDirectory: workDirectory, logOutput: logOutput)
+        return assemble(arguments: ["generate-proof"], workDirectory: workDirectory, buildPhase: .proof, logOutput: logOutput)
     }
 }
