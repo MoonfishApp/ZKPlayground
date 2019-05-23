@@ -129,7 +129,7 @@ class ShellOperation: Operation {
         }
         
         task.launch()
-        self.task.waitUntilExit() // uncomment when testing Hello-world        
+        self.task.waitUntilExit() // uncomment when testing Hello-world
         self.executionTime = Date().timeIntervalSince(startTime)
     }
     
@@ -212,11 +212,6 @@ extension ShellOperation {
         let operation = ShellOperation(workDirectory: workDirectory, buildPhase: buildPhase, logOutput: logOutput)
         operation.task.arguments = arguments
         
-        // Create build directory
-        if operation.createBuildDirectory() == false {
-            assertionFailure()
-        }
-        
         return operation
     }
     
@@ -237,12 +232,17 @@ extension ShellOperation {
         let proofOperation = proof(workDirectory: workDirectory, logOutput: logOutput)
         
         // Add dependencies, so operations are executed in the right order
+        setupOperation.addDependency(compileOperation)
+        witnessOperation.addDependency(setupOperation)
+        verifierOperation.addDependency(witnessOperation)
         proofOperation.addDependency(verifierOperation)
-        verifierOperation.addDependency(setupOperation)
-        setupOperation.addDependency(witnessOperation)
-        witnessOperation.addDependency(compileOperation)
         
-        return [compileOperation, witnessOperation, setupOperation, verifierOperation, proofOperation]
+        // Create build directory
+        if compileOperation.createBuildDirectory() == false {
+            assertionFailure()
+        }
+        
+        return [compileOperation, setupOperation, witnessOperation, verifierOperation, proofOperation]
     }
     
     /// Compiles code

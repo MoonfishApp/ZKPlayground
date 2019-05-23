@@ -117,7 +117,7 @@ class InspectorViewController: NSViewController {
                     
                     // Phase was successful
                     buildPhaseView.titleLabel.stringValue = "✅ " + phase.name
-                    buildPhaseView.timeLabel.stringValue = phase.elapsedTime == nil ? " " : "\(phase.elapsedTime!)s"
+                    buildPhaseView.timeLabel.stringValue = phase.elapsedTime == nil ? " " : String(format: "%.2fs", phase.elapsedTime!)
                     if let result = phase.fetchCompilerResult() {
                         buildPhaseView.textField.stringValue = result
                         buildPhaseView.textField.isHidden = false

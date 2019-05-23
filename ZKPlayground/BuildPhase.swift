@@ -85,7 +85,7 @@ enum BuildPhaseType: String {
         case .compile:
             return ["out", "out.code"]
         case .setup:
-            return ["proving.key", "variables.inf", "verification.key"]
+            return ["proving.key", "verification.key"] // "variables.inf"
         case .witness:
             return ["witness"]
         case .proof:

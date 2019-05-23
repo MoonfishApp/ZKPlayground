@@ -86,7 +86,9 @@ extension EditorWindowController {
         for operation in compileOperations {
             operation.delegate = self
             operation.completionBlock = {
+                
                 let buildPhase = BuildPhase(phase: operation.buildPhaseType, workDirectory: workDirectory, elapsedTime: operation.executionTime , errorMessage: operation.exitStatus == 0 ? nil : "Error")
+                print(buildPhase)
                 document.buildPhases!.append(buildPhase)
             }
         }
