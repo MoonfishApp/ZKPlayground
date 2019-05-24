@@ -86,10 +86,11 @@ extension EditorWindowController {
         for operation in compileOperations {
             operation.delegate = self
             operation.completionBlock = {
-                
-                let buildPhase = BuildPhase(phase: operation.buildPhaseType, workDirectory: workDirectory, elapsedTime: operation.executionTime , errorMessage: operation.exitStatus == 0 ? nil : "Error")
-                print(buildPhase)
-                document.buildPhases!.append(buildPhase)
+                DispatchQueue.main.sync {
+                    let buildPhase = BuildPhase(phase: operation.buildPhaseType, workDirectory: workDirectory, elapsedTime: operation.executionTime , errorMessage: operation.exitStatus == 0 ? nil : "Error")
+                    print(buildPhase)
+                    document.buildPhases!.append(buildPhase)
+                }
             }
         }
         compileQueue.addOperations(compileOperations, waitUntilFinished: false)
@@ -104,26 +105,31 @@ extension EditorWindowController {
 // Docker delegate
 extension EditorWindowController: ShellProtocol {
     func shell(_ docker: ShellOperation, didReceiveStdout string: String) {
-        self.logViewController.stdout(string)
+        
+        DispatchQueue.main.sync {
+            self.logViewController.stdout(string)
+        }
     }
     
     func shell(_ docker: ShellOperation, didReceiveStderr string: String) {
         
         // Open log pane
-        DispatchQueue.main.async {
+        DispatchQueue.main.sync {
             let item = (self.contentViewController as! NSSplitViewController).splitViewItems[2]
             
             if item.isCollapsed {
                 self.statusViewController.disclosureClicked(self)
                 self.statusViewController.disclosureButton.state = .on
             }
+            self.logViewController.stderr(string)
         }
-        
-        self.logViewController.stderr(string)
     }
     
     func shell(_ docker: ShellOperation, didReceiveStdin string: String) {
-        self.logViewController.stdin(string)
+        
+        DispatchQueue.main.sync {
+            self.logViewController.stdin(string)
+        }
     }
     
 }

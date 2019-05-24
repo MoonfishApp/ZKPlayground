@@ -68,9 +68,13 @@ class ShellOperation: Operation {
         
         // Set up task
 
-        // Exporting Zokrates paths in environment. May not be necessary
+        // Exporting Zokrates paths in environment.
         let zokratesDirectory = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".zokrates")
         let zokratesBinPath = zokratesDirectory.appendingPathComponent("bin").path
+        self.task.environment = ProcessInfo().environment
+        self.task.environment?.updateValue("/usr/local/bin/:/usr/bin:/bin:/usr/sbin:/sbin:\(zokratesBinPath)", forKey: "PATH")
+        let zokratesHomePath = zokratesDirectory.appendingPathComponent("stdlib").path
+        self.task.environment?.updateValue(zokratesHomePath, forKey: "ZOKRATES_HOME")
         
         // Set executable to Zokrates
         self.task.executableURL = URL(fileURLWithPath: zokratesBinPath, isDirectory: true).appendingPathComponent("zokrates")
