@@ -26,7 +26,7 @@ public class ZokratesLexer: SourceCodeRegexLexer {
         
         generators.append(regexGenerator("\\.\\w+", tokenType: .identifier))
         
-        let keywords = "import def return for in endfor if fi".components(separatedBy: " ")
+        let keywords = "import def return for in endfor if fi as".components(separatedBy: " ")
         
         generators.append(keywordGenerator(keywords, tokenType: .keyword))
         

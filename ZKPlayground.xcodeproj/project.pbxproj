@@ -24,7 +24,6 @@
 		C76F0A8E2251943F002B275B /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A8D2251943F002B275B /* BuildPhase.swift */; };
 		C76F0A902252D167002B275B /* BuildPhaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76F0A8F2252D167002B275B /* BuildPhaseView.xib */; };
 		C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */; };
-		C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C12246F7720033233E /* RemoteDockerAPI.swift */; };
 		C78A91CA22488BA00033233E /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A91C922488BA00033233E /* NSColor.swift */; };
 		C78A92442248ADD60033233E /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92432248ADD60033233E /* CompilerError.swift */; };
 		C78A92462248AF3A0033233E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A92452248AF3A0033233E /* String.swift */; };
@@ -41,7 +40,7 @@
 		C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */; };
 		C7AE8A94224430B0001EC64A /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A93224430B0001EC64A /* SplitViewController.swift */; };
 		C7AE8A9622443135001EC64A /* InspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A9522443135001EC64A /* InspectorViewController.swift */; };
-		C7AE8A9A22445986001EC64A /* Docker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A97224443BA001EC64A /* Docker.swift */; };
+		C7AE8A9A22445986001EC64A /* ShellOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE8A97224443BA001EC64A /* ShellOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,14 +73,12 @@
 		C76F0A8D2251943F002B275B /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
 		C76F0A8F2252D167002B275B /* BuildPhaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BuildPhaseView.xib; sourceTree = "<group>"; };
 		C76F0A912252D8A0002B275B /* BuildPhaseStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhaseStackView.swift; sourceTree = "<group>"; };
-		C78A91C12246F7720033233E /* RemoteDockerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDockerAPI.swift; sourceTree = "<group>"; };
 		C78A91C922488BA00033233E /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		C78A92432248ADD60033233E /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
 		C78A92452248AF3A0033233E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C79BE65C2255765C00325471 /* slice1_512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slice1_512@2x.png"; sourceTree = "<group>"; };
 		C7AE8A5C22434E55001EC64A /* ZKPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZKPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7AE8A5F22434E55001EC64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C7AE8A6122434E55001EC64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C7AE8A6322434E55001EC64A /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		C7AE8A6522434E59001EC64A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7AE8A6822434E59001EC64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,7 +94,7 @@
 		C7AE8A9122442EE6001EC64A /* EditorWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorWindowController.swift; sourceTree = "<group>"; };
 		C7AE8A93224430B0001EC64A /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		C7AE8A9522443135001EC64A /* InspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorViewController.swift; sourceTree = "<group>"; };
-		C7AE8A97224443BA001EC64A /* Docker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docker.swift; sourceTree = "<group>"; };
+		C7AE8A97224443BA001EC64A /* ShellOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellOperation.swift; sourceTree = "<group>"; };
 		CD92BEDFC397D6BE20E8D2FE /* Pods-ZKPlaygroundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlaygroundTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlaygroundTests/Pods-ZKPlaygroundTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF75002819B65626EA81721D /* Pods-ZKPlayground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZKPlayground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZKPlayground/Pods-ZKPlayground.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,13 +158,12 @@
 			path = Inspector;
 			sourceTree = "<group>";
 		};
-		C78A91C3224718390033233E /* Docker Operations */ = {
+		C78A91C3224718390033233E /* Shell Operations */ = {
 			isa = PBXGroup;
 			children = (
-				C7AE8A97224443BA001EC64A /* Docker.swift */,
-				C78A91C12246F7720033233E /* RemoteDockerAPI.swift */,
+				C7AE8A97224443BA001EC64A /* ShellOperation.swift */,
 			);
-			path = "Docker Operations";
+			path = "Shell Operations";
 			sourceTree = "<group>";
 		};
 		C78A91C822488B970033233E /* Extensions */ = {
@@ -207,8 +203,7 @@
 				C764DC5D2257B3B80042B122 /* Template Window */,
 				C7AE8A8122436470001EC64A /* Editor Window */,
 				C7AE8A5F22434E55001EC64A /* AppDelegate.swift */,
-				C78A91C3224718390033233E /* Docker Operations */,
-				C7AE8A6122434E55001EC64A /* ViewController.swift */,
+				C78A91C3224718390033233E /* Shell Operations */,
 				C7AE8A6322434E55001EC64A /* Document.swift */,
 				C7AE8A8F22436B37001EC64A /* ZKError.swift */,
 				C78A92432248ADD60033233E /* CompilerError.swift */,
@@ -450,7 +445,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C78A91C22246F7720033233E /* RemoteDockerAPI.swift in Sources */,
 				C76F0A8C22518043002B275B /* TimeInterval.swift in Sources */,
 				C764DC64225C73250042B122 /* ZokratesInterface.swift in Sources */,
 				C7AE8A9222442EE6001EC64A /* EditorWindowController.swift in Sources */,
@@ -465,7 +459,7 @@
 				C7AE8A9022436B37001EC64A /* ZKError.swift in Sources */,
 				C764DC68225C742E0042B122 /* InterfaceProtocol.swift in Sources */,
 				C7AE8A6022434E55001EC64A /* AppDelegate.swift in Sources */,
-				C7AE8A9A22445986001EC64A /* Docker.swift in Sources */,
+				C7AE8A9A22445986001EC64A /* ShellOperation.swift in Sources */,
 				C7AE8A6422434E55001EC64A /* Document.swift in Sources */,
 				C76F0A922252D8A0002B275B /* BuildPhaseStackView.swift in Sources */,
 				C764DC612257B3F60042B122 /* TemplatesViewController.swift in Sources */,
