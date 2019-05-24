@@ -16,11 +16,6 @@ ZK Playground uses [ZoKrates toolbox](https://github.com/Zokrates/ZoKrates).
 - Auto-parsing of main arguments
 - One-click compile and proof generation
 
-Soon:
-
-- Templates
-- Export to and deploy on [Composite](https://github.com/compositeapp/Composite/releases)
-
 ![alt text](Readme/Compiling.png "ZK Playground screenshot")
 
 ## What is Zokrates?
@@ -58,8 +53,6 @@ Download latest version in [releases section](https://github.com/compositeapp/ZK
 
 ## Requirements
 - MacOS 10.13 or higher
-- Docker ([download](https://docs.docker.com/docker-for-mac/install))
-
 
 ## Zokrates Resources
 - [Zokrates documentation](https://zokrates.github.io)
