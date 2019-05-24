@@ -78,111 +78,58 @@ extension EditorWindowController {
         
         // 3. Save document and reset buildphases
         document.save(self)
-        document.buildPhases = nil
-        
-        // 4. Build directory
-        let fileManager = FileManager.default
-        let buildDirectory = URL(string: workDirectory)!.appendingPathComponent(Docker.buildDirectory)
-        var isDirectory: ObjCBool = false
-        if fileManager.fileExists(atPath: buildDirectory.path, isDirectory: &isDirectory) == false || isDirectory.boolValue == false {
-            
-            // 5.a Build directory does not exist. Create it
-            do {
-                try fileManager.createDirectory(atPath: buildDirectory.path, withIntermediateDirectories: false, attributes: nil)
-            } catch {
-                NSAlert(error: error).beginSheetModal(for: self.window!)
-                inspectorViewController.progressIndicator.stopAnimation(self)
-                return
-            }
-        } else {
-        
-            // 5.b  Delete all files in the build directory
-            let enumerator = fileManager.enumerator(at: buildDirectory, includingPropertiesForKeys: nil)
-            while let file = enumerator?.nextObject() as? URL {
-                do {
-                    try fileManager.removeItem(at: file)
-                } catch {
-                    NSAlert(error: error).beginSheetModal(for: self.window!)
-                    inspectorViewController.progressIndicator.stopAnimation(self)
-                    return
-                }
-            }
-        }
+        document.buildPhases = [BuildPhase]()
 
-        // 6. Create and queue compile operation
-        let compile = Compile(workDirectory: workDirectory, filename: filename, arguments: self.inspectorViewController.arguments)
-        compile.delegate = self
-        compile.completionBlock = {
-            
-            // 5.a Fetch time measurements
-            let times = TimeInterval.parse(compile.output)
-            
-            // 5.b Set BuildPhases
-            var phases = [BuildPhase]()
-            for index in 0 ..< 5 {
-                
-                var phase: BuildPhaseType {
-                    switch index {
-                    case 0:
-                        return .compile
-                    case 1:
-                        return .setup
-                    case 2:
-                        return .witness
-                    case 3:
-                        return .proof
-                    case 4:
-                        return .verifier
-                    default:
-                        assertionFailure()
-                        return .verifier
-                    }
+        // 6. Create and queue compile operations
+        let compileOperations = ShellOperation.build(workDirectory: workDirectory, arguments: self.inspectorViewController.arguments, sourceFilename: filename, logOutput: .inputOnly)
+        
+        for operation in compileOperations {
+            operation.delegate = self
+            operation.completionBlock = {
+                DispatchQueue.main.sync {
+                    let buildPhase = BuildPhase(phase: operation.buildPhaseType, workDirectory: workDirectory, elapsedTime: operation.executionTime , errorMessage: operation.exitStatus == 0 ? nil : "Error")
+                    print(buildPhase)
+                    document.buildPhases!.append(buildPhase)
                 }
-                
-                let buildPhase: BuildPhase
-                if times.count > index {
-                    // Phase completed successfully
-                    buildPhase = BuildPhase(phase: phase, workDirectory: workDirectory, elapsedTime: times[index])
-                } else {
-                    // Error
-                    buildPhase = BuildPhase(phase: phase, workDirectory: workDirectory, elapsedTime: nil, errorMessage: "Error")
-                }
-                phases.append(buildPhase)
             }
-                    
-            document.buildPhases = phases
         }
-        compileQueue.addOperation(compile)
+        compileQueue.addOperations(compileOperations, waitUntilFinished: false)
+        
     }
     
     @IBAction func stop(_ sender: Any?) {
-        
+        print("Not implemented")
     }
 }
 
 // Docker delegate
-extension EditorWindowController: DockerProtocol {
-    func docker(_ docker: Docker, didReceiveStdout string: String) {
-        self.logViewController.stdout(string)
+extension EditorWindowController: ShellProtocol {
+    func shell(_ docker: ShellOperation, didReceiveStdout string: String) {
+        
+        DispatchQueue.main.sync {
+            self.logViewController.stdout(string)
+        }
     }
     
-    func docker(_ docker: Docker, didReceiveStderr string: String) {
+    func shell(_ docker: ShellOperation, didReceiveStderr string: String) {
         
         // Open log pane
-        DispatchQueue.main.async {
+        DispatchQueue.main.sync {
             let item = (self.contentViewController as! NSSplitViewController).splitViewItems[2]
             
             if item.isCollapsed {
                 self.statusViewController.disclosureClicked(self)
                 self.statusViewController.disclosureButton.state = .on
             }
+            self.logViewController.stderr(string)
         }
-        
-        self.logViewController.stderr(string)
     }
     
-    func docker(_ docker: Docker, didReceiveStdin string: String) {
-        self.logViewController.stdin(string)
+    func shell(_ docker: ShellOperation, didReceiveStdin string: String) {
+        
+        DispatchQueue.main.sync {
+            self.logViewController.stdin(string)
+        }
     }
     
 }

@@ -18,7 +18,7 @@ extension TimeInterval {
     /// Bash time format set to: TIMEFORMAT='Elapsed time: %3R'
     /// Example: "Elapsed time: 0.003"
     /// - Returns: Array of timeintervals
-    static func parse(_ string: String) -> [TimeInterval] {
+/*    static func parse(_ string: String) -> [TimeInterval] {
         
         let regex = try! NSRegularExpression(pattern: "(?<=Elapsed time\\:\\s)[0-9]{1,2}+\\.[0-9]{1,3}", options: [])
         
@@ -27,5 +27,5 @@ extension TimeInterval {
         return matches.compactMap{
             return TimeInterval(String(string.substring(with: $0.range(at: 0)) ?? "")) ?? nil
         }
-    }
+    } */
 }

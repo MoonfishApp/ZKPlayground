@@ -31,7 +31,7 @@ class BuildPhase: NSObject {
         self.errorMessage = errorMessage
         
         self.urls = phase.filenames.map{
-            URL(fileURLWithPath: workDirectory).appendingPathComponent(Docker.buildDirectory).appendingPathComponent($0).path
+            URL(fileURLWithPath: workDirectory).appendingPathComponent("build").appendingPathComponent($0).path
         }
         if let urls = self.urls { self.successful = urls.filter{ FileManager.default.fileExists(atPath: $0) }.count == urls.count
         } else { self.successful = false }
@@ -85,7 +85,7 @@ enum BuildPhaseType: String {
         case .compile:
             return ["out", "out.code"]
         case .setup:
-            return ["proving.key", "variables.inf", "verification.key"]
+            return ["proving.key", "verification.key"] // "variables.inf"
         case .witness:
             return ["witness"]
         case .proof:
