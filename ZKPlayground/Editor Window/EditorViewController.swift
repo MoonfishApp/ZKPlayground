@@ -36,7 +36,7 @@ class EditorViewController: NSViewController {
     }
     
     @objc fileprivate func lint(_ sender: Any?) {
-        
+        return // ***REMOVE
         guard let document  = representedObject as? Document,
             let filename = document.fileURL?.lastPathComponent,
             let workDirectory = document.fileURL?.deletingLastPathComponent().path
@@ -44,7 +44,7 @@ class EditorViewController: NSViewController {
         
         document.save(nil)
         
-        let lint = ShellOperation.lint(workDirectory: workDirectory, sourceFilename: filename, logOutput: true)
+        let lint = ShellOperation.lint(workDirectory: workDirectory, sourceFilename: filename, logOutput: .none)
         lint.completionBlock = {
 
             if lint.output.contains("Compilation failed:") {

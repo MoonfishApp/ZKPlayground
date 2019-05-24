@@ -21,6 +21,13 @@ protocol ShellProtocol: class {
     func shell(_ shell: ShellOperation, didReceiveStdin string: String)
 }
 
+enum LogLevel {
+    
+    case none // Nothing will be logged
+    case inputOnly // Only input (e.g. commands) will be logged
+    case all // Everything will be logged
+}
+
 class ShellOperation: Operation {
     
     weak var delegate: ShellProtocol?
@@ -33,12 +40,10 @@ class ShellOperation: Operation {
     
     private (set) var executionTime: TimeInterval?
     
-    // If true, output will be stored in output property
-    private let logOutput: Bool
+    private let logOutput: LogLevel
     
     private (set) var output = ""
     let buildPhaseType: BuildPhaseType
-    
     
     fileprivate let task = Process()
     
@@ -50,7 +55,7 @@ class ShellOperation: Operation {
     fileprivate let workDirectory: String
     var buildDirectory: String { return URL(fileURLWithPath: self.workDirectory).appendingPathComponent("build").path }
     
-    init(workDirectory: String, buildPhase: BuildPhaseType, logOutput: Bool = true) {
+    init(workDirectory: String, buildPhase: BuildPhaseType, logOutput: LogLevel = .all) {
         
         self.workDirectory = workDirectory
         self.buildPhaseType = buildPhase
@@ -83,7 +88,7 @@ class ShellOperation: Operation {
         // Set to the buildDirectory.
         self.task.currentDirectoryPath = self.buildDirectory
         
-        if self.logOutput {
+        if self.logOutput != .none {
             
             // Print to log
             let path = task.currentDirectoryPath
@@ -111,8 +116,8 @@ class ShellOperation: Operation {
 
         self.capture(self.stdoutPipe) { stdout in
             
-            self.delegate?.shell(self, didReceiveStdout: stdout)
-            if self.logOutput == true {
+            if self.logOutput == .all {
+                self.delegate?.shell(self, didReceiveStdout: stdout)
                 self.output += stdout
                 print(stdout)
             }
@@ -125,11 +130,11 @@ class ShellOperation: Operation {
         
         self.capture(self.stderrPipe) { stderr in
             
+            guard self.logOutput != .none else { return }
+            
             self.delegate?.shell(self, didReceiveStderr: stderr)
-            if self.logOutput == true {
-                self.output += stderr
-                print(stderr)
-            }
+            self.output += stderr
+            print(stderr)
         }
         
         task.launch()
@@ -211,7 +216,7 @@ class ShellOperation: Operation {
 // Convenience inits
 extension ShellOperation {
     
-    private static func assemble(arguments: [String], workDirectory: String, buildPhase: BuildPhaseType, logOutput: Bool = true) -> ShellOperation {
+    private static func assemble(arguments: [String], workDirectory: String, buildPhase: BuildPhaseType, logOutput: LogLevel = .all) -> ShellOperation {
         
         let operation = ShellOperation(workDirectory: workDirectory, buildPhase: buildPhase, logOutput: logOutput)
         operation.task.arguments = arguments
@@ -220,14 +225,14 @@ extension ShellOperation {
     }
     
     /// Compiles code, returns warnings and errors
-    static func lint(workDirectory: String, sourceFilename: String, logOutput: Bool = false) -> ShellOperation {
+    static func lint(workDirectory: String, sourceFilename: String, logOutput: LogLevel = .all) -> ShellOperation {
         
         // TODO: don't delete the other files in the build directory
         
         return assemble(arguments: ["compile", "-i", "../" + sourceFilename], workDirectory: workDirectory, buildPhase: .compile, logOutput: logOutput)
     }
     
-    static func build(workDirectory: String, arguments: [String]?, sourceFilename: String, logOutput: Bool = true) -> [ShellOperation] {
+    static func build(workDirectory: String, arguments: [String]?, sourceFilename: String, logOutput: LogLevel = .all) -> [ShellOperation] {
         
         let compileOperation = compile(workDirectory: workDirectory, sourceFilename: sourceFilename, logOutput: logOutput)
         let witnessOperation = witness(arguments: arguments, workDirectory: workDirectory, logOutput: logOutput)
@@ -250,7 +255,7 @@ extension ShellOperation {
     }
     
     /// Compiles code
-    static func compile(workDirectory: String, sourceFilename: String, logOutput: Bool = true) -> ShellOperation {
+    static func compile(workDirectory: String, sourceFilename: String, logOutput: LogLevel = .all) -> ShellOperation {
         
         // TODO: don't delete the other files in the build directory
         
@@ -258,7 +263,7 @@ extension ShellOperation {
     }
     
     /// Computes a witness for the compiled program found at ./out.code and arguments to the program.
-    static func witness(arguments: [String]? = nil, workDirectory: String, logOutput: Bool = true) -> ShellOperation {
+    static func witness(arguments: [String]? = nil, workDirectory: String, logOutput: LogLevel = .all) -> ShellOperation {
         
         var args = ["compute-witness"]
         if let arguments = arguments {
@@ -271,20 +276,20 @@ extension ShellOperation {
     
     /// Generates a trusted setup for the compiled program found at ./out.code
     /// Creates a proving key and a verifying key at ./proving.key and ./verifying.key. These keys are derived from a source of randomness, commonly referred to as “toxic waste”. Anyone having access to the source of randomness can produce fake proofs that will be accepted by a verifier following the protocol.
-    static func setup(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
+    static func setup(workDirectory: String, logOutput: LogLevel = .all) -> ShellOperation {
         
         return assemble(arguments: ["setup"], workDirectory: workDirectory, buildPhase: .setup, logOutput: logOutput)
     }
     
     /// Using the verifying key at ./verifying.key, generates a Solidity contract which contains the generated verification key and a public function to verify a solution to the compiled program at ./out.code.
     /// Creates a verifier contract at ./verifier.sol.
-    static func verifier(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
+    static func verifier(workDirectory: String, logOutput: LogLevel = .all) -> ShellOperation {
         
         return assemble(arguments: ["export-verifier"], workDirectory: workDirectory, buildPhase: .verifier, logOutput: logOutput)
     }
 
     /// Using the proving key at ./proving.key, generates a proof for a computation of the compiled program ./out.code resulting in ./witness.
-    static func proof(workDirectory: String, logOutput: Bool = true) -> ShellOperation {
+    static func proof(workDirectory: String, logOutput: LogLevel = .all) -> ShellOperation {
         
         return assemble(arguments: ["generate-proof"], workDirectory: workDirectory, buildPhase: .proof, logOutput: logOutput)
     }

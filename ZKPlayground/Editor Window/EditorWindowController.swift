@@ -81,7 +81,7 @@ extension EditorWindowController {
         document.buildPhases = [BuildPhase]()
 
         // 6. Create and queue compile operations
-        let compileOperations = ShellOperation.build(workDirectory: workDirectory, arguments: self.inspectorViewController.arguments, sourceFilename: filename)
+        let compileOperations = ShellOperation.build(workDirectory: workDirectory, arguments: self.inspectorViewController.arguments, sourceFilename: filename, logOutput: .inputOnly)
         
         for operation in compileOperations {
             operation.delegate = self
