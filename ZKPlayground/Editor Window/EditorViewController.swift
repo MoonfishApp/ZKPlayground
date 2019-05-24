@@ -44,7 +44,7 @@ class EditorViewController: NSViewController {
         
         document.save(nil)
         
-        let lint = ShellOperation.lint(workDirectory: workDirectory, sourceFilename: filename, logOutput: .none)
+        let lint = ShellOperation.lint(workDirectory: workDirectory, sourceFilename: filename, logOutput: .all)
         lint.completionBlock = {
 
             if lint.output.contains("Compilation failed:") {
