@@ -36,7 +36,7 @@ class EditorViewController: NSViewController {
     }
     
     @objc fileprivate func lint(_ sender: Any?) {
-        return // ***REMOVE
+
         guard let document  = representedObject as? Document,
             let filename = document.fileURL?.lastPathComponent,
             let workDirectory = document.fileURL?.deletingLastPathComponent().path
